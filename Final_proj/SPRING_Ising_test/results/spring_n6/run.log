@@ -1,0 +1,19 @@
+step=   1 E=-6.4015574014 E-E0=1.326e+00
+step=  50 E=-7.7272645591 E-E0=1.421e-04
+step= 100 E=-7.7273502411 E-E0=5.637e-05
+step= 150 E=-7.7273734224 E-E0=3.319e-05
+step= 200 E=-7.7273871736 E-E0=1.944e-05
+step= 250 E=-7.7273908520 E-E0=1.576e-05
+{
+  "results": "/home/leean/research/Applied_machine_learning_course/Final_proj/spring_ising_test/results/spring_n6",
+  "E0": -7.727406610312546,
+  "final_energy": -7.727390852046698,
+  "gradient_check": {
+    "parameter_count": 73,
+    "finite_difference_step": 1e-05,
+    "covariance_vs_autodiff_max_abs": 1.942890293094024e-15,
+    "covariance_vs_finite_difference_max_abs": 2.8707036747732673e-10,
+    "exact_physical_gradient_norm": 2.796402129360154,
+    "normalization_gauge_gradient": 6.938893903907228e-16
+  }
+}

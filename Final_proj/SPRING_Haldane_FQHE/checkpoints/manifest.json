@@ -1,0 +1,20 @@
+{
+  "source_ne8.npz": {
+    "sha256": "9b4f50f91e5d7c9ee03e257cf54fe9e1f6b9c8839b579cc2bed238eb5de622d0",
+    "original_run": "ne8_born_baseline_20261023/seed71",
+    "energy_V1": 0.5045306910453273,
+    "fidelity": 0.35298627610467526,
+    "variance_V1_squared": 0.479610141100777,
+    "L2": 30.911915740962904,
+    "purpose": "Parameter initialization; optimizer memory resets. Exact resume requires a clean-runtime full checkpoint."
+  },
+  "best_dense_ne8.npz": {
+    "sha256": "d0739bfd36ad57d601b8bf487665e033cfa92aa0b255b4b31abfcfb0e04444c8",
+    "original_run": "ne8_structured_born_20261023/dense_seed71",
+    "energy_V1": 0.4908449813352472,
+    "fidelity": 0.36569881386865055,
+    "variance_V1_squared": 0.4657121642087249,
+    "L2": 30.01675632063238,
+    "purpose": "Parameter initialization; optimizer memory resets. Exact resume requires a clean-runtime full checkpoint."
+  }
+}

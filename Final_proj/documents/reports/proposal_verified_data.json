@@ -1,0 +1,269 @@
+{
+  "inputs": {
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/summary.json": "b7c00febed6f2996ee7d09dec7956057b422bbfd0a8789dd37b7fac098a3bd2f",
+    "SPRING_Ising_test/benchmarks/ed/summary.json": "ff890328390273e186bad4f1fa234635e8a74fd5d6464177234064a1ec287293",
+    "SPRING_Ising_test/results/spring_n6/metrics.json": "63bca8fc49355ea2db10674384039fc182cbacb59a703dc8ec2a90e218a57863",
+    "SPRING_Ising_test/results/spring_n6/training.csv": "791abce475ea24be5d01f7862547954d0e606ce8974c45abafe31abd9f0cebd7",
+    "SPRING_Haldane_FQHE/results/ne8_architecture_pilot/exact_trajectory.csv": "97be94b8bfea0f7e0c5bc76da653e884c5563136f3139243d6636a297225d898",
+    "SPRING_Haldane_FQHE/results/ne8_architecture_pilot/endpoints.csv": "99c4e5b1df44d42fc3e593a923cda4100abdfabce3de9379026840826a6bb16e",
+    "benchmarks/validation.json": "b0db265c6407b2964fd0ff4cebbbc8024f8cf4b1cf44c2650126d51793180891",
+    "SPRING_Ising_test/benchmarks/ed/n4_J1_h1/basis_spins.npy": "2a16044416120c62011a3d9cc5259c1ded75b3f105b896b12041b2cc9d6870ff",
+    "SPRING_Ising_test/benchmarks/ed/n4_J1_h1/eigenvalues.npy": "9cf31fc5acd9a02c28f7beab1ecf0ca3ef798a9dc601a2d8f7ffd1af42d76076",
+    "SPRING_Ising_test/benchmarks/ed/n6_J1_h1/basis_spins.npy": "06ae987467669e8967a7507c2b9edcbc9a4fa0f4848cc44b48066b18c15540bc",
+    "SPRING_Ising_test/benchmarks/ed/n6_J1_h1/eigenvalues.npy": "993a06ceefbfda13d71647c269d8e10be487ebc5442333285cc15837644e047a",
+    "SPRING_Ising_test/benchmarks/ed/n8_J1_h1/basis_spins.npy": "3f647244769888d8f934135206d58ed4f07216fe0db712eb92365a08cc4e12a8",
+    "SPRING_Ising_test/benchmarks/ed/n8_J1_h1/eigenvalues.npy": "b4aad6cb25c488d35e7eaefaf3b60f938448523f7497e725febd396afc578033",
+    "SPRING_Ising_test/benchmarks/ed/n10_J1_h1/basis_spins.npy": "d04d0632d2b1a316c26257a88bf8ddd780c3b7feacb261acfe6fbe58bb0981c2",
+    "SPRING_Ising_test/benchmarks/ed/n10_J1_h1/eigenvalues.npy": "57ef39f90a3c75574859944b7dfbd8527b4b3ebb35acf413be805e03d8850e34",
+    "SPRING_Ising_test/benchmarks/ed/n6_J1_h0p5/basis_spins.npy": "06ae987467669e8967a7507c2b9edcbc9a4fa0f4848cc44b48066b18c15540bc",
+    "SPRING_Ising_test/benchmarks/ed/n6_J1_h0p5/eigenvalues.npy": "dac2fb177f1e804a7f5a6f64a4d9d2e90fd6cf81daa9b767b659603cf3c13c0e",
+    "SPRING_Ising_test/benchmarks/ed/n6_J1_h2/basis_spins.npy": "06ae987467669e8967a7507c2b9edcbc9a4fa0f4848cc44b48066b18c15540bc",
+    "SPRING_Ising_test/benchmarks/ed/n6_J1_h2/eigenvalues.npy": "17c7e1012ddef72a2906b426746921b2020bf59d137cf799631e70615f4e0d5e",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/ne4/eigenpairs.npz": "3d318c8e89d2352faf4baa62a971bfd2d6c5d6174bc08dcf7f1cfcf4bd729a10",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/ne5/eigenpairs.npz": "a11d54362a59885824a36ccb46b4da8bdfdf7cdd6a4a71944a87eb496fa62416",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/ne6/eigenpairs.npz": "1ceffcd65158e48ceab8a0f206001bcf40a8cac736243a754a36e6cbae3e7b88",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/ne7/eigenpairs.npz": "d3181a2dc7979b7b1ba48760e1ada6ea5106db801de90828e587bc88b614cf0e",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/ne8/eigenpairs.npz": "bfbd9dffef23c35d7cbbab59398dca48ec20a495324fcb2bd79047dd9e73d512",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/model_evaluations/base_seed71_coefficients.npy": "19ddc0ba4f6104d39bb4d4b106ebb345a399819a29d5e2a0e2c6f6d71e090043",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/model_evaluations/base_seed137_coefficients.npy": "252319fc76a99c6a31703e8277f662647a30a64f8de287a9efbcaf2c4f9592c8",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/model_evaluations/dense_seed71_coefficients.npy": "340792b37843b463ea7dfa5fd9485e991764df7056e0cec233cf7c176d432a49",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/model_evaluations/dense_seed137_coefficients.npy": "196049afe5877553be1ca7e6c4bbe680943d62fd0dc91e29b7c10b391b952c70",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/model_evaluations/attention_seed71_coefficients.npy": "fe2ced5e36e6703f5299f2ae4d105a294436f4df013e6dfeefaeda5295e01df1",
+    "SPRING_Haldane_FQHE/results/ed_benchmarks/model_evaluations/attention_seed137_coefficients.npy": "2fa92069c076799d7107a5233d45d1e749ffcbb8d76f0fc4bf702a6f2ee38e9b"
+  },
+  "ising_example": {
+    "model": "Positive zero-bias RBM with exact global spin-flip + symmetry",
+    "source_checkpoint": "results/spring_n6/trained_parameters.npz",
+    "checkpoint_sha256": "273800d84e34a48c9226e94aa991460daeefe2fdd596722d5c4886b7a6240125",
+    "n": 6,
+    "J": 1.0,
+    "h": 1.0,
+    "parameter_count": 73,
+    "evaluation": "Complete-basis NumPy Rayleigh quotient; no Monte Carlo uncertainty",
+    "energy": -7.727390852046701,
+    "energy_error": 1.5758265846876895e-05,
+    "energy_error_per_site": 2.6263776411461492e-06,
+    "fidelity": 0.9999985691163904,
+    "variance": 0.00020536374883783735,
+    "spin_flip_parity": 1.0,
+    "observables": {
+      "energy": -7.727390852046701,
+      "variance": 0.00020536374883783735,
+      "spin_flip_parity": 1.0,
+      "transverse_magnetization_per_site": 0.6443643602821518,
+      "nearest_neighbor_zz_per_bond": 0.6435341150589649,
+      "longitudinal_magnetization_per_site": 0.0,
+      "longitudinal_magnetization_squared": 0.6609978014170832
+    },
+    "full_gap": 0.263304995174793,
+    "even_parity_gap": 2.0705523608201712,
+    "energy_error_over_full_gap": 5.9847956307915436e-05,
+    "infidelity_upper_bound_from_even_gap": 7.610657979513666e-06,
+    "fidelity_lower_bound_from_even_gap": 0.9999923893420205,
+    "gap_bound_note": "Numerical finite-size ED reference bound, using explicitly checked even parity; not an interval-arithmetic certificate",
+    "used_for_training": false
+  },
+  "fqhe_selected_example": {
+    "model": "dense",
+    "seed": 71,
+    "parameter_count": 24606,
+    "energy_V1": 0.4908449813352469,
+    "ED_ground_energy_V1": -1.6586706002642712e-16,
+    "energy_error_V1": 0.49084498133524707,
+    "neutral_gap_V1": 0.5315767947048607,
+    "energy_error_over_neutral_gap": 0.9233754863354624,
+    "ground_state_fidelity": 0.3656988138686511,
+    "infidelity": 0.6343011861313489,
+    "gap_based_fidelity_lower_bound": 0.0766245136645376,
+    "residual_variance_V1_squared": 0.46571216420872474,
+    "residual_norm_V1": 0.6824310691994648,
+    "L2": 30.016756320632375,
+    "L0_probability": 0.3689180072237209,
+    "checkpoint": "results/ne8_architecture_pilot/checkpoints/dense_seed71.npz",
+    "checkpoint_sha256": "d0739bfd36ad57d601b8bf487665e033cfa92aa0b255b4b31abfcfb0e04444c8"
+  },
+  "database_size": {
+    "hamiltonian_instances": 11,
+    "ising": {
+      "instances": 6,
+      "configuration_rows_per_instance_sum": 1488,
+      "unique_basis_rows_across_sizes": 1360,
+      "saved_eigenvalues": 1488,
+      "cases": [
+        {
+          "n": 4,
+          "J": 1.0,
+          "h": 1.0,
+          "decoded_input_shape": [
+            16,
+            4
+          ],
+          "saved_eigenvalues": 16
+        },
+        {
+          "n": 6,
+          "J": 1.0,
+          "h": 1.0,
+          "decoded_input_shape": [
+            64,
+            6
+          ],
+          "saved_eigenvalues": 64
+        },
+        {
+          "n": 8,
+          "J": 1.0,
+          "h": 1.0,
+          "decoded_input_shape": [
+            256,
+            8
+          ],
+          "saved_eigenvalues": 256
+        },
+        {
+          "n": 10,
+          "J": 1.0,
+          "h": 1.0,
+          "decoded_input_shape": [
+            1024,
+            10
+          ],
+          "saved_eigenvalues": 1024
+        },
+        {
+          "n": 6,
+          "J": 1.0,
+          "h": 0.5,
+          "decoded_input_shape": [
+            64,
+            6
+          ],
+          "saved_eigenvalues": 64
+        },
+        {
+          "n": 6,
+          "J": 1.0,
+          "h": 2.0,
+          "decoded_input_shape": [
+            64,
+            6
+          ],
+          "saved_eigenvalues": 64
+        }
+      ]
+    },
+    "fqhe": {
+      "instances": 5,
+      "configuration_rows_per_instance_sum": 10597,
+      "saved_low_eigenpairs": 98,
+      "cases": [
+        {
+          "n": 4,
+          "decoded_input_shape": [
+            18,
+            10
+          ],
+          "saved_eigenpairs": 18
+        },
+        {
+          "n": 5,
+          "decoded_input_shape": [
+            73,
+            13
+          ],
+          "saved_eigenpairs": 20
+        },
+        {
+          "n": 6,
+          "decoded_input_shape": [
+            338,
+            16
+          ],
+          "saved_eigenpairs": 20
+        },
+        {
+          "n": 7,
+          "decoded_input_shape": [
+            1656,
+            19
+          ],
+          "saved_eigenpairs": 20
+        },
+        {
+          "n": 8,
+          "decoded_input_shape": [
+            8512,
+            22
+          ],
+          "saved_eigenpairs": 20
+        }
+      ],
+      "neural_predictions": [
+        {
+          "model": "base",
+          "sampling_seed": 71,
+          "coefficient_shape": [
+            8512
+          ]
+        },
+        {
+          "model": "base",
+          "sampling_seed": 137,
+          "coefficient_shape": [
+            8512
+          ]
+        },
+        {
+          "model": "dense",
+          "sampling_seed": 71,
+          "coefficient_shape": [
+            8512
+          ]
+        },
+        {
+          "model": "dense",
+          "sampling_seed": 137,
+          "coefficient_shape": [
+            8512
+          ]
+        },
+        {
+          "model": "attention",
+          "sampling_seed": 71,
+          "coefficient_shape": [
+            8512
+          ]
+        },
+        {
+          "model": "attention",
+          "sampling_seed": 137,
+          "coefficient_shape": [
+            8512
+          ]
+        }
+      ]
+    },
+    "total_configuration_rows_per_instance_sum": 12085,
+    "decoded_input_entries_per_instance_sum": 238769,
+    "nn": {
+      "ising_runs": 1,
+      "fqhe_continuations": 6,
+      "ising_diagnostic_shape": [
+        52,
+        9
+      ],
+      "fqhe_trajectory_shape": [
+        20,
+        7
+      ],
+      "fqhe_endpoint_shape": [
+        6,
+        26
+      ]
+    },
+    "counting_convention": "Configuration rows summed per Hamiltonian instance; the N=6 Ising basis is reused at three fields. FQHE bits are stored packed; shapes describe decoded NN inputs. Diagnostic rows are aggregate records, not saved raw Monte Carlo samples."
+  },
+  "fqhe_pilot_condition": "1000 additional updates from one shared pretrained state; batch32; sampling seeds71,137",
+  "new_training_performed": false,
+  "figure_generator_sha256": "143dce7eabfc3467977d78f37d9d48eaa3ae5f5abf17074cd35654ae811c0863"
+}

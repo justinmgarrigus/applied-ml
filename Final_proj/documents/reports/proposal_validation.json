@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-23",
+  "scope": "Strongly correlated quantum systems; Ising entry level; Hubbard or FQHE advanced extension",
+  "hubbard_status": "proposed; no computed Hubbard benchmarks",
+  "pages": 4,
+  "main_proposal_pages": 2,
+  "appendix_pages": 2,
+  "vector_figures": 2,
+  "source_data_hashes_verified": true,
+  "all_rendered_pages_inspected": true,
+  "latex_overfull_or_underfull_warnings": false,
+  "optimizer_physics_review_completed": true,
+  "new_training_performed": false,
+  "pdf_sha256": "029f1dbfd5756775ea3891a6f2d222d4fbee3ba042c9730ea1b9a26a7d64eeb4",
+  "source_archive_sha256": "9d79ca8619ee8de887d0b5a669b37526edf0b78c377a54efd41c96209ab7b19b",
+  "source_archive_compiles_independently": true,
+  "source_archive_pdf_text_matches_final": true,
+  "source_artifact_hash_count": 30,
+  "database_size_inventory_verified": true,
+  "database_size_summary": {
+    "hamiltonian_instances": 11,
+    "Ising_configuration_rows_per_instance_sum": 1488,
+    "FQHE_configuration_rows": 10597,
+    "total_configuration_rows_per_instance_sum": 12085,
+    "largest_decoded_input_shape": [
+      8512,
+      22
+    ],
+    "NN_Ising_log_shape": [
+      52,
+      9
+    ],
+    "NN_FQHE_trajectory_shape": [
+      20,
+      7
+    ],
+    "NN_FQHE_endpoint_shape": [
+      6,
+      26
+    ]
+  },
+  "new_ED_performed": false,
+  "contributor_handle": "PassengerAn",
+  "github_submission_target": "https://github.com/justinmgarrigus/applied-ml",
+  "outline_pages": 2,
+  "outline_sha256": "df83ded18ba4227947825bdc1c7dcfd4e763769aa8e3f278728012557b044fe2",
+  "renamed_directory_paths_verified": true
+}

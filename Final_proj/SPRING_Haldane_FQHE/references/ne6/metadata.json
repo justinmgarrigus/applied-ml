@@ -1,0 +1,13 @@
+{
+  "ne": 6,
+  "flux": 15,
+  "two_lz": 0,
+  "v3": 0.0,
+  "dimension": 338,
+  "raising_target_dimension": 332,
+  "basis_convention": "Ascending orbital Slater; a=m+Q; sorted integer bitstrings",
+  "hamiltonian": "Sum of normalized relative-angular-momentum-one pair projectors, V1=1; all other pseudopotentials zero",
+  "energy_unit": "V1",
+  "original_reference": "ne6_spectrum_20261022",
+  "reference_used_for_training": false
+}

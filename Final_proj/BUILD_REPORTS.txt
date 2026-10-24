@@ -1,0 +1,65 @@
+Retained project documents
+==========================
+
+Source paper:
+  documents/papers/2412.00618v2.pdf
+
+Course specification:
+  documents/course/Ghosh Term Project Applied ML.pdf
+
+Final proposal and detailed reading report:
+  documents/reports/Project_Outline.pdf
+  documents/reports/SPRING_Multi_System_Optimizer_Proposal.pdf
+  documents/reports/SPRING_Multi_System_Optimizer_Proposal.tex
+  documents/reports/ML_Explanation_Note.pdf
+  documents/reports/ML_Explanation_Note.tex
+  documents/reports/SPRING_Proposal_With_ML_Explanation.pdf
+  documents/reports/2412_00618_reading_report.pdf
+  documents/reports/2412_00618_reading_report.tex
+
+The modified proposal has two main pages plus a workflow appendix and an ED/NN
+benchmark appendix. It studies strongly correlated quantum systems, using
+Ising as entry level and Hubbard or FQHE as an advanced extension. Existing
+Ising/FQHE results are preliminary examples; Hubbard calculations are planned.
+Its figures are spring_optimizer_workflow.pdf/png and
+nn_ed_proposal_examples.pdf/png. make_optimizer_proposal_figures.py regenerates
+both figures and proposal_data.tex from the saved benchmark records; input
+hashes are retained in proposal_verified_data.json. It performs no training.
+The database introduction reports present Hamiltonian/configuration counts,
+decoded input shapes and saved NN log sizes. The same JSON records the size
+inventory and hashes of the audited basis, spectrum and prediction files.
+
+ML_Explanation_Note is a separate three-page attachment showing the input
+arrays, scalar energy output, Hamiltonian energy calculation and NN role.
+It includes a fully worked three-variable teaching example, exact and sampled
+energy evaluation, batch shapes and how optimizers use the shared objective.
+Its TeX source is self-contained. SPRING_Proposal_With_ML_Explanation combines
+the existing four-page proposal and this attachment into a seven-page packet.
+Earlier versions remain in older_documents/ml_explanation_detailed_20261023
+and older_documents/ml_explanation_one_page_20261023 under the archive below.
+
+The older reading report's analytical illustration and its generating script
+remain next to its TeX file. That illustration evaluates an analytic polynomial;
+the modified proposal's NN figures instead use the executed benchmark runs.
+
+To rebuild, run latexmk from documents/reports so the figure resolves:
+  cd documents/reports
+  latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=/tmp/fqh_report_build 2412_00618_reading_report.tex
+  latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=/tmp/spring_optimizer_proposal_build SPRING_Multi_System_Optimizer_Proposal.tex
+  latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=/tmp/ml_explanation_note_build ML_Explanation_Note.tex
+
+Build the two-page course outline from the same proposal source, omitting the
+appendices (run twice to settle PDF cross-references):
+  pdflatex -interaction=nonstopmode -halt-on-error -jobname=Project_Outline -output-directory=/tmp/spring_optimizer_proposal_build '\def\OutlineOnly{1}\input{SPRING_Multi_System_Optimizer_Proposal.tex}'
+
+Inspect the generated PDFs before replacing the retained copies. The revised
+proposal was prepared on 23 October 2026; the detailed reading report remains
+dated 19 October. For current implemented methods and numerical outcomes, use
+SPRING_Haldane_FQHE/README.md and SPRING_Haldane_FQHE/results/.
+
+After copying the reviewed proposal and attachment PDFs into documents/reports,
+rebuild the combined packet from that directory:
+  pdfunite SPRING_Multi_System_Optimizer_Proposal.pdf ML_Explanation_Note.pdf SPRING_Proposal_With_ML_Explanation.pdf
+
+The superseded outline, original proposal and original build instructions are recoverable under
+../_project_archive/20261023_fqhe_cleanup/older_documents/.

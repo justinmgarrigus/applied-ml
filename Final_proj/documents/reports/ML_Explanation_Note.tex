@@ -1,0 +1,158 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,booktabs,array,tabularx,xcolor,hyperref,fancyhdr}
+\definecolor{ink}{HTML}{24517E}
+\hypersetup{colorlinks=true,urlcolor=ink,pdftitle={Input, output, and energy calculation},pdfsubject={A three-page computational attachment to the SPRING project proposal}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\renewcommand{\arraystretch}{1.12}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small SPRING project: computational explanation}
+\fancyhead[R]{\small Input, output, and energy}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+\newcommand{\topic}[1]{\vspace{4pt}\textbf{\color{ink}#1}\par}
+\newcommand{\pagetitle}[1]{\begin{center}{\Large\bfseries #1}\end{center}}
+\newcommand{\Rea}{\operatorname{Re}}
+\begin{document}
+\pagetitle{1. The Physics Model as an Energy Function}
+
+\textbf{Project in computational terms.} Each model supplies a fixed function that takes an array describing a candidate solution and returns one real energy. A neural network (NN) represents that candidate. Training adjusts the NN parameters to make the returned energy smaller. We compare optimizers for this same task.
+
+\topic{The fixed function: an array goes in, a number comes out}
+Let $v$ be a nonzero array containing $D$ coefficients. The Hamiltonian $H$ supplies known matrix entries defining the energy calculator:
+\[
+ \boxed{\quad \underbrace{v\in\mathbb C^D}_{\text{candidate array}}
+ \quad\longmapsto\quad
+ \underbrace{E_H(v)=\frac{\Rea(v^\dagger Hv)}{v^\dagger v}}_{\text{one scalar energy; the loss}}\quad}
+\]
+For real arrays, $v^\dagger$ is the transpose. For complex arrays, it also conjugates the entries. The denominator is the sum of squared magnitudes. Dividing by it means that scaling every coefficient by the same nonzero number leaves the energy unchanged.
+\begin{verbatim}
+Hv = apply_H(v)                       # known model rules
+energy = real(vdot(v, Hv)) / real(vdot(v, v))
+\end{verbatim}
+\texttt{vdot} conjugates its first argument. Applying $H$ produces an intermediate array; the dot products give the scalar output. For a small problem, $H$ can be stored as a matrix. Larger problems use rules that compute its nonzero entries as needed.
+
+\topic{Two different arrays appear in the implementation}
+A \textbf{configuration array} $x$ identifies one possible arrangement, such as six $\pm1$ entries. Each valid $x$ labels one coefficient $v(x)$. The \textbf{candidate array} $v$ collects the coefficients for \emph{all} valid arrangements. For six Ising variables, $x$ has length six, there are $2^6=64$ valid rows, and $v$ has length 64. Thus the NN and the energy calculator have different interfaces:
+\[
+ \underbrace{x}_{\text{one configuration}}
+ \ \xrightarrow{\ \text{NN with parameters }\theta\ }\
+ \underbrace{v_\theta(x)}_{\text{one coefficient}},
+ \qquad
+ \underbrace{v_\theta}_{\text{all coefficients}}
+ \ \xrightarrow{\ \text{known energy calculator}\ }\ E.
+\]
+The project code produces a log coefficient for numerical convenience. Ising uses one real output $a_\theta(x)$, giving $v_\theta(x)=e^{a_\theta(x)}$. The implemented FQHE model uses two real outputs $[a_\theta(x),b_\theta(x)]$, giving $v_\theta(x)=e^{a_\theta(x)+i b_\theta(x)}$. The second output allows relative complex phases. The NN supplies coefficients; the known calculator determines their energy.
+
+\begin{center}\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.08in}>{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{1.35in}@{}}
+\toprule
+Model example & NN input: one configuration $x$ & Full candidate array $v$\\
+\midrule
+Ising, $N=6$ & Six entries, each $-1$ or $+1$ & 64 coefficients\\
+Hubbard starter & Eight 0/1 entries; two occupied in each four-entry channel & 36 coefficients\\
+FQHE, $N=8$ & 22 entries, each 0/1; eight occupied, with a fixed weighted sum of indices & 8,512 coefficients\\
+\bottomrule
+\end{tabularx}
+\end{center}
+The Hubbard example is planned. The FQHE count uses the existing constraints $\sum_{a=0}^{21}x_a=8$ and $\sum_{a=0}^{21}a x_a=84$. These constraints define valid inputs before training. In every case, the final output is one scalar energy. The model rules are fixed for each experiment; the NN parameters are learned.
+
+\clearpage
+\pagetitle{2. A Complete Numerical Energy Calculation}
+
+\textbf{A hand-sized Ising example.} To show every array entry, this teaching example uses three variables and eight configurations. The existing six-variable benchmark instead uses 64 configurations. We set the fixed model coefficients to $J=h=1$ and connect the last variable back to the first. The numbers below describe a chosen candidate, rather than an optimized training result.
+
+\topic{Step 1: define the Hamiltonian as array operations}
+For any three-entry configuration $x=(x_0,x_1,x_2)$, the diagonal entry is
+\[
+ H_{xx}=-(x_0x_1+x_1x_2+x_2x_0).
+\]
+There are also three entries of weight $-1$, connecting $x$ to the configurations obtained by flipping one entry. All other matrix entries vanish. Therefore, to calculate one component of $Hv$, use
+\[
+ (Hv)(x)=H_{xx}v(x)-v(\operatorname{flip}_0 x)
+                    -v(\operatorname{flip}_1 x)
+                    -v(\operatorname{flip}_2 x).
+\]
+These are the complete rules for this example. The pair products give a row's diagonal cost; the flipped-row terms make the total energy depend on coefficients at other rows as well.
+
+\topic{Step 2: choose the candidate array and apply the rules}
+Order the rows as shown below and choose $v=[2,1,1,1,1,1,1,2]$. An NN would supply these eight coefficients by evaluating each configuration. Its corresponding log outputs here would be $[\log2,0,0,0,0,0,0,\log2]$.
+\begin{center}\small
+\begin{tabular}{@{}ccrrrr@{}}
+\toprule
+Row & Configuration $x$ & $v(x)$ & $H_{xx}$ & $(Hv)(x)$ & $(Hv)(x)/v(x)$\\
+\midrule
+0 & $[-1,-1,-1]$ & 2 & $-3$ & $-9$ & $-4.5$\\
+1 & $[-1,-1,+1]$ & 1 & $+1$ & $-3$ & $-3$\\
+2 & $[-1,+1,-1]$ & 1 & $+1$ & $-3$ & $-3$\\
+3 & $[-1,+1,+1]$ & 1 & $+1$ & $-3$ & $-3$\\
+4 & $[+1,-1,-1]$ & 1 & $+1$ & $-3$ & $-3$\\
+5 & $[+1,-1,+1]$ & 1 & $+1$ & $-3$ & $-3$\\
+6 & $[+1,+1,-1]$ & 1 & $+1$ & $-3$ & $-3$\\
+7 & $[+1,+1,+1]$ & 2 & $-3$ & $-9$ & $-4.5$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For row 0, the calculation is $(-3)(2)-1-1-1=-9$. For row 1, its three flipped neighbors have coefficients $1,1,2$, so the calculation is $(1)(1)-1-1-2=-3$.
+
+\topic{Step 3: reduce the arrays to one scalar loss}
+\[
+ v^\dagger v=2(2^2)+6(1^2)=14,\qquad
+ v^\dagger Hv=2(2\cdot[-9])+6(1\cdot[-3])=-54.
+\]
+\[
+ \boxed{E_H(v)=-\frac{54}{14}=-\frac{27}{7}\approx-3.857143.}
+\]
+That is the output for this candidate array. Updating the NN changes the coefficients, so the same fixed calculator can return a different energy at the next training iteration.
+
+\topic{What changes when we choose a different system?}
+The Hubbard and FQHE problems provide different valid input rows and different rules for $H$. For example, a Hubbard rule connects occupation arrays by moving an occupied entry along an allowed edge, while the FQHE rules connect arrays by permitted pair rearrangements. Their weights and signs are supplied by the model. The outer calculation---apply $H$, take two dot products, divide---is the same. Changing optimizers changes how coefficients are learned; changing $H$ changes the task itself.
+
+\clearpage
+\pagetitle{3. Computing the Same Energy with Sampled Batches}
+
+\textbf{Why sampling is useful.} Large systems can make the full coefficient array impractical to construct. The NN lets us query individual coefficients and their connected rows instead.
+
+\topic{Turn the full-array calculation into a per-row calculation}
+For a row with nonzero coefficient, define the intermediate scalar
+\[
+ e_\theta(x)=\frac{(Hv_\theta)(x)}{v_\theta(x)}
+ =\sum_{x'}H_{xx'}\frac{v_\theta(x')}{v_\theta(x)}.
+\]
+This is often called a \emph{local energy}. To compute it, query the NN on $x$ and on rows $x'$ with nonzero $H_{xx'}$. The matrix-entry rules supply the weights in the sum. With log outputs $\ell_\theta(x)=a_\theta(x)+i b_\theta(x)$, each coefficient ratio is computed as $\exp[\ell_\theta(x')-\ell_\theta(x)]$.
+
+The total energy is the weighted average of these per-row values:
+\[
+ E_H(v_\theta)=\sum_x p_\theta(x)\,\Rea e_\theta(x),\qquad
+ p_\theta(x)=\frac{|v_\theta(x)|^2}{\sum_y|v_\theta(y)|^2}.
+\]
+In the example on page 2, each aligned row has probability $4/14$ and each other row has probability $1/14$. Therefore $E=(8/14)(-4.5)+(6/14)(-3)=-27/7$. A uniform mean of the eight per-row values would give $-3.375$, a different answer. The coefficient magnitudes determine the correct sampling weights.
+
+\topic{The batch algorithm: configurations in, one estimated energy out}
+Draw $B$ configurations from the current model distribution $p_\theta$. Then
+\[
+ \widehat E=\frac1B\sum_{r=1}^{B}\Rea e_\theta(x_r),
+ \qquad x_r\sim p_\theta.
+\]
+{\small\begin{verbatim}
+energy_sum = 0
+for x in sample_current_model(theta, B):
+    ell_x = log_v(theta, x)        # NN log coefficient
+    e = 0
+    for xp, weight in connected_rows_and_weights(x):
+        e += weight * exp(log_v(theta, xp) - ell_x)
+    energy_sum += real(e)
+energy_estimate = energy_sum / B
+\end{verbatim}}
+The connected-row list includes a nonzero diagonal entry. Small systems can sample from an enumerated probability table. Large systems use Monte Carlo acceptance ratios based on coefficient ratios, avoiding the normalization sum. The target is $|v_\theta|^2$; it requires no artificial temperature.
+
+\topic{Batch size, optimization, and checking the answer}
+For six Ising variables and $B=128$, the input batch has shape $128\times6$ and the output contains 128 scalar log coefficients. Each row queries six flipped neighbors: up to $7B$ coefficient evaluations before reusing duplicates. Larger batches reduce sampling noise, subject to correlations; more iterations update the candidate more often. The set of 64 possible configurations stays fixed.
+
+This pseudocode evaluates energy. Parameter updates use the energy's covariance-gradient routine to account for the parameter-dependent sampling distribution. SPRING, SR, K-FAC, and Adam/SGD optimize this shared loss. Compare a fixed model and NN representation under a common computational budget. Exact diagonalization (ED) supplies small-system minimum-energy references for evaluation. Measure energy error and time to a target error; training requires no ED labels.
+\end{document}

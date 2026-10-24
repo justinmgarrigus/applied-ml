@@ -1,0 +1,282 @@
+# Running Workflows
+
+This page explains the shared mechanics of running JaQMC workflows: how to do a quick
+debug run, how to launch a real training job, how resume and evaluation work, and what
+files each command writes.
+
+This page is for users running built-in apps such as `jaqmc molecule`, `jaqmc solid`, and
+`jaqmc hall`. If you are building a new app/workflow implementation, see
+<project:../extending/writing-workflows.md>.
+
+In command examples, replace `<app>` with your system command name such as `molecule`,
+`solid`, or `hall`.
+
+## Common Tasks
+
+Most users arrive here with one of four goals. Start with the recipe that matches what
+you want to do, then use the later sections as reference.
+
+(recipe-fast-debug-run)=
+### Fast debug run
+
+A fast debug run confirms that the workflow starts, writes outputs, and makes
+progress without waiting for a full calculation.
+
+1. Pick your normal system input: CLI flags or one or more `--yml` files.
+2. Set an explicit save path so the short run does not mix with other outputs.
+3. Cut the training budget down to something that finishes quickly.
+4. If your app has a pretrain stage, shorten that stage too.
+5. Lower `workflow.batch_size` for speed, for example to `256` or `512`.
+6. If needed, reduce model size with your app's `wf.*` knobs.
+
+```bash
+jaqmc <app> train ... \
+  workflow.save_path=./runs/<name>-debug \
+  train.run.iterations=100
+```
+
+What success looks like:
+
+- `workflow.save_path` is created and contains `train_config.yaml`.
+- The logs show increasing step numbers.
+- Reported losses and energies stay finite.
+- A final checkpoint is written.
+
+If the run fails to initialize or produces NaNs, continue in <project:troubleshooting.md>.
+
+### Production baseline
+
+A production baseline launches a real optimization run on a workstation or cluster.
+
+1. Start from the recommended settings on your system page and its config reference.
+2. Set a stable, descriptive `workflow.save_path`.
+3. Tune the optimization budget first: usually `pretrain.run.iterations` and
+   `train.run.iterations`.
+4. Keep `workflow.batch_size` at its default unless you have evidence that the training
+   signal is too noisy or your hardware budget requires a change.
+5. Leave lower-level knobs alone until you have a specific reason to touch them.
+
+```bash
+jaqmc <app> train ... workflow.save_path=./runs/<name>-prod
+```
+
+For most production runs, the highest-value decisions are how long to train, whether to
+keep pretraining, and whether you need a different optimizer or wavefunction. Everything
+else is usually a second-order adjustment.
+
+#### Fit larger runs in memory
+
+If a run does not fit in device memory, first decide whether you can change the walker
+count. Lowering `workflow.batch_size` reduces memory, but it also increases variance and
+can hurt optimization quality. To keep the same number of walkers, set `vmap_chunk_size`
+on a local estimator so the work is evaluated in smaller pieces. That trades speed for
+lower peak memory.
+
+The tightest part of the model varies by system, but the kinetic energy estimator is
+often the right place to start:
+
+```bash
+jaqmc <app> train ... \
+  estimators.energy.kinetic.vmap_chunk_size=128
+```
+
+Use the largest chunk size that still fits. Smaller chunks cut peak memory further, but
+they add overhead.
+
+(recipe-resume-evaluate)=
+### Resume, branch, or evaluate
+
+These recipes start from a run already on disk: continue it, fork from it, or
+measure final observables from its checkpoints.
+
+Resume training in the same directory by reusing `workflow.save_path` and increasing the
+training budget. `train.run.iterations` is the total target step count, not the
+number of additional steps:
+
+```bash
+jaqmc <app> train ... \
+  workflow.save_path=./runs/<name>-prod \
+  train.run.iterations=<larger_value>
+```
+
+JaQMC restores the latest checkpoint in that directory, drops any statistics written
+after that checkpoint, and appends new steps to the same `*_stats.*` files. Iteration
+budgets count total steps, not additional ones.
+
+To resume from a specific checkpoint rather than the latest one, set
+`workflow.restore_path` to the checkpoint file:
+
+```bash
+jaqmc <app> train ... \
+  workflow.save_path=./runs/<name>-prod \
+  workflow.restore_path=./runs/<name>-prod/train_ckpt_001000.npz \
+  train.run.iterations=<larger_value>
+```
+
+Branch from an existing run into a new output directory by setting both save and restore
+paths, and the restore path may be the run's directory or a single checkpoint file. JaQMC
+creates `workflow.save_path` if needed; if it already exists, it must be completely
+empty to avoid accidental overwrites:
+
+```bash
+jaqmc <app> train ... \
+  workflow.save_path=./runs/<name>-v2 \
+  workflow.restore_path=./runs/<name>-prod \
+  train.run.iterations=<larger_value>
+```
+
+The new directory starts with the resumed stage's stats files (`train_stats.h5` and
+`train_stats.csv` by default), truncated at the restored step. New checkpoints and
+the resolved config are written as the run continues. Outputs from other stages, such as
+`pretrain_*`, stay in the original directory.
+
+For a trained wavefunction, run evaluation in a separate directory by pointing
+`workflow.source_path` at the training run you want to evaluate:
+
+```bash
+jaqmc <app> evaluate ... \
+  workflow.save_path=./runs/<name>-eval \
+  workflow.source_path=./runs/<name>-prod \
+  run.iterations=1000
+```
+
+Evaluation always writes per-step statistics to `evaluation_stats.h5` in
+`workflow.save_path`. That file is the input for uncertainty analysis. Console and CSV writers
+are disabled by default; see <project:writers.md> to enable them. For example, to print
+the total energy when the energy estimator is enabled:
+
+```bash
+jaqmc <app> evaluate ... \
+  writers.console.module=jaqmc.writer.console \
+  writers.console.fields="energy=total_energy"
+```
+
+If you want multiple evaluation variants, give each one its own `workflow.save_path` and
+reuse the same `workflow.source_path`.
+
+```{tip}
+These three path settings do different jobs:
+
+- `workflow.save_path`: where the current command writes outputs
+- `workflow.restore_path`: where the current command looks for its own checkpoints; if
+  unset, it defaults to `workflow.save_path`. May be a directory or a specific checkpoint
+  file. When the checkpoint lives in a different directory, `workflow.save_path` must be
+  empty.
+- `workflow.source_path`: training run or checkpoint used by `evaluate` to load trained
+  parameters, walkers, and sampler state. It is required when the wavefunction has
+  trainable parameters. Analytic wavefunctions with no parameters can instead start
+  evaluation from freshly initialized walkers; system pages document those workflows.
+```
+
+### Reporting checklist
+
+A final report should satisfy these criteria:
+
+1. Final reported observables come from evaluation outputs rather than
+   in-training values.
+2. Uncertainty comes from per-step evaluation data in `evaluation_stats.h5`,
+   not from a single digest value.
+3. The resolved config and run provenance accompany the result.
+4. Non-default estimator, optimizer, and wavefunction settings are recorded.
+5. Comparisons across runs share the same observable definitions and units.
+
+For detailed analysis workflows, see <project:training-stats.md> and
+<project:analyzing-evaluations.md>.
+
+## Shared Command Model
+
+The exact stage structure is app-defined, so this page does not try to describe one
+universal training pipeline. System pages are the source of truth for what a given app
+actually runs.
+
+What *is* shared across apps is the command contract:
+
+- **`jaqmc <app> train`** runs that app's training workflow and writes its outputs under
+  `workflow.save_path`.
+- **`jaqmc <app> evaluate`** runs an app's evaluation workflow when the app exposes
+  one and writes evaluation outputs under its own `workflow.save_path`. It loads trained
+  state from `workflow.source_path` when the wavefunction has trainable parameters;
+  parameter-free analytic wavefunctions start from fresh state. The production system apps
+  (`molecule`, `solid`, and `hall`) expose evaluation commands; the
+  `hydrogen-atom` tutorial command is train-only on the CLI.
+- **`jaqmc <app> reference`** prepares and converts the orbital reference files that
+  `molecule` and `solid` runs load. These files provide pretraining targets and,
+  for solids, occupied k-points. The command supports solver setups that
+  automatic generation cannot provide, such as a non-default basis or, for
+  solids, Quantum ESPRESSO. System-specific instructions:
+  [Molecule](../systems/molecule/reference.md), [Solid](../systems/solid/reference.md).
+- Training-stage keys are workflow-specific, so their structure lives in the app's config
+  reference rather than on this page.
+- Evaluation-stage keys live at the config root, which is why evaluation examples use
+  `run.*`, `sampler.*`, and `writers.*` directly.
+
+```{tip}
+The config scope changes between these commands. In particular, evaluation stage keys
+live at the config root, so use `run.iterations=...` with `jaqmc <app> evaluate`, not
+`train.run.iterations=...`.
+```
+
+If you need the exact workflow shape for a specific app, go back to that system page. For
+authoritative key definitions, use the config reference for your system:
+[Molecule](../systems/molecule/train.md), [Solid](../systems/solid/train.md), or
+[Hall](../systems/hall/train.md). For general override rules and YAML composition, see
+<project:configuration.md>.
+
+## Paths, Outputs, And Checkpoints
+
+All outputs for a command go into `workflow.save_path`. If you do not set it explicitly,
+JaQMC creates a timestamped directory under `runs/`. If the current working directory is inside the source repo, that means
+the repo-level `runs/` directory; outside the repo, it means `./runs/` in your current
+working directory.
+
+Typical training output looks like this. If your workflow does not include a pretrain
+stage, the `pretrain_*` files are simply absent:
+
+```
+save_path/
+├── train_config.yaml
+├── reference.npz                 # molecule/solid only: auto-generated orbital reference
+├── pretrain_ckpt_NNNNNN.npz
+├── pretrain_stats.h5
+├── pretrain_stats.csv
+├── train_ckpt_NNNNNN.npz
+├── train_stats.h5
+└── train_stats.csv
+```
+
+Typical evaluation output looks like this:
+
+```
+save_path/
+├── evaluation_config.yaml
+├── evaluation_ckpt_NNNNNN.npz
+├── evaluation_stats.h5
+├── evaluation_stats.csv        # optional, depends on configured writers
+└── evaluation_digest.npz
+```
+
+A few details are worth keeping straight:
+
+- `*_ckpt_*.npz` files are resumable checkpoints for that stage.
+- `*_stats.h5` stores per-step statistics in a machine-friendly format.
+- `*_stats.csv` is writer-dependent, so it may or may not be present.
+- `evaluation_digest.npz` is the compact summary produced at the end of evaluation.
+
+When `workflow.source_path` is set, evaluation loads trained parameters,
+walkers, and sampler state from that path. If the path is a directory, JaQMC
+restores the latest `train_ckpt_*.npz` it finds there. If it is a specific
+checkpoint file, JaQMC uses that file directly.
+
+Checkpoint saves follow one rule: the last iteration is always saved, and intermediate
+checkpoints are written only when both `save_time_interval` and `save_step_interval` are
+satisfied. With the defaults (`600` seconds and every `1000` steps), that means a fast
+job may skip step-1000 checkpointing if 10 minutes have not passed yet, but it still
+writes a final checkpoint when the run ends.
+
+For final observables, use evaluation output rather than training logs. In practice,
+`evaluation_digest.npz` is the quick summary, while `evaluation_stats.h5` is the file you
+need for uncertainty analysis from per-step data. For a full walkthrough, see
+<project:analyzing-evaluations.md>.
+
+If you are implementing a new workflow or app rather than running an existing one, continue
+with <project:../extending/writing-workflows.md> for the framework-side wiring model.

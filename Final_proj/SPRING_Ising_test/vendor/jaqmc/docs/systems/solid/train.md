@@ -1,0 +1,292 @@
+# Solid Training
+
+Configuration reference for `jaqmc solid train`.
+This page shows the effective defaults for the train workflow preset. Use
+`--dry-run` to see the resolved config for your run, or add
+`workflow.config.verbose=true` to include field descriptions. Keys use the same
+dot notation as CLI overrides, such as `train.run.iterations=5000`. Defaults
+are resolved in this order: schema defaults, workflow preset, YAML config, then
+CLI overrides. For evaluation config, see <project:eval.md>.
+
+Root-level runtime keys such as `logging.*`, `jax.*`, and `distributed.*` are
+shared by all commands. See <project:../../guide/runtime-configuration.md>.
+
+```{eval-rst}
+.. config-context::
+   :preset: jaqmc.app.solid.workflow.SolidTrainWorkflow.default_preset
+```
+
+## Workflow (`workflow.*`)
+
+These keys control workflow-level settings shared across all stages.
+
+```{eval-rst}
+.. config-defaults:: jaqmc.workflow.base.WorkflowConfig
+   :prefix: workflow
+```
+
+(solid-train-system)=
+## System (`system.*`)
+
+Defines the periodic solid system to simulate. The implementation is selected by
+`system.module`.
+
+- Default module selection: unset, so `system.*` is read directly as an
+  arbitrary crystal config. Built-in choices are:
+  - unset: arbitrary crystal config
+  - `rock_salt`: rock-salt crystal generator
+  - `two_atom_chain`: two-atom chain generator
+
+### Arbitrary crystals (default)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.app.solid.config.base.SolidConfig
+   :prefix: system
+   :scope: Solid
+```
+
+### Rock salt (`system.module=rock_salt`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.app.solid.config.rock_salt.rock_salt_config
+   :prefix: system
+   :scope: rock-salt
+```
+
+### Two-atom chain (`system.module=two_atom_chain`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.app.solid.config.two_atom_chain.two_atom_chain
+   :prefix: system
+   :scope: two-atom-chain
+```
+
+(solid-train-wf)=
+## Wavefunction (`wf.*`)
+
+- Default module selection: `solid`. Its effective defaults are listed below.
+  The built-in choice is `solid`.
+
+```{eval-rst}
+.. config-defaults:: jaqmc.app.solid.wavefunction.SolidWavefunction
+   :prefix: wf
+   :scope: Solid
+```
+
+(solid-train-sampler)=
+## Sampler (`sampler.*`)
+
+The solid workflow uses adaptive Metropolis-Hastings sampling with a periodic
+Gaussian proposal. Pretraining and training share these settings.
+
+```{eval-rst}
+.. config-defaults:: jaqmc.sampler.mcmc.MCMCSampler
+   :prefix: sampler
+```
+
+---
+
+## Reference (`reference`)
+
+Optional path to a `reference.npz`. When omitted, `train` reuses one from the
+run directory or generates one with PySCF; the solid ansatz loads its occupied
+k-points from the file even when `pretrain.run.iterations=0`.
+<project:reference.md> describes resolution and standalone preparation.
+
+In YAML:
+
+```yaml
+reference: ./runs/lih_solid/hf/reference.npz
+```
+
+Or as a CLI override: `reference=./runs/lih_solid/hf/reference.npz`.
+
+---
+
+(solid-train-stage)=
+## Train Stage (`train.*`)
+
+The main VMC optimization loop. Samples electron configurations, computes energy, and updates wavefunction parameters.
+
+(solid-train-run)=
+### Run options (`train.run.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.workflow.stage.vmc.VMCWorkStageConfig
+   :prefix: train.run
+```
+
+(solid-train-optim)=
+### Optimizer (`train.optim.*`)
+
+- Default optimizer module: `kfac`. Effective defaults for the built-in
+  optimizers are listed below.
+
+#### KFAC options
+
+```{eval-rst}
+.. config-defaults:: jaqmc.optimizer.kfac.kfac.KFACOptimizer
+   :prefix: train.optim
+   :scope: KFAC
+```
+
+#### SR options
+
+```{eval-rst}
+.. config-defaults:: jaqmc.optimizer.sr.SROptimizer
+   :prefix: train.optim
+   :scope: SR
+```
+
+#### Adam options
+
+```{eval-rst}
+.. config-defaults:: jaqmc.optimizer.optax.adam
+   :prefix: train.optim
+   :scope: Adam
+```
+
+#### LAMB options
+
+```{eval-rst}
+.. config-defaults:: jaqmc.optimizer.optax.lamb
+   :prefix: train.optim
+   :scope: LAMB
+```
+
+(solid-train-writers)=
+### Writers (`train.writers.*`)
+
+The train stage enables `console`, `csv`, and `hdf5` writers by default.
+
+#### Console writer (`train.writers.console.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.writer.console.ConsoleWriter
+   :prefix: train.writers.console
+```
+
+#### CSV writer (`train.writers.csv.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.writer.csv.CSVWriter
+   :prefix: train.writers.csv
+```
+
+#### HDF5 writer (`train.writers.hdf5.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.writer.hdf5.HDF5Writer
+   :prefix: train.writers.hdf5
+```
+
+(solid-train-grads)=
+### Loss gradients (`train.grads.*`)
+
+Loss and gradient estimator. Computes the VMC loss and parameter gradients. See [Loss and gradient](../../guide/estimators/loss-grad.md) for the mathematical derivation and outlier clipping details.
+
+```{eval-rst}
+.. config-defaults:: jaqmc.estimator.loss_grad.LossAndGrad
+   :prefix: train.grads
+```
+
+---
+
+## Pretrain Stage (`pretrain.*`)
+
+Initializes the neural network to approximate the loaded reference orbitals
+before VMC training. Its run and writer settings follow the same schemas as the
+train stage, while the optimizer default and workflow-wired supervised loss are
+specific to pretraining.
+
+### Sampling mixture (`pretrain.sample_fraction`)
+
+Mixing fraction between the neural ansatz and the loaded reference during
+pretrain sampling. `0.0` is pure neural, `1.0` (the default) is pure reference.
+
+### Run options (`pretrain.run.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.workflow.stage.vmc.VMCWorkStageConfig
+   :prefix: pretrain.run
+```
+
+### Optimizer (`pretrain.optim.*`)
+
+- Default optimizer module: `optax:adam`, and its effective keys are listed
+  below.
+
+#### Effective Adam defaults
+
+```{eval-rst}
+.. config-defaults:: jaqmc.optimizer.optax.adam
+   :prefix: pretrain.optim
+   :scope: Adam
+```
+
+### Writers (`pretrain.writers.*`)
+
+The pretrain stage enables `console`, `csv`, and `hdf5` writers by default.
+
+#### Console writer (`pretrain.writers.console.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.writer.console.ConsoleWriter
+   :prefix: pretrain.writers.console
+```
+
+#### CSV writer (`pretrain.writers.csv.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.writer.csv.CSVWriter
+   :prefix: pretrain.writers.csv
+```
+
+#### HDF5 writer (`pretrain.writers.hdf5.*`)
+
+```{eval-rst}
+.. config-defaults:: jaqmc.writer.hdf5.HDF5Writer
+   :prefix: pretrain.writers.hdf5
+```
+
+### Loss gradients
+
+Pretraining does not use configurable `pretrain.grads.*` settings. The workflow
+wires a supervised orbital-matching loss against the loaded reference.
+
+---
+
+## Estimators (`estimators.*`)
+
+Energy estimators are configured programmatically by the workflow and are not
+typically overridden via config. The same definitions are used by
+<project:eval.md>. For physics and derivations, see
+<project:../../guide/estimators/index.md>. For the API, see
+[Estimators](../../api-reference/estimators.md).
+
+`PotentialEnergy` uses [Ewald summation](../../guide/estimators/ewald.md) for
+periodic Coulomb interactions and is always present. `TotalEnergy`
+automatically sums all `energy:`-prefixed components.
+
+- `estimators.enabled.spin` defaults to `false`.
+
+### Kinetic energy (`estimators.energy.kinetic.*`)
+
+Kinetic energy estimator. See [Kinetic energy](../../guide/estimators/kinetic.md) for physics details and Laplacian mode trade-offs.
+
+```{eval-rst}
+.. config-defaults:: jaqmc.estimator.kinetic.EuclideanKinetic
+   :prefix: estimators.energy.kinetic
+```
+
+### ECP energy (`estimators.energy.ecp.*`)
+
+ECP (semi-local pseudopotential) energy estimator. Added automatically when
+`system.pp` selects an ECP for at least one atom. See
+[Pseudopotentials](../../guide/estimators/ecp.md) for physics details and
+quadrature options.
+
+```{eval-rst}
+.. config-defaults:: jaqmc.estimator.ecp.estimator.ECPEnergy
+   :prefix: estimators.energy.ecp
+```

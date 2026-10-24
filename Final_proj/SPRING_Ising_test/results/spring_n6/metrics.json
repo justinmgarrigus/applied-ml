@@ -1,0 +1,60 @@
+{
+  "configuration": {
+    "n": 6,
+    "hidden": 12,
+    "J": 1.0,
+    "h": 1.0,
+    "steps": 250,
+    "batch_size": 128,
+    "learning_rate": 0.05,
+    "damping": 0.001,
+    "mu": 0.9,
+    "max_norm": 0.1,
+    "seed": 7,
+    "log_every": 5,
+    "optimizer": "spring",
+    "output": "/home/leean/research/Applied_machine_learning_course/Final_proj/spring_ising_test/results/spring_n6"
+  },
+  "upstream_commit": "71f94158f2aca88ded904451f5314f71cdff5666",
+  "backend": "[CpuDevice(id=0)]",
+  "dtype": "float64",
+  "versions": {
+    "jaqmc": "0.1.0",
+    "jax": "0.9.1",
+    "jaxlib": "0.9.1",
+    "optax": "0.2.8",
+    "numpy": "2.5.4"
+  },
+  "optimizer_module": "jaqmc.optimizer.sr.jasr",
+  "parameter_count": 73,
+  "exact_ground_energy": -7.727406610312546,
+  "initial": {
+    "step": 0,
+    "exact_energy": -6.192017834495834,
+    "energy_error": 1.5353887758167115,
+    "exact_variance": 4.271206523494897,
+    "ground_state_fidelity": 0.51746632055087
+  },
+  "final": {
+    "step": 250,
+    "exact_energy": -7.727390852046698,
+    "energy_error": 1.5758265847765074e-05,
+    "exact_variance": 0.00020536374883783966,
+    "ground_state_fidelity": 0.9999985691163893,
+    "parameter_update_norm": 0.00570160437400468,
+    "raw_direction_norm": 0.11403208748009362,
+    "sampled_energy_before_update": -7.7275805107768,
+    "sampled_physical_gradient_norm": 0.005164560817112841
+  },
+  "gradient_check": {
+    "parameter_count": 73,
+    "finite_difference_step": 1e-05,
+    "covariance_vs_autodiff_max_abs": 1.942890293094024e-15,
+    "covariance_vs_finite_difference_max_abs": 2.8707036747732673e-10,
+    "exact_physical_gradient_norm": 2.796402129360154,
+    "normalization_gauge_gradient": 6.938893903907228e-16
+  },
+  "training_seconds_including_jit": 0.477840308999987,
+  "sampling": "iid categorical draws from enumerated |psi|^2; exact expectations used for evaluation only",
+  "spring_force_convention": "physical_gradient/2; SGD uses physical_gradient"
+}

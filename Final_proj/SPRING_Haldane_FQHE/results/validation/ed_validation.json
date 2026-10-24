@@ -1,0 +1,10 @@
+{
+  "fqhe": {
+    "tests": 13,
+    "failures": 0,
+    "errors": 0
+  },
+  "existing_training_and_references_unchanged": true,
+  "independent_Hamiltonian_check": "../ed_benchmarks/independent_validation.json",
+  "scope": "ED benchmark extension; no long training or TACC jobs"
+}

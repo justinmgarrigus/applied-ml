@@ -1,0 +1,254 @@
+{
+  "passed": true,
+  "checks": {
+    "source_parameter_sha256_matches_plan": true,
+    "complete_sector_N8_M0": true,
+    "reference_artifacts_unchanged": true,
+    "dense_neural_initialization_identical_across_sampling_seeds": true,
+    "attention_neural_initialization_identical_across_sampling_seeds": true
+  },
+  "arms": {
+    "dense_seed71": {
+      "checks": {
+        "completed": true,
+        "source_inputs_unchanged": true,
+        "training_sources_unchanged": true,
+        "initial_full_params_match_flat": true,
+        "initial_full_base_params_match_source": true,
+        "initial_log_coefficients_identical_to_source": true,
+        "initial_normalized_coefficients_identical_to_source": true,
+        "initial_step_and_time_zero": true,
+        "initial_optimizer_memory_fresh": true,
+        "initial_full_walkers_match_burn": true,
+        "initial_walkers_valid": true,
+        "config_hash_matches": true,
+        "no_temperature_parameter": true,
+        "optimizer_and_budget_match_plan": true,
+        "common_source_matches_plan": true,
+        "fixed_pureV1_physics": true,
+        "no_ED_training_flags": true,
+        "all_trainer_fullstate_checks_passed": true,
+        "final_full_params_match_flat": true,
+        "final_step_matches_plan": true,
+        "final_config_hash_matches": true,
+        "final_optimizer_counters_match_plan": true,
+        "all_initial_and_final_arrays_finite": true,
+        "final_walkers_valid": true,
+        "reconstructed_coefficients_match_stored": true,
+        "stored_coefficients_sha256_matches": true,
+        "endpoint_energies_variance_fidelity_L2_match": true,
+        "real_Hermitian_energy": true,
+        "normalized": true,
+        "first_actual_logged_update_independently_reconstructed": true
+      },
+      "initial_max_log_error": 0.0,
+      "initial_max_normalized_coefficient_error": 0.0,
+      "stored_max_coefficient_error": 0.0,
+      "recomputed_endpoints": {
+        "exact_variational_energy_V1": 0.4908449813352472,
+        "exact_residual_variance_V1_squared": 0.4657121642087249,
+        "ground_state_fidelity": 0.36569881386865055,
+        "exact_L2": 30.016756320632396
+      },
+      "endpoint_absolute_errors": {
+        "exact_variational_energy_V1": 0.0,
+        "exact_residual_variance_V1_squared": 0.0,
+        "ground_state_fidelity": 0.0,
+        "exact_L2": 1.7763568394002505e-14
+      },
+      "source_parameter_sha256": "9b4f50f91e5d7c9ee03e257cf54fe9e1f6b9c8839b579cc2bed238eb5de622d0",
+      "frozen_training_source_count": 36,
+      "first_update_independent_equation_check": {
+        "upstream_vs_independent_Woodbury_direction_max_abs": 2.4397150966137815e-14,
+        "sampled_energy_abs": 0.0,
+        "acceptance_abs": 0.0,
+        "update_norm_abs": 3.187554387107383e-17,
+        "sampled_FS_quadratic_abs": 1.0164395367051604e-20
+      }
+    },
+    "dense_seed137": {
+      "checks": {
+        "completed": true,
+        "source_inputs_unchanged": true,
+        "training_sources_unchanged": true,
+        "initial_full_params_match_flat": true,
+        "initial_full_base_params_match_source": true,
+        "initial_log_coefficients_identical_to_source": true,
+        "initial_normalized_coefficients_identical_to_source": true,
+        "initial_step_and_time_zero": true,
+        "initial_optimizer_memory_fresh": true,
+        "initial_full_walkers_match_burn": true,
+        "initial_walkers_valid": true,
+        "config_hash_matches": true,
+        "no_temperature_parameter": true,
+        "optimizer_and_budget_match_plan": true,
+        "common_source_matches_plan": true,
+        "fixed_pureV1_physics": true,
+        "no_ED_training_flags": true,
+        "all_trainer_fullstate_checks_passed": true,
+        "final_full_params_match_flat": true,
+        "final_step_matches_plan": true,
+        "final_config_hash_matches": true,
+        "final_optimizer_counters_match_plan": true,
+        "all_initial_and_final_arrays_finite": true,
+        "final_walkers_valid": true,
+        "reconstructed_coefficients_match_stored": true,
+        "stored_coefficients_sha256_matches": true,
+        "endpoint_energies_variance_fidelity_L2_match": true,
+        "real_Hermitian_energy": true,
+        "normalized": true
+      },
+      "initial_max_log_error": 0.0,
+      "initial_max_normalized_coefficient_error": 0.0,
+      "stored_max_coefficient_error": 0.0,
+      "recomputed_endpoints": {
+        "exact_variational_energy_V1": 0.49231693930368053,
+        "exact_residual_variance_V1_squared": 0.4511453907154125,
+        "ground_state_fidelity": 0.36017658280964227,
+        "exact_L2": 29.78851351733246
+      },
+      "endpoint_absolute_errors": {
+        "exact_variational_energy_V1": 0.0,
+        "exact_residual_variance_V1_squared": 0.0,
+        "ground_state_fidelity": 2.7755575615628914e-16,
+        "exact_L2": 2.1316282072803006e-14
+      },
+      "source_parameter_sha256": "9b4f50f91e5d7c9ee03e257cf54fe9e1f6b9c8839b579cc2bed238eb5de622d0",
+      "frozen_training_source_count": 36
+    },
+    "attention_seed71": {
+      "checks": {
+        "completed": true,
+        "source_inputs_unchanged": true,
+        "training_sources_unchanged": true,
+        "initial_full_params_match_flat": true,
+        "initial_full_base_params_match_source": true,
+        "initial_log_coefficients_identical_to_source": true,
+        "initial_normalized_coefficients_identical_to_source": true,
+        "initial_step_and_time_zero": true,
+        "initial_optimizer_memory_fresh": true,
+        "initial_full_walkers_match_burn": true,
+        "initial_walkers_valid": true,
+        "config_hash_matches": true,
+        "no_temperature_parameter": true,
+        "optimizer_and_budget_match_plan": true,
+        "common_source_matches_plan": true,
+        "fixed_pureV1_physics": true,
+        "no_ED_training_flags": true,
+        "all_trainer_fullstate_checks_passed": true,
+        "final_full_params_match_flat": true,
+        "final_step_matches_plan": true,
+        "final_config_hash_matches": true,
+        "final_optimizer_counters_match_plan": true,
+        "all_initial_and_final_arrays_finite": true,
+        "final_walkers_valid": true,
+        "reconstructed_coefficients_match_stored": true,
+        "stored_coefficients_sha256_matches": true,
+        "endpoint_energies_variance_fidelity_L2_match": true,
+        "real_Hermitian_energy": true,
+        "normalized": true,
+        "first_actual_logged_update_independently_reconstructed": true
+      },
+      "initial_max_log_error": 0.0,
+      "initial_max_normalized_coefficient_error": 0.0,
+      "stored_max_coefficient_error": 0.0,
+      "recomputed_endpoints": {
+        "exact_variational_energy_V1": 0.5062111255927563,
+        "exact_residual_variance_V1_squared": 0.4522707232236763,
+        "ground_state_fidelity": 0.3469078646645389,
+        "exact_L2": 30.753900091573673
+      },
+      "endpoint_absolute_errors": {
+        "exact_variational_energy_V1": 0.0,
+        "exact_residual_variance_V1_squared": 0.0,
+        "ground_state_fidelity": 2.7755575615628914e-16,
+        "exact_L2": 1.7763568394002505e-14
+      },
+      "source_parameter_sha256": "9b4f50f91e5d7c9ee03e257cf54fe9e1f6b9c8839b579cc2bed238eb5de622d0",
+      "frozen_training_source_count": 36,
+      "first_update_independent_equation_check": {
+        "upstream_vs_independent_Woodbury_direction_max_abs": 2.606248550307555e-14,
+        "sampled_energy_abs": 0.0,
+        "acceptance_abs": 0.0,
+        "update_norm_abs": 3.1008182133085427e-17,
+        "sampled_FS_quadratic_abs": 6.928729508540177e-19
+      }
+    },
+    "attention_seed137": {
+      "checks": {
+        "completed": true,
+        "source_inputs_unchanged": true,
+        "training_sources_unchanged": true,
+        "initial_full_params_match_flat": true,
+        "initial_full_base_params_match_source": true,
+        "initial_log_coefficients_identical_to_source": true,
+        "initial_normalized_coefficients_identical_to_source": true,
+        "initial_step_and_time_zero": true,
+        "initial_optimizer_memory_fresh": true,
+        "initial_full_walkers_match_burn": true,
+        "initial_walkers_valid": true,
+        "config_hash_matches": true,
+        "no_temperature_parameter": true,
+        "optimizer_and_budget_match_plan": true,
+        "common_source_matches_plan": true,
+        "fixed_pureV1_physics": true,
+        "no_ED_training_flags": true,
+        "all_trainer_fullstate_checks_passed": true,
+        "final_full_params_match_flat": true,
+        "final_step_matches_plan": true,
+        "final_config_hash_matches": true,
+        "final_optimizer_counters_match_plan": true,
+        "all_initial_and_final_arrays_finite": true,
+        "final_walkers_valid": true,
+        "reconstructed_coefficients_match_stored": true,
+        "stored_coefficients_sha256_matches": true,
+        "endpoint_energies_variance_fidelity_L2_match": true,
+        "real_Hermitian_energy": true,
+        "normalized": true
+      },
+      "initial_max_log_error": 0.0,
+      "initial_max_normalized_coefficient_error": 0.0,
+      "stored_max_coefficient_error": 0.0,
+      "recomputed_endpoints": {
+        "exact_variational_energy_V1": 0.5023383723842019,
+        "exact_residual_variance_V1_squared": 0.43561442484953694,
+        "ground_state_fidelity": 0.34707626867080266,
+        "exact_L2": 30.078619542871216
+      },
+      "endpoint_absolute_errors": {
+        "exact_variational_energy_V1": 0.0,
+        "exact_residual_variance_V1_squared": 0.0,
+        "ground_state_fidelity": 0.0,
+        "exact_L2": 3.552713678800501e-15
+      },
+      "source_parameter_sha256": "9b4f50f91e5d7c9ee03e257cf54fe9e1f6b9c8839b579cc2bed238eb5de622d0",
+      "frozen_training_source_count": 36
+    }
+  },
+  "paired_seed_initialization_checks": {
+    "71": {
+      "burned_walkers": true,
+      "burned_jax_key": true,
+      "initial_numpy_rng": true,
+      "final_numpy_rng": true,
+      "saved_burned_state_sha": true
+    },
+    "137": {
+      "burned_walkers": true,
+      "burned_jax_key": true,
+      "initial_numpy_rng": true,
+      "final_numpy_rng": true,
+      "saved_burned_state_sha": true
+    }
+  },
+  "scope": "Independent post-training reconstruction of all initial/final coefficients and sparse-operator energy, variance, ground fidelity and L2; raw full checkpoints checked without the trainer loader.",
+  "statistical_scope": "Two paired Monte Carlo seeds sharing one neural initialization give descriptive paired differences, not confidence intervals or a general architecture superiority claim.",
+  "audit": {
+    "born_sampling": "Symmetric fixed-sector pair proposals and uniform independence refresh target exp(2 Re logpsi), with no artificial temperature.",
+    "force": "Uniform-row Re Cov(O*,Eloc), half the physical energy gradient.",
+    "optimizer": "The trainer asserts identity with upstream jaqmc.optimizer.sr.jasr.robust_sr, using exact uniform-covariance Householder rows.",
+    "parameter_cap": "Euclidean update radius .03; it is not a Fubini-Study constraint.",
+    "state_metric": "Recorded sum |(O-mean O) delta_theta|^2/B is the sampled linearized Fubini-Study quadratic displacement.",
+    "evaluator": "Normalized full8512 coefficient Rayleigh quotient, residual norm squared, ED ground overlap, and raising-map norm squared; reference data are read only after training."
+  }
+}

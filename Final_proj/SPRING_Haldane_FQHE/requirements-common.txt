@@ -1,0 +1,5 @@
+# Direct dependencies, captured from the verified Python 3.12 environment.
+# JaQMC SPRING is supplied separately as the small, licensed vendor subset.
+numpy==2.5.4
+scipy==1.18.1
+optax==0.2.8
