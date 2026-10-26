@@ -139,7 +139,7 @@ def main():
               "The report builder requires NumPy and Matplotlib; the numerical ED "
               "scripts specify their own requirements. `summary.json` records source "
               "data hashes and the cross-model tables. PDF and PNG versions of the "
-              "figure are included. Future TACC N=8 runs can be checked with the "
+              "figure are included. Future N=8 runs can be checked with the "
               "same frozen FQHE reference and evaluator. ED labels/eigenvectors do "
               "not enter SPRING training, and no 200,000-update run was performed here.", "",
               "[Validation record](validation.json) includes the full FQHE and Ising "

@@ -1,4 +1,0 @@
-# NVIDIA CUDA 12; requires compatible node architecture and NVIDIA driver.
-# See TACC.md before installing. CUDA 13 is also supported by setup_env.sh.
--r requirements-common.txt
-jax[cuda12]==0.9.1

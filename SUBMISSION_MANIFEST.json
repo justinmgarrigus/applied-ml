@@ -1,9 +1,9 @@
 {
-  "snapshot_date": "2026-10-23",
+  "snapshot_date": "2026-10-26",
   "contributor_handle": "PassengerAn",
   "repository": "https://github.com/justinmgarrigus/applied-ml",
-  "file_count_excluding_manifest": 858,
-  "bytes_excluding_manifest": 72932391,
+  "file_count_excluding_manifest": 853,
+  "bytes_excluding_manifest": 64409741,
   "excluded_local_content": [
     "virtual environments",
     "Python/test caches",
@@ -17,36 +17,24 @@
       "sha256": "aa63bf9ae26d790acba5db87901268365f2b17f31b1249e21c2f355dbf0dcbca"
     },
     "Final_proj/BUILD_REPORTS.txt": {
-      "bytes": 3822,
-      "sha256": "cbcb60d1ed829289b281105f235b9b90e76c1120077b9223684f964efd1ed265"
-    },
-    "Final_proj/Haldane_FQHE_TACC.tar.gz": {
-      "bytes": 8509672,
-      "sha256": "deff25328a693671a322e890da361a15555b4ba52deb1bc5f45ee43860b80b33"
-    },
-    "Final_proj/Haldane_FQHE_TACC.tar.gz.sha256": {
-      "bytes": 91,
-      "sha256": "6ab1444d2daed7d90b2432b3b19c414650b8e0567ed3952050b70b1b0e30edb8"
+      "bytes": 5298,
+      "sha256": "b8be2e20734220cc20df82c334548a54d4f4bfb55f86f24a00c92c8880f9a909"
     },
     "Final_proj/README.md": {
-      "bytes": 2674,
-      "sha256": "a7b6c9e381948043a942ba5f0a8c608a749ef45f40a755df8302acd7bb2d4e14"
+      "bytes": 2183,
+      "sha256": "82219ea0e5ca39e060f4b8456ba9ed6cd6af776f681ec367044c860ec590e012"
     },
     "Final_proj/SPRING_Haldane_FQHE/.gitignore": {
       "bytes": 100,
       "sha256": "81b0c7debdaebab89a56edd914d79d816eb734449ea7de2f9da111dc4145e1ea"
     },
     "Final_proj/SPRING_Haldane_FQHE/README.md": {
-      "bytes": 9671,
-      "sha256": "514836d4cc68404f7423c1b433e7790ed18359802a4416c7a17de8360e818a20"
+      "bytes": 9345,
+      "sha256": "4795cc5739140ec7f78cc0858922221d131538f283c9cf858b2c6724e4bfe39d"
     },
     "Final_proj/SPRING_Haldane_FQHE/SHA256SUMS": {
-      "bytes": 16793,
-      "sha256": "d38ae16275c9a2b04f9571c11359e60eaada432190afdfa94c19e9187452bfa8"
-    },
-    "Final_proj/SPRING_Haldane_FQHE/TACC.md": {
-      "bytes": 8065,
-      "sha256": "bcc8bc82f7e5f82e43fc9b35072a1c8d92df7c98ba4b2ec49b58c9096e9a543e"
+      "bytes": 16383,
+      "sha256": "ac173bb8ce18d3d88a84742edc526406b3435449ed04e6cafb74e609c2108138"
     },
     "Final_proj/SPRING_Haldane_FQHE/checkpoints/README.md": {
       "bytes": 634,
@@ -256,13 +244,9 @@
       "bytes": 52,
       "sha256": "cd950b4cc52582c392a293f703211a1921ecd0c902e2a8912ce6927c2fbf1ed4"
     },
-    "Final_proj/SPRING_Haldane_FQHE/requirements-gpu.txt": {
-      "bytes": 197,
-      "sha256": "da53feb70db7efb63a409051bbcb6a1de274057a8db8cb8f922af0d87817ef6c"
-    },
     "Final_proj/SPRING_Haldane_FQHE/results/ed_benchmarks/README.md": {
-      "bytes": 6040,
-      "sha256": "71dbe96332ba7f00dbef84ff0bb5adda41e077256f847425943ab9dc6eb9f85b"
+      "bytes": 6013,
+      "sha256": "90ffc54be2683acea168814fb20b3927377aa386b0e329a62bafbe11cb8c9507"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/ed_benchmarks/checkpoint_comparison.csv": {
       "bytes": 2548,
@@ -509,32 +493,32 @@
       "sha256": "4b700b63c9a83176defadf5b72bdcd557329d373d3e270fced6219404dc765e5"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/README.md": {
-      "bytes": 914,
-      "sha256": "b7ecf38efe43d6e524c08f91787eb6d4fad64aefc5e7952d52143450407c19bc"
+      "bytes": 889,
+      "sha256": "b8677ea1efe912d43df57e7911d12822f9595165420cbca509cde7ac1389d6d2"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/ed_pytest_results.xml": {
       "bytes": 1984,
       "sha256": "445e30de42f80e4df7f2f3ec9b46ecbfd6a4ae5f6d1e5122c42149692460c547"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/ed_validation.json": {
-      "bytes": 277,
-      "sha256": "661135e3019ae25307df2ee1380b13e4c70eac573c6c5c306faa909c0753db3f"
+      "bytes": 279,
+      "sha256": "d3d663b5c2a34130bf909f29b8c00d098561b376d5517c6ee1a4399c791e58ed"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/endpoint_reproduction.json": {
       "bytes": 1990,
       "sha256": "7103c131fceb0bb54097566005159f7f179cda49a00a8d1548813def1343c9f9"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/packaging_validation.json": {
-      "bytes": 4172,
-      "sha256": "8756c70071054909ae59b4f4fbee9f6c4b60ba22bf0d0b2622d4767abcc13677"
+      "bytes": 4002,
+      "sha256": "594caaa7dd6afe749d8b06af901efb7221f28c6098247965ee5946a5a9c3d3d0"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/pytest_results.xml": {
       "bytes": 1342,
       "sha256": "0cc162bbe4e79e88c64ab316e5e6b31f75e0e075810a1cfeea54b4c37b7ec487"
     },
     "Final_proj/SPRING_Haldane_FQHE/results/validation/release_validation.json": {
-      "bytes": 1473,
-      "sha256": "d29db252824abac1acaef13bfacc1befdfb1451fd96e505d69922f780f024733"
+      "bytes": 1386,
+      "sha256": "690231aef6fbcadd928b88e92f89ea5a5f148729e07c8d5473fc3e3077eb6c98"
     },
     "Final_proj/SPRING_Haldane_FQHE/src/fqh_spring/__init__.py": {
       "bytes": 93,
@@ -587,18 +571,6 @@
     "Final_proj/SPRING_Haldane_FQHE/src/fqh_spring/train.py": {
       "bytes": 21650,
       "sha256": "abd3bd7a898a9c8d6c10cd0e46b6da48f4d9eaf19705a708e4890611a65593e6"
-    },
-    "Final_proj/SPRING_Haldane_FQHE/tacc/setup_env.sh": {
-      "bytes": 1247,
-      "sha256": "cf4d4d20bc3258322143769835338d87bd464d352a01118df046b509a355c813"
-    },
-    "Final_proj/SPRING_Haldane_FQHE/tacc/submit.sh": {
-      "bytes": 4364,
-      "sha256": "80f8285da4f7b713e9c912453ce37d55d2456aa421016dafb7dc9eb199a783ef"
-    },
-    "Final_proj/SPRING_Haldane_FQHE/tacc/train.sbatch": {
-      "bytes": 2347,
-      "sha256": "f85c3d64ad6f65309d123c950fdcff004c15c9be1741ff512206b4019ddb78f9"
     },
     "Final_proj/SPRING_Haldane_FQHE/tests/test_ed_benchmark.py": {
       "bytes": 1588,
@@ -3297,24 +3269,24 @@
       "sha256": "957bf9ffd40c58a701a92434e3cf7e7871c1351533c7edfdf88a0b291dfb13ab"
     },
     "Final_proj/SUBMISSION.md": {
-      "bytes": 2958,
-      "sha256": "878687b718ce8966c11ed105b5186c82f6cb86c037c748f6b5247ccd1275960d"
+      "bytes": 2780,
+      "sha256": "b9ecb8543dcaf4d69ecf103027bbcbb7c6584254833ad3074c7cf3e412dfd432"
     },
     "Final_proj/THIRD_PARTY.md": {
       "bytes": 2200,
       "sha256": "abab0ca252e7dd6d4e34ab84eaa82c760d3f7dfea52c1ed5b8fe85c1820ad3b0"
     },
     "Final_proj/benchmarks/README.md": {
-      "bytes": 5380,
-      "sha256": "e89d7bd2b33aa9be1a87b3602999d8346e4475d732112b37776c0259004295ea"
+      "bytes": 5375,
+      "sha256": "1938255b04b18304ebc775c2e5c7da82cd6b8c67df453d92a11dc9e8d35f034e"
     },
     "Final_proj/benchmarks/SHA256SUMS": {
       "bytes": 749,
       "sha256": "e0e28989f10d695fd7fb3c2769130cbb22d1411945335261ee5bedf20cb9c7b3"
     },
     "Final_proj/benchmarks/build_report.py": {
-      "bytes": 9966,
-      "sha256": "71988ef3c1db290f3276f261d8c4263dbd3c0a5717aaca76f8c0d6f7111cce44"
+      "bytes": 9961,
+      "sha256": "a361028fa9554fa29f49d56da16bc319134ff263d113d68d091e5ebf02a47e95"
     },
     "Final_proj/benchmarks/ed_benchmarks.pdf": {
       "bytes": 21422,
@@ -3341,8 +3313,8 @@
       "sha256": "90c5938b436781cd514704ba8af3cfa1ff5b1f5e24bf653d32853170f23607f8"
     },
     "Final_proj/benchmarks/validation.json": {
-      "bytes": 336,
-      "sha256": "b0db265c6407b2964fd0ff4cebbbc8024f8cf4b1cf44c2650126d51793180891"
+      "bytes": 347,
+      "sha256": "08309f5dc437d19cf4e4998160d57291c5b9532acf9866e166ab8f6194499752"
     },
     "Final_proj/documents/course/Ghosh Term Project Applied ML.pdf": {
       "bytes": 89798,
@@ -3352,97 +3324,105 @@
       "bytes": 9800873,
       "sha256": "a8f12a3107b862e03d1169ef026cbd84b9e97c1d0080ab40744d34e80d69bec2"
     },
-    "Final_proj/documents/reports/2412_00618_reading_report.pdf": {
+    "Final_proj/documents/reports/README.md": {
+      "bytes": 472,
+      "sha256": "491029dd3b8c2fb12a940c6e57b08913f6a53170e5fa50a766cd1062e3ed1327"
+    },
+    "Final_proj/documents/reports/SPRING_Proposal.pdf": {
+      "bytes": 262551,
+      "sha256": "2cc381cd23cfcee5ed752f2f1db497983e27dccfe90dc31885f0a294e5469339"
+    },
+    "Final_proj/documents/reports/reference/2412_00618_reading_report.pdf": {
       "bytes": 527455,
       "sha256": "dcbc96025287f2dd6fc133ca3c1dc8ff96d69b92cf86644a45c681a4d6b1e9c5"
     },
-    "Final_proj/documents/reports/2412_00618_reading_report.tex": {
+    "Final_proj/documents/reports/reference/2412_00618_reading_report.tex": {
       "bytes": 79348,
       "sha256": "7d5fc3fc567d46a255ca283bb8a21e5190e792daa53e7d5fdc1b4adee7198038"
     },
-    "Final_proj/documents/reports/ML_Explanation_Note.pdf": {
+    "Final_proj/documents/reports/reference/ML_Explanation_Note.pdf": {
       "bytes": 213356,
       "sha256": "4b9ac689659fc5339b9b9b8621d7a514da2ebf696177ea428316a12b0a31412a"
     },
-    "Final_proj/documents/reports/ML_Explanation_Note.tex": {
+    "Final_proj/documents/reports/reference/ML_Explanation_Note.tex": {
       "bytes": 10642,
       "sha256": "83c09e2ca64dc4a97ffe05266c6224c5a9fcd509a0dbcca892c5005d168fb3a4"
     },
-    "Final_proj/documents/reports/Project_Outline.pdf": {
-      "bytes": 262549,
-      "sha256": "df83ded18ba4227947825bdc1c7dcfd4e763769aa8e3f278728012557b044fe2"
+    "Final_proj/documents/reports/reference/README.md": {
+      "bytes": 1805,
+      "sha256": "c6e103509e561ccb54941877bdc4b7db7ecc14d601f852793c801c9f07d6fb95"
     },
-    "Final_proj/documents/reports/SPRING_Multi_System_Optimizer_Proposal.pdf": {
-      "bytes": 474222,
-      "sha256": "029f1dbfd5756775ea3891a6f2d222d4fbee3ba042c9730ea1b9a26a7d64eeb4"
+    "Final_proj/documents/reports/reference/SPRING_Multi_System_Optimizer_Proposal.pdf": {
+      "bytes": 474225,
+      "sha256": "68fa00b7a1211a1e1ed3bd0ff1b44a0e73f846a68dc5637afd797d8278b70a01"
     },
-    "Final_proj/documents/reports/SPRING_Multi_System_Optimizer_Proposal.tex": {
-      "bytes": 17708,
-      "sha256": "b1dd9a5cf2dcf7f8144336e2b39bdc5a57a1f74050625f9f3e95f3b0e767fcd4"
+    "Final_proj/documents/reports/reference/SPRING_Multi_System_Optimizer_Proposal.tex": {
+      "bytes": 17700,
+      "sha256": "98ab8c407a064159312ec50f847aacfcf2a0589b53e91167b7757ec503b7f353"
     },
-    "Final_proj/documents/reports/SPRING_Multi_System_Optimizer_Proposal_sources.zip": {
-      "bytes": 596307,
-      "sha256": "9d79ca8619ee8de887d0b5a669b37526edf0b78c377a54efd41c96209ab7b19b"
+    "Final_proj/documents/reports/reference/SPRING_Multi_System_Optimizer_Proposal_sources.zip": {
+      "bytes": 596301,
+      "sha256": "eaad3cd7ffe5a45d4831f4e04ddc5fa7a66bddc9d70c853d6d9cfa89658bbb33"
     },
-    "Final_proj/documents/reports/SPRING_Proposal_With_ML_Explanation.pdf": {
-      "bytes": 741229,
-      "sha256": "c3e28281a7a14c2efcc7665acbc8b53b38ba192dc8718cebf427fc5719f30a51"
+    "Final_proj/documents/reports/reference/SPRING_Proposal_With_ML_Explanation.pdf": {
+      "bytes": 741230,
+      "sha256": "b2af718bd5e1b1710d29677562ed079e954f51b5a3bd5098f55c78f0549d9df7"
     },
-    "Final_proj/documents/reports/fqh_zero_splitting_schematic.pdf": {
+    "Final_proj/documents/reports/reference/fqh_zero_splitting_schematic.pdf": {
       "bytes": 94086,
       "sha256": "4ff50825ab2fedf41a76a5cf8777286fa37fba57334c09fdaffea31784f6ab3f"
     },
-    "Final_proj/documents/reports/fqh_zero_splitting_schematic.png": {
+    "Final_proj/documents/reports/reference/fqh_zero_splitting_schematic.png": {
       "bytes": 215736,
       "sha256": "abbf6c4989edfedaf829b8658dbb4e6680c3135ec4ca832ca87ae42323eec36c"
     },
-    "Final_proj/documents/reports/make_fqh_report_figure.py": {
+    "Final_proj/documents/reports/reference/make_fqh_report_figure.py": {
       "bytes": 1701,
       "sha256": "ddc408ae95b7ccc4cf67a6f39497623d3037605e33585cd8c612f2c1cc23ff1f"
     },
-    "Final_proj/documents/reports/make_optimizer_proposal_figures.py": {
-      "bytes": 13945,
-      "sha256": "143dce7eabfc3467977d78f37d9d48eaa3ae5f5abf17074cd35654ae811c0863"
+    "Final_proj/documents/reports/reference/make_optimizer_proposal_figures.py": {
+      "bytes": 13942,
+      "sha256": "698ab978c987eb2a4ea3d76634494af1d54ca6dff72fa29181a53b1c84415476"
     },
-    "Final_proj/documents/reports/ml_explanation_validation.json": {
-      "bytes": 2713,
-      "sha256": "95c50eb298517a21cdf995cdacd01a1ed57851e1594a6c397082832d561b4fc9"
+    "Final_proj/documents/reports/reference/ml_explanation_validation.json": {
+      "bytes": 2903,
+      "sha256": "608f7749faa125a71dda80d9017fd73967798774b8cca54c756e8db26e60ceab"
     },
-    "Final_proj/documents/reports/nn_ed_proposal_examples.pdf": {
+    "Final_proj/documents/reports/reference/nn_ed_proposal_examples.pdf": {
       "bytes": 23590,
       "sha256": "87aa5e67948651d857a098527293f6322df271065d7d591d16a6d7a5d5751371"
     },
-    "Final_proj/documents/reports/nn_ed_proposal_examples.png": {
+    "Final_proj/documents/reports/reference/nn_ed_proposal_examples.png": {
       "bytes": 220406,
       "sha256": "9550a52414e50ef357aad52919590ab1bd305ef713ff7fea4ee293dc55bd0724"
     },
-    "Final_proj/documents/reports/proposal_data.tex": {
+    "Final_proj/documents/reports/reference/proposal_data.tex": {
       "bytes": 1089,
       "sha256": "952c5ebd9b52b87447e4360e17ecab81dbd9e1dffa39345dc507685e39b02044"
     },
-    "Final_proj/documents/reports/proposal_validation.json": {
-      "bytes": 1600,
-      "sha256": "93fcdce38b47b78bb6bd2ce1386e1d36595c92c615c2cd7fd0fb726ac705c23d"
+    "Final_proj/documents/reports/reference/proposal_validation.json": {
+      "bytes": 1985,
+      "sha256": "93acecdcfe873d38d8696939c6d17aea9a6390ec34608b0f4ad0e8fdf872901f"
     },
-    "Final_proj/documents/reports/proposal_verified_data.json": {
+    "Final_proj/documents/reports/reference/proposal_verified_data.json": {
       "bytes": 10581,
-      "sha256": "185d2202e638669d03081bed6af0fc35755e53148d3bb5d4f40c72e02b7a02c6"
+      "sha256": "2b8ed62948c597e162f5624753a476afc6bbaa54701d459b3a4697268c3ad383"
     },
-    "Final_proj/documents/reports/spring_optimizer_workflow.pdf": {
+    "Final_proj/documents/reports/reference/spring_optimizer_workflow.pdf": {
       "bytes": 51897,
       "sha256": "effe0f32bfc4772c7dc2a6b0474c5ebe15ae1223c5fdd5ead514139b81772697"
     },
-    "Final_proj/documents/reports/spring_optimizer_workflow.png": {
+    "Final_proj/documents/reports/reference/spring_optimizer_workflow.png": {
       "bytes": 342072,
       "sha256": "9c824a86ffff426f862973387397dbf23c08c0982405729928d175841c55d918"
     },
     "Final_proj/submission_validation.json": {
-      "bytes": 757,
-      "sha256": "6747f01100665963578c136f4656ac2204c228625012b665ed8f48d6bd6970a4"
+      "bytes": 1344,
+      "sha256": "ed56cd58b219eaef280b612d1d22727a8fb1fa3455358829236617be87e5e9dc"
     },
     "README.md": {
-      "bytes": 1696,
-      "sha256": "d1d828b6351231ebe091eb5527a960350ee1fc7d1a463058e152fb6b4c0c70e5"
+      "bytes": 1836,
+      "sha256": "e80c9dd58489bc3322cb6a4f09db4b439e2cd871c81600d3fd1e826b84dadade"
     }
   }
 }

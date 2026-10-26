@@ -17,7 +17,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-FINAL = HERE.parent.parent
+FINAL = HERE.parents[2]
 
 
 def read_csv(path):

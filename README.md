@@ -9,12 +9,16 @@ SR/MinSR, K-FAC and Adam/SGD under controlled conditions.
 
 ## Read first
 
-- [Project outline — 2 pages](Final_proj/documents/reports/Project_Outline.pdf)
-- [Full proposal with supplements — 7 pages](Final_proj/documents/reports/SPRING_Proposal_With_ML_Explanation.pdf)
+- [Main proposal — 2 pages](Final_proj/documents/reports/SPRING_Proposal.pdf)
+- [Supporting reference documents](Final_proj/documents/reports/reference/README.md)
 - [Course submission guide](Final_proj/SUBMISSION.md)
 - [Project contents and current results](Final_proj/README.md)
 - [ED benchmark database](Final_proj/benchmarks/README.md)
 - [Reused code and references](Final_proj/THIRD_PARTY.md)
+
+`SPRING_Proposal.pdf` is the primary course proposal. The `reference/` folder
+contains extended reading copies, explanations, paper analysis and editable
+sources for supplementary use.
 
 The ED database covers 11 Hamiltonian instances and 12,085 configuration rows
 counted per instance; its largest decoded input array is 8,512 × 22.
@@ -33,7 +37,7 @@ bash setup.sh
 
 See the [Ising instructions](Final_proj/SPRING_Ising_test/README.md) and
 [FQHE instructions](Final_proj/SPRING_Haldane_FQHE/README.md) for training,
-benchmark regeneration, evaluation and TACC setup. Environments are created
+benchmark regeneration and evaluation. Environments are created
 locally from the supplied dependency specifications.
 
 The [submission manifest](SUBMISSION_MANIFEST.json) records the packaged

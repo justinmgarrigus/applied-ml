@@ -60,6 +60,6 @@ The model-specific READMEs give the ED generation commands. After generating bot
 Final_proj/SPRING_Ising_test/.venv/bin/python Final_proj/benchmarks/build_report.py
 ```
 
-The report builder requires NumPy and Matplotlib; the numerical ED scripts specify their own requirements. `summary.json` records source data hashes and the cross-model tables. PDF and PNG versions of the figure are included. Future TACC N=8 runs can be checked with the same frozen FQHE reference and evaluator. ED labels/eigenvectors do not enter SPRING training, and no 200,000-update run was performed here.
+The report builder requires NumPy and Matplotlib; the numerical ED scripts specify their own requirements. `summary.json` records source data hashes and the cross-model tables. PDF and PNG versions of the figure are included. Future N=8 runs can be checked with the same frozen FQHE reference and evaluator. ED labels/eigenvectors do not enter SPRING training, and no 200,000-update run was performed here.
 
 [Validation record](validation.json) includes the full FQHE and Ising test-suite results. The independent Hamiltonian check is saved in [independent_fqhe_validation.json](independent_fqhe_validation.json).

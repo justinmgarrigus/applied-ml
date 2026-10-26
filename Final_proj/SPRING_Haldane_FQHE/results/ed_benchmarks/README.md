@@ -41,7 +41,7 @@ The selected dense seed-71 endpoint gives:
 - Residual variance `0.465712164209 V1^2`, or residual norm `0.682431069199 V1`.
 - L2 expectation `30.0167563206` and L=0 probability `0.368918007224`.
 
-This endpoint is a pure variational wavefunction with components in several angular-momentum sectors and energy eigenstates. Its energy being below the first exact excitation does not establish ground-state convergence. The exact variational bound `F >= max(0, 1-(E-E0)/gap)` gives only `0.0766245` here; the directly evaluated fidelity is more informative. Long TACC runs should reduce the energy error and variance while increasing fidelity against this reference. These pilot data do not establish a CDW or a higher-LL competing phase.
+This endpoint is a pure variational wavefunction with components in several angular-momentum sectors and energy eigenstates. Its energy being below the first exact excitation does not establish ground-state convergence. The exact variational bound `F >= max(0, 1-(E-E0)/gap)` gives only `0.0766245` here; the directly evaluated fidelity is more informative. Longer runs can be assessed by changes in energy error, variance and fidelity against this reference. These pilot data do not establish a CDW or a higher-LL competing phase.
 
 ## Reproduce
 
@@ -54,4 +54,4 @@ python -m fqh_spring.ed_benchmark --root . --sizes 4 5 6 7 8 \
 python -m pytest tests/test_ed_benchmark.py tests/test_ed_independent.py
 ```
 
-The default run regenerates ED benchmark outputs and checkpoint evaluations. Existing reference directories are integrity-checked and reused rather than overwritten; the eigensystem is nevertheless solved afresh from their Hamiltonians. `--skip-model-comparison` performs ED alone. The CLI intentionally rejects N>8 to avoid accidentally launching a large local ED calculation. Recorded runtimes describe this machine and are not a benchmark against neural training or TACC performance.
+The default run regenerates ED benchmark outputs and checkpoint evaluations. Existing reference directories are integrity-checked and reused rather than overwritten; the eigensystem is nevertheless solved afresh from their Hamiltonians. `--skip-model-comparison` performs ED alone. The CLI intentionally rejects N>8 to avoid accidentally launching a large local ED calculation. Recorded runtimes describe this machine and are not a benchmark against neural training.

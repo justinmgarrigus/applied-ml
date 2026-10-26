@@ -1,6 +1,6 @@
 # Haldane FQHE with SPRING
 
-A portable implementation for long training runs on TACC. The default experiment
+A portable implementation of Born-sampled SPRING training. The default experiment
 continues the best retained N=8 dense network for **200,000 optimizer updates**.
 This is a training budget, not a claim that the ground state has converged.
 No long run or remote job was launched during this cleanup.
@@ -57,7 +57,6 @@ therefore `C=0.0009`. It is not a per-parameter clipping threshold.
 | `results/validation/` | Release tests and numerical reproduction checks |
 | `tests/` | Physics, evaluator and full-state resume checks |
 | `vendor/jaqmc_spring/` | Minimal pinned SPRING subset, original license and source hashes |
-| `tacc/`, `TACC.md` | Environment setup, Slurm arrays, checkpoint signals and resume instructions |
 
 The models share a six-layer width-64 MLP. The `dense` variant adds two small
 residual dense blocks; `attention` adds two orbital-attention blocks. New
@@ -105,13 +104,18 @@ project's `Final_proj/benchmarks/` folder.
 ## Install and check
 
 Use Python 3.12 and install on the target machine. Virtual environments are
-excluded from Git; the setup command below creates one. The sibling Ising
+excluded from Git; the commands below create one. The sibling Ising
 project is not required. From the Git repository root:
 
 ```bash
 cd Final_proj/SPRING_Haldane_FQHE
-FQH_PYTHON=python3.12 bash tacc/setup_env.sh cpu .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements-cpu.txt
+python -m pip install --no-deps ./vendor/jaqmc_spring
+python -m pip install --no-deps -e .
+python -m pip check
 python -m fqh_spring.train --config configs/ne8_dense_200k.json \
   --steps 20 --output runs/smoke --cpus 4 --backend cpu
 python -m fqh_spring.evaluate --checkpoint runs/smoke/checkpoint_latest.npz \
@@ -126,8 +130,7 @@ endpoints reproduce their earlier diagnostics within `3e-14`.
 
 ## Long runs and continuation
 
-Follow [TACC.md](TACC.md) for transfer, installation and submission. The choices
-of starting state are explicit:
+After the local installation above, choose the starting wavefunction explicitly:
 
 | Configuration | Starting wavefunction |
 |---|---|
@@ -156,19 +159,13 @@ Runtime source hashes and invariant settings must match for resume; moving the
 whole project is allowed. Periodic checkpoints are atomic, only three historical
 snapshots are retained, and metrics are written incrementally. SIGUSR1/SIGTERM
 request a checkpoint after the current update. Each run uses one JAX device;
-independent Slurm seeds run separately.
+independent sampling seeds run separately.
 
 Check exact energy, residual variance, ground-state overlap, angular momentum,
 acceptance and agreement between seeds. A low sampled energy or a long run
 alone does not establish convergence. ED references are never read by training.
 For larger systems the trainer remains matrix-free; this release provides
 full-sector reference diagnostics only for the retained small systems.
-
-The adjacent `Haldane_FQHE_TACC.tar.gz` is a separately hashed transfer snapshot
-without virtual environments, caches or the recovery archive. Its extraction
-directory is `Haldane_FQHE`; the Git checkout uses `SPRING_Haldane_FQHE`.
-For the archive, extract it on the target machine, enter `Haldane_FQHE`, and run
-`sha256sum -c SHA256SUMS` before setup.
 
 ## Source and recovery
 

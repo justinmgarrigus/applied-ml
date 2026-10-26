@@ -44,9 +44,8 @@
     "target_steps": 10000
   },
   "offline_wheel_install_and_minimal_spring_import": "passed",
-  "tacc_script_checks": "shell syntax, dry-run arguments and mocked signal forwarding passed",
-  "tacc_training_executed": false,
   "gpu_execution_tested": false,
   "long_training_executed": false,
-  "not_a_convergence_claim": true
+  "not_a_convergence_claim": true,
+  "submission_cleanup_date": "2026-10-26"
 }

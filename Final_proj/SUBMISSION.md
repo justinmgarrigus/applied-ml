@@ -9,13 +9,12 @@ supplementary materials; the course's final written report also goes to Canvas.
 The outline is due **October 26** and should be **2–3 pages**, covering the
 problem, available data, possible approaches and selected references.
 
-- [Project outline — 2 pages](documents/reports/Project_Outline.pdf): primary outline document.
-- [Proposal with appendices — 4 pages](documents/reports/SPRING_Multi_System_Optimizer_Proposal.pdf): workflow and preliminary benchmark examples.
-- [ML explanation — 3 pages](documents/reports/ML_Explanation_Note.pdf): input/output arrays and energy computation.
-- [Combined packet — 7 pages](documents/reports/SPRING_Proposal_With_ML_Explanation.pdf): convenient reading copy.
+- [Main proposal — 2 pages](documents/reports/SPRING_Proposal.pdf): the primary course outline, previously named `Project_Outline.pdf`.
+- [Supporting references](documents/reports/reference/README.md): extended reading copies, ML explanation and paper analysis.
 
-Use the two-page outline for the required document and the longer documents as
-supplements if permitted. The local course guidelines do not specify the
+Use `SPRING_Proposal.pdf` for the required document. The longer PDFs in
+`documents/reports/reference/` supplement the same proposal if permitted.
+The local course guidelines do not specify the
 outline's upload destination. Check the assignment on Canvas.
 
 ## Present data and results

@@ -93,14 +93,8 @@
   "commit_evidence": "Pinned commit inherited consistently from original Ising PROVENANCE.json; old vendor was a source archive, not a git checkout. Live GitHub retrieval unavailable (web cache miss); file hashes independently checked against original vendored bytes.",
   "active_code_legacy_path_hits": [],
   "train_and_evaluate_cli_help": "passed from isolated wheel installation",
-  "readme_install_commands": "reviewed; consistent with CLI and CPU setup helper",
-  "tacc_script_checks": [
-    "bash -n all three shell scripts",
-    "CPU/GPU array dry runs",
-    "mocked array seed mapping",
-    "mocked SIGUSR1 forwarding and checkpoint exit wait",
-    "duplicate seeds, invalid CPU count, missing resume checkpoint rejected"
-  ],
+  "readme_install_commands": "Portable CPU venv and pip installation instructions reviewed on 2026-10-26; no new installation performed",
   "remote_jobs_submitted": false,
-  "gpu_execution_tested": false
+  "gpu_execution_tested": false,
+  "submission_cleanup_date": "2026-10-26"
 }

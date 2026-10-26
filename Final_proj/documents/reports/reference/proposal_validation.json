@@ -11,8 +11,8 @@
   "latex_overfull_or_underfull_warnings": false,
   "optimizer_physics_review_completed": true,
   "new_training_performed": false,
-  "pdf_sha256": "029f1dbfd5756775ea3891a6f2d222d4fbee3ba042c9730ea1b9a26a7d64eeb4",
-  "source_archive_sha256": "9d79ca8619ee8de887d0b5a669b37526edf0b78c377a54efd41c96209ab7b19b",
+  "pdf_sha256": "68fa00b7a1211a1e1ed3bd0ff1b44a0e73f846a68dc5637afd797d8278b70a01",
+  "source_archive_sha256": "eaad3cd7ffe5a45d4831f4e04ddc5fa7a66bddc9d70c853d6d9cfa89658bbb33",
   "source_archive_compiles_independently": true,
   "source_archive_pdf_text_matches_final": true,
   "source_artifact_hash_count": 30,
@@ -43,6 +43,16 @@
   "contributor_handle": "PassengerAn",
   "github_submission_target": "https://github.com/justinmgarrigus/applied-ml",
   "outline_pages": 2,
-  "outline_sha256": "df83ded18ba4227947825bdc1c7dcfd4e763769aa8e3f278728012557b044fe2",
-  "renamed_directory_paths_verified": true
+  "outline_sha256": "2cc381cd23cfcee5ed752f2f1db497983e27dccfe90dc31885f0a294e5469339",
+  "renamed_directory_paths_verified": true,
+  "submission_cleanup": {
+    "date": "2026-10-26",
+    "change": "Removed computing-platform name; research scope and planned update budgets unchanged.",
+    "outline_pages": 2,
+    "extended_pages": 4,
+    "source_archive_compiles_independently": true,
+    "source_archive_pdf_text_matches_final": true,
+    "latex_layout_warnings": false,
+    "rendered_page_2_inspected": true
+  }
 }

@@ -100,11 +100,16 @@
   "sha256": {
     "ML_Explanation_Note.pdf": "4b9ac689659fc5339b9b9b8621d7a514da2ebf696177ea428316a12b0a31412a",
     "ML_Explanation_Note.tex": "83c09e2ca64dc4a97ffe05266c6224c5a9fcd509a0dbcca892c5005d168fb3a4",
-    "SPRING_Multi_System_Optimizer_Proposal.pdf": "029f1dbfd5756775ea3891a6f2d222d4fbee3ba042c9730ea1b9a26a7d64eeb4",
-    "SPRING_Proposal_With_ML_Explanation.pdf": "c3e28281a7a14c2efcc7665acbc8b53b38ba192dc8718cebf427fc5719f30a51"
+    "SPRING_Multi_System_Optimizer_Proposal.pdf": "68fa00b7a1211a1e1ed3bd0ff1b44a0e73f846a68dc5637afd797d8278b70a01",
+    "SPRING_Proposal_With_ML_Explanation.pdf": "b2af718bd5e1b1710d29677562ed079e954f51b5a3bd5098f55c78f0549d9df7"
   },
   "proposal_packet_text_matches_current_proposal": true,
   "standalone_note_sha256_unchanged_in_database_revision": true,
   "proposal_database_revision": "Added current ED configuration counts, decoded input shapes and NN record sizes.",
-  "proposal_submission_revision": "Added PassengerAn as contributor and updated repository paths; two-page outline exported from shared source."
+  "proposal_submission_revision": "Added PassengerAn as contributor and updated repository paths; two-page outline exported from shared source.",
+  "submission_cleanup": {
+    "date": "2026-10-26",
+    "change": "Updated proposal pages in combined reading packet; standalone explanation unchanged.",
+    "combined_packet_pages": 7
+  }
 }

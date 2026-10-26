@@ -6,7 +6,7 @@
     "SPRING_Ising_test/results/spring_n6/training.csv": "791abce475ea24be5d01f7862547954d0e606ce8974c45abafe31abd9f0cebd7",
     "SPRING_Haldane_FQHE/results/ne8_architecture_pilot/exact_trajectory.csv": "97be94b8bfea0f7e0c5bc76da653e884c5563136f3139243d6636a297225d898",
     "SPRING_Haldane_FQHE/results/ne8_architecture_pilot/endpoints.csv": "99c4e5b1df44d42fc3e593a923cda4100abdfabce3de9379026840826a6bb16e",
-    "benchmarks/validation.json": "b0db265c6407b2964fd0ff4cebbbc8024f8cf4b1cf44c2650126d51793180891",
+    "benchmarks/validation.json": "08309f5dc437d19cf4e4998160d57291c5b9532acf9866e166ab8f6194499752",
     "SPRING_Ising_test/benchmarks/ed/n4_J1_h1/basis_spins.npy": "2a16044416120c62011a3d9cc5259c1ded75b3f105b896b12041b2cc9d6870ff",
     "SPRING_Ising_test/benchmarks/ed/n4_J1_h1/eigenvalues.npy": "9cf31fc5acd9a02c28f7beab1ecf0ca3ef798a9dc601a2d8f7ffd1af42d76076",
     "SPRING_Ising_test/benchmarks/ed/n6_J1_h1/basis_spins.npy": "06ae987467669e8967a7507c2b9edcbc9a4fa0f4848cc44b48066b18c15540bc",
@@ -265,5 +265,5 @@
   },
   "fqhe_pilot_condition": "1000 additional updates from one shared pretrained state; batch32; sampling seeds71,137",
   "new_training_performed": false,
-  "figure_generator_sha256": "143dce7eabfc3467977d78f37d9d48eaa3ae5f5abf17074cd35654ae811c0863"
+  "figure_generator_sha256": "698ab978c987eb2a4ea3d76634494af1d54ca6dff72fa29181a53b1c84415476"
 }
