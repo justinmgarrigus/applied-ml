@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "shared_suite": {
+    "command": "python -m pytest -q Final_proj/shared/tests",
+    "passed": 53,
+    "seconds": 51.15
+  },
+  "export_safeguards": {
+    "command": "python3 Final_proj/tools/check_prepare_submission_safety.py",
+    "status": "passed"
+  },
+  "actual_export_preview": {
+    "status": "unavailable",
+    "reason": "Designated .submission/applied-ml checkout does not exist in this workspace; layout validation and scratch export safeguards run instead."
+  },
+  "smoke": {
+    "command": "python Final_proj/SA/Ising/training/run.py --n 6 --hidden 12 --steps 100 --output /tmp/yiming-sa-ising-check-20261117",
+    "artifacts": "check_cpu_n6",
+    "converged": false,
+    "matched_optimizer_comparison": false
+  },
+  "scope": "Exact-objective Ising weight-space SA only; no FQHE or long training.",
+  "source_sha256": {
+    "shared/ising_annealing.py": "6383473db4fb4166fc9900c5a814a9327e1e8fc2478a08606e17333b0b6fe560",
+    "shared/tests/test_ising_annealing.py": "e410e85d712dda729bf011b5ad88124c747fd184f8f9c15c02a8a4d9970d84ac",
+    "SA/Ising/training/run.py": "c753fcae7494807c98b333fbb4c8e40c38805b04f32efd96ea0bc2490645e879"
+  }
+}

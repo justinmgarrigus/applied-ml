@@ -10,6 +10,7 @@ comparison modules. Each module documents its implemented scope and limitations.
 - [SPRING implementation and validation](Final_proj/SPRING/)
 - [VMC module](Final_proj/VMC/)
 - [MinSR module](Final_proj/MinSR/)
+- [Simulated annealing Ising baseline](Final_proj/SA/README.md)
 - [Shared models and pinned source snapshot](Final_proj/shared/)
 - [Benchmark data](Final_proj/benchmarks/)
 - [Course submission guide](Final_proj/SUBMISSION.md)

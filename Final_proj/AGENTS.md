@@ -6,6 +6,9 @@ PHYSICS.md, RUN_TRAINING.md and training/PARAMETERS.md before editing.
 ## Ownership and layout
 
 - Canonical entry points: `SPRING|VMC|MinSR/{Ising,FQHE}/training/run.py`.
+- `SA/Ising/training/run.py` adds weight-space simulated annealing using the
+  exact full-basis loss and no gradients. Its shared search backend is
+  `shared/ising_annealing.py`; reuse the existing Ising model/Hamiltonian.
 - Each physics folder has `training/` and `results/`; ED belongs in shared
   `benchmarks/`, not a third per-method copy.
 - `shared/ising_backend.py` and `shared/fqh_spring/` own physics, models,
@@ -32,6 +35,9 @@ PHYSICS.md, RUN_TRAINING.md and training/PARAMETERS.md before editing.
   architecture. Layer count is not inferred from electron count.
 - The portable baseline has no wall, V5, angular penalty or artificial
   temperature. Archived angular-aware experiments are a separate protocol.
+- Exception: SA has an artificial temperature for accepting weight proposals;
+  it changes neither the physical model nor the Born distribution. It uses
+  exact loss, so comparisons with sampled gradient runners must say so.
 - The cap argument is norm radius sqrt(C), not the paper's squared C.
 - One training step is one optimizer update, not an epoch over a fixed dataset.
 - Tiny execution checks do not prove convergence or a speed advantage.

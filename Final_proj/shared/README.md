@@ -9,6 +9,8 @@ All algorithm folders use the same scientific backend for each problem:
 - `vendor/jaqmc_spring/`: licensed JaQMC runtime subset, upstream commit
   `71f94158f2aca88ded904451f5314f71cdff5666`.
 - `tests/`: optimizer equivalence and physics/execution checks.
+- `ising_annealing.py`: gradient-free, exact-objective Ising weight-space SA;
+  see [its separate experiment protocol](../SA/README.md).
 
 These are portable snapshots with explicit new method adapters. The original
 research trees stay frozen locally. The historical Python package name

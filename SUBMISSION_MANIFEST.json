@@ -1,5 +1,5 @@
 {
-  "bytes_excluding_manifest": 46525558,
+  "bytes_excluding_manifest": 46573405,
   "contributor_handle": "PassengerAn",
   "excluded_local_content": [
     "legacy raw research trees",
@@ -8,7 +8,7 @@
     "secret/private paths",
     "files >=50 MB"
   ],
-  "file_count_excluding_manifest": 552,
+  "file_count_excluding_manifest": 566,
   "files": {
     ".gitignore": {
       "bytes": 328,
@@ -19,8 +19,8 @@
       "sha256": "864e1869f9cdd2f6d1f7b9e765af57939725ed9be4d138879f7e91ba83f12ff4"
     },
     "Final_proj/AGENTS.md": {
-      "bytes": 2829,
-      "sha256": "cd5b39f54856040b59c0895e6c8221c1074a7fa70e3045d40d149dc0c19e0644"
+      "bytes": 3277,
+      "sha256": "8c699737f3ddda8c8301794f0e7d1e29dead979f439483bd9542198fabbfc277"
     },
     "Final_proj/BUILD_REPORTS.txt": {
       "bytes": 5298,
@@ -167,12 +167,60 @@
       "sha256": "486cf28214300b492a86e89ab795a9987368426c93dff8ba13c499f94b4a0af9"
     },
     "Final_proj/README.md": {
-      "bytes": 2986,
-      "sha256": "65b7ee394830d95bf84ceba4c13c4022262cfb6e9e41b4163078c9ae272d710d"
+      "bytes": 3425,
+      "sha256": "b42ed622afffa6bd237a53978d3bad02b673fb6483d3ef81da9ad1c700680329"
+    },
+    "Final_proj/SA/Ising/PHYSICS.md": {
+      "bytes": 1353,
+      "sha256": "1bb5cd85f9e0f931f9a2b824378a7e9aa1dcee55a9bd780b42a44888cb35cc45"
+    },
+    "Final_proj/SA/Ising/RUN_TRAINING.md": {
+      "bytes": 1909,
+      "sha256": "f3ebaba340620aef7c17e56407856967f032953f5918a5baa2b8d1834efd77c1"
+    },
+    "Final_proj/SA/Ising/results/README.md": {
+      "bytes": 1200,
+      "sha256": "5648c1e46b2a790e284b131bbc40b404a1fd2d68e100223552e8368ef313ff62"
+    },
+    "Final_proj/SA/Ising/results/check_cpu_n6/best_parameters.npz": {
+      "bytes": 1074,
+      "sha256": "24f8ed8b56230e781565a142b5bf8addee9e087d31f05e0c20bf838d9d5a3b05"
+    },
+    "Final_proj/SA/Ising/results/check_cpu_n6/initial_parameters.npz": {
+      "bytes": 1074,
+      "sha256": "af3e642d52d12ee3d0d95561f6eaace6901c37f6ac57b22a208967cac0988fe1"
+    },
+    "Final_proj/SA/Ising/results/check_cpu_n6/metrics.json": {
+      "bytes": 2230,
+      "sha256": "699540111e258880d44ac3be2b75d7a25d0cbf95aa24bc2e2513decfacdbaa47"
+    },
+    "Final_proj/SA/Ising/results/check_cpu_n6/trained_parameters.npz": {
+      "bytes": 1074,
+      "sha256": "24f8ed8b56230e781565a142b5bf8addee9e087d31f05e0c20bf838d9d5a3b05"
+    },
+    "Final_proj/SA/Ising/results/check_cpu_n6/training.csv": {
+      "bytes": 17318,
+      "sha256": "2940aea289fde4f4fb4d940e6aa3cd026e3a34715a9b56491f0156139ffa113e"
+    },
+    "Final_proj/SA/Ising/results/validation.json": {
+      "bytes": 1174,
+      "sha256": "b66722d2a9ce1d491222a0ebc9bf181b6168e55c4f8f5081b92a37986422f948"
+    },
+    "Final_proj/SA/Ising/training/PARAMETERS.md": {
+      "bytes": 1675,
+      "sha256": "4e87e70bc7173e09cff48bf80ff0eb747c6753b210f3452f840e75268de4d851"
+    },
+    "Final_proj/SA/Ising/training/run.py": {
+      "bytes": 338,
+      "sha256": "c753fcae7494807c98b333fbb4c8e40c38805b04f32efd96ea0bc2490645e879"
+    },
+    "Final_proj/SA/README.md": {
+      "bytes": 1571,
+      "sha256": "94265192476e19ccc67137675bf4bfe1f42aaa496b867016853328a6280607b0"
     },
     "Final_proj/SOURCE_CATALOG.json": {
-      "bytes": 96282,
-      "sha256": "9bff4aae9cecdb8670eb4fdd8568d3a2ebadb5078d95d1923e841f931c75b5d1"
+      "bytes": 98453,
+      "sha256": "c3fcbe0a1068d82a2f447b68a15f0ec9d9dc2c002fc18fb7a253379d4169d9e3"
     },
     "Final_proj/SPRING/FQHE/PHYSICS.md": {
       "bytes": 1961,
@@ -1939,8 +1987,8 @@
       "sha256": "9c824a86ffff426f862973387397dbf23c08c0982405729928d175841c55d918"
     },
     "Final_proj/shared/README.md": {
-      "bytes": 2664,
-      "sha256": "be284b87ad6c3ab1fd63b6ce9af294d2c4fd807429ceebeb2c96653721da94a2"
+      "bytes": 2801,
+      "sha256": "8a5caa47af50214efa7e32cbe1d893dfe9abfbe3fff95ff12d3bc300a2fb86ff"
     },
     "Final_proj/shared/fqh_spring/SNAPSHOT_ORIGIN.json": {
       "bytes": 3121,
@@ -2070,6 +2118,10 @@
       "bytes": 22331,
       "sha256": "4a5a9c36b7bc40ed0c38f61eaf7857409ff745bfa8508f112af761482e64b9a6"
     },
+    "Final_proj/shared/ising_annealing.py": {
+      "bytes": 10211,
+      "sha256": "6383473db4fb4166fc9900c5a814a9327e1e8fc2478a08606e17333b0b6fe560"
+    },
     "Final_proj/shared/ising_backend.py": {
       "bytes": 17719,
       "sha256": "26f9e3c46d8195c9b39f0619f397d8d2d6c452028f183bfb9b8135822868ed5c"
@@ -2113,6 +2165,10 @@
     "Final_proj/shared/tests/test_fqh_resume.py": {
       "bytes": 3528,
       "sha256": "e663c9041b7794e38660d621d68e3bc4761e5bea1197ca74a4ecf03aa2bc8389"
+    },
+    "Final_proj/shared/tests/test_ising_annealing.py": {
+      "bytes": 3957,
+      "sha256": "e410e85d712dda729bf011b5ad88124c747fd184f8f9c15c02a8a4d9970d84ac"
     },
     "Final_proj/shared/tests/test_ising_entrypoints.py": {
       "bytes": 1697,
@@ -2179,12 +2235,12 @@
       "sha256": "6c23404e01896a90b1ed33757f9cebebec7cd12a76a5d73b0b51c027f539bbf7"
     },
     "Final_proj/tools/prepare_submission.py": {
-      "bytes": 15122,
-      "sha256": "c594e127db35c8c36af271633dc63d8212b41b51c10f4915ab33b7f231267abf"
+      "bytes": 15186,
+      "sha256": "2c77e165f113bb38467702fec5eef58703f31b4c02990f0bb6737c9045c9480b"
     },
     "Final_proj/tools/validate_reorganization.py": {
-      "bytes": 14470,
-      "sha256": "e9b08e19ba40156d39952ed1965fb7e2b82d411fd9e3a43d0f057300c5cbe6cb"
+      "bytes": 14489,
+      "sha256": "f9a35e250eb3c1bfa47f21d5b66bf9a4f0bece097084474ffa8d029aaf557053"
     },
     "Final_proj/tools/validation/independent_reorganization_review.json": {
       "bytes": 950,
@@ -2211,12 +2267,12 @@
       "sha256": "c451f7271dad6c19cf13fff0d6648a5917ac06764662f102d4303c3791db3f69"
     },
     "Final_proj/validation/reorganization_validation.json": {
-      "bytes": 3557,
-      "sha256": "024c9a82825eb10f395494b179aaa3f0502ec6a9a21febc8ca265371cb24ee3e"
+      "bytes": 1904,
+      "sha256": "89535bbca425a324e4ca83473c9b9ab1893ea79a8ff00faadf8ed7aa0814912d"
     },
     "README.md": {
-      "bytes": 1122,
-      "sha256": "c71e5dbc9182cd777a9d777981a4c37d6aec8c97d13a8da03b7ede14119eca49"
+      "bytes": 1186,
+      "sha256": "f97daa65fed0b59ba26a61a68e8e6a6b4863da36b438b0357b427acb7d5fe225"
     }
   },
   "repository": "https://github.com/justinmgarrigus/applied-ml",

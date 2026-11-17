@@ -1,14 +1,15 @@
 # Neural quantum states: optimizer comparison
 
-Start with an **algorithm**, then choose **Ising** or **FQHE**. All three use
-variational energy as the loss. They differ in the parameter update; all are
-within the variational Monte Carlo (VMC) framework.
+Start with an **algorithm**, then choose **Ising** or **FQHE**. All methods use
+variational energy as the loss. SPRING, SGD and MinSR use the variational
+Monte Carlo (VMC) framework; SA currently uses exact full-basis Ising energy.
 
 | Algorithm | Update | Start here |
 |---|---|---|
 | SPRING | Sample-space reconfiguration with remembered directions | [SPRING](SPRING/README.md) |
 | VMC | Ordinary stochastic gradient descent on energy | [VMC](VMC/README.md) |
 | MinSR | Memory-free, damped minimum-norm/SR control | [MinSR](MinSR/README.md) |
+| SA (Ising only) | Gradient-free weight search with exact full-basis loss | [SA](SA/README.md) |
 
 ```text
 Final_proj/
@@ -22,6 +23,7 @@ Final_proj/
 │   └── FQHE/               # same structure
 ├── VMC/                    # Ising/ and FQHE/, same structure
 ├── MinSR/                  # Ising/ and FQHE/, same structure
+├── SA/                     # Ising only; exact-objective simulated annealing
 ├── shared/                 # common physics/model backend + licensed optimizer
 ├── benchmarks/             # shared ED solvers, inputs, outputs, validation
 ├── documents/              # proposal, papers and presentations
@@ -40,6 +42,10 @@ updates and saved files. Read its `training/PARAMETERS.md` before tuning.
 Small smoke runs validate execution; they do not establish an optimizer
 ranking. A matched, multi-seed convergence comparison remains research work.
 K-FAC and Hubbard are not implemented here.
+
+SA is a separate exact-objective small-Ising baseline, without sampled loss or
+gradients. Its artificial temperature controls weight acceptance only. The
+other runners retain sampled updates; these are not yet matched experiments.
 
 Historical results include the accurate small Ising example and the stopped
 large FQHE study. The latter uses a separate angular-momentum-aware research
