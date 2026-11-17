@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/bytedance/jaqmc",
+  "commit": "71f94158f2aca88ded904451f5314f71cdff5666",
+  "scope": "Minimal SPRING runtime subset. Algorithm files, array types, and source license notices are byte-identical to upstream. sr/__init__.py is a new minimal packaging wrapper; the full JaQMC application is not included.",
+  "upstream_unmodified_file_sha256": {
+    "src/jaqmc/optimizer/sr/jasr.py": "1d2a36b8b766018dfc459ff22c82841d7eb1f3250f4c17443e99785f7f3bb16d",
+    "src/jaqmc/utils/chunked_vmap.py": "5ac518d2b0e178c463f04c288af59ef00bea2910410820f8184215552cb1fef6",
+    "src/jaqmc/array_types.py": "0e22490ba16c8fa4872090d7bf3038304fe0e66508f76e5fa8f63af46f10dff7",
+    "src/jaqmc/__init__.py": "3c227e55f696e50bc251445c468337e35c58cadda94a079d5aaa158c55f701b7",
+    "src/jaqmc/optimizer/__init__.py": "3c227e55f696e50bc251445c468337e35c58cadda94a079d5aaa158c55f701b7",
+    "src/jaqmc/utils/__init__.py": "3c227e55f696e50bc251445c468337e35c58cadda94a079d5aaa158c55f701b7",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "NOTICE": "a983fe6af7e5536a06a52f31a213051ff7e950f319199f91ef207d32964ab320"
+  },
+  "license": "Apache-2.0"
+}

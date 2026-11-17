@@ -1,0 +1,142 @@
+{
+  "status": "passed",
+  "H_shape": [
+    1656,
+    1656
+  ],
+  "L0_dimension": 10,
+  "L0_H_preservation_residual": 4.878651833848003e-14,
+  "max_independent_metric_error": 3.219646771412954e-14,
+  "checkpoint_validations": [
+    {
+      "step": 0,
+      "max_metric_error": 1.915134717478395e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 500,
+      "max_metric_error": 8.271161533457416e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 1000,
+      "max_metric_error": 7.549516567451064e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 1500,
+      "max_metric_error": 1.529332216421153e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 2000,
+      "max_metric_error": 1.1268763699945339e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 2500,
+      "max_metric_error": 1.1129985821867194e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 3000,
+      "max_metric_error": 1.484923295436147e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 3500,
+      "max_metric_error": 2.040034807748725e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 4000,
+      "max_metric_error": 6.2727600891321345e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 4500,
+      "max_metric_error": 2.7478019859472624e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 5000,
+      "max_metric_error": 1.995625886763719e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 5500,
+      "max_metric_error": 3.941291737419306e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 6000,
+      "max_metric_error": 8.992806499463768e-15,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 6500,
+      "max_metric_error": 1.2434497875801753e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 7000,
+      "max_metric_error": 1.887379141862766e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 7500,
+      "max_metric_error": 1.9817480989559044e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 8000,
+      "max_metric_error": 1.3933298959045715e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 8500,
+      "max_metric_error": 2.4730217873525362e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 9000,
+      "max_metric_error": 2.6006974351844292e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 9500,
+      "max_metric_error": 1.5210055437364645e-14,
+      "checkpoint_and_state_hashes_verified": true
+    },
+    {
+      "step": 10000,
+      "max_metric_error": 3.219646771412954e-14,
+      "checkpoint_and_state_hashes_verified": true
+    }
+  ],
+  "energy_sector_error_decomposition": {
+    "0": {
+      "error_inside_L0_V1": 0.06036930035313903,
+      "error_outside_L0_V1": 0.16616986054018335,
+      "cross_term_V1": 1.7529380724745636e-15,
+      "total_energy_error_V1": 0.22653916089332515,
+      "fraction_error_outside_L0": 0.7335149467532059,
+      "conditional_L0_energy_V1": 6.3237804067255645
+    },
+    "10000": {
+      "error_inside_L0_V1": 0.04409031143392607,
+      "error_outside_L0_V1": 0.11541037222904124,
+      "cross_term_V1": 1.6748755160556072e-15,
+      "total_energy_error_V1": 0.159500683662964,
+      "fraction_error_outside_L0": 0.7235728999940299,
+      "conditional_L0_energy_V1": 6.2982690308814515
+    }
+  },
+  "attempts": 10000,
+  "accepted_updates": 9925,
+  "rejected_attempts": 75,
+  "all_CG_passed": true,
+  "source_and_evaluation_input_hashes_verified": true,
+  "inherited_CG1024_unchanged": true,
+  "energy_error_reduction_percent": 29.59244528230999
+}

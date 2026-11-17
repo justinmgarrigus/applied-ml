@@ -1,52 +1,58 @@
 # Submission guide
 
-This folder contains the project outline, supporting explanations, reproducible
-code, ED benchmarks and preliminary neural-network results. GitHub provides
-supplementary materials; the course's final written report also goes to Canvas.
+The primary proposal remains
+[SPRING_Proposal.pdf](documents/reports/SPRING_Proposal.pdf), with
+[supporting references](documents/reports/reference/README.md).
+The original 2–3 page outline milestone was October 26. This update reorganizes
+the supplementary code; it does not replace the final Canvas submission.
 
-## Current milestone: project outline
+## Current code and data
 
-The outline is due **October 26** and should be **2–3 pages**, covering the
-problem, available data, possible approaches and selected references.
+Start at [Final_proj/README.md](README.md), then choose SPRING, VMC-SGD or damped
+MinSR and a physics problem. Each physics folder contains PHYSICS.md,
+RUN_TRAINING.md, training/PARAMETERS.md, runnable code and results/. ED solvers,
+inputs and outputs are shared in [benchmarks](benchmarks/README.md).
 
-- [Main proposal — 2 pages](documents/reports/SPRING_Proposal.pdf): the primary course outline, previously named `Project_Outline.pdf`.
-- [Supporting references](documents/reports/reference/README.md): extended reading copies, ML explanation and paper analysis.
+The frozen ED database has 11 Hamiltonian instances and 12,085 basis rows
+counted per instance: 1,488 Ising and 10,597 FQHE. Its largest decoded input is
+8,512 x 22. These are enumerated basis configurations, not a supervised dataset.
 
-Use `SPRING_Proposal.pdf` for the required document. The longer PDFs in
-`documents/reports/reference/` supplement the same proposal if permitted.
-The local course guidelines do not specify the
-outline's upload destination. Check the assignment on Canvas.
+Retained results include small-system neural/ED comparisons and later FQHE
+research summaries. The stopped Ne12 pure-V1 calculation has not reached its
+analytical zero-energy ground state. The new code's execution checks are not a
+matched optimizer ranking. A full controlled convergence study, K-FAC and
+Hubbard remain future work. See each result index for actual settings and limits.
 
-## Present data and results
+## Curated Git update
 
-The ED database covers **11 Hamiltonian instances** and **12,085 configuration
-rows**, counted separately for each instance: 1,488 Ising and 10,597 FQHE rows.
-The largest decoded input array is **8,512 × 22**, or **187,264 input entries**.
-These are enumerated configurations, rather than retained raw Monte Carlo
-samples. The same six-spin Ising basis is reused at three field settings.
+The export includes current algorithm folders, shared code/licensed vendor,
+small ED reference data, selected scientific evidence and documents. Raw local
+archives, large checkpoints, JAX caches, environments, SSH material and TACC
+deployment bundles are excluded. See [migration](MIGRATION.md).
 
-Existing NN results are preliminary. The full matched optimizer comparison
-and Hubbard calculations remain proposed work. Planned long training runs
-should be described as future experiments.
+Preview and validate the prepared payload before applying it:
 
-## Remaining course deliverables
+```bash
+python Final_proj/tools/validate_reorganization.py
+python Final_proj/tools/prepare_submission.py --check --refresh-root-readme
+```
 
-- **Final report:** due **December 7 at midnight through Canvas**, one submission
-  per group. Include the repository URL for code, data and supporting materials.
-- **Presentation:** approximately **15–20 minutes per group**, scheduled for
-  late November or early December.
-- **Peer assessment:** each team member submits their own assessment by
-  **December 7**.
-- **Team details:** the course specifies teams of **3–5 students**. Confirm the
-  assigned roster and add required names/identifiers before the course hand-in.
-  The confirmed repository contributor handle is `PassengerAn`.
+The export destination is the existing project repository
+`.submission/applied-ml`. Do not initialize Git in the research container.
+Publish a reviewable branch/PR and verify the remote head against the exact
+commit. SUBMISSION_MANIFEST.json describes packaged files only; archive
+provenance does not mean the raw checkpoint is included.
 
-Check **Canvas → Modules → Projects** for the detailed presentation/report
-rubric. Those additional instructions have not been verified here. The
-[local course specification](<documents/course/Ghosh Term Project Applied ML.pdf>)
-provides the requirements summarized above: outline and submission milestones
-on page 1, data guidance on page 2, and reuse/peer-assessment guidance on page 3.
+## Course hand-in
 
-Retain upstream licenses and [source attribution](THIRD_PARTY.md). The final
-report should identify reused code and the team's implementation, experiments
-and analysis separately.
+According to the retained [course specification](<documents/course/Ghosh Term Project Applied ML.pdf>):
+
+- Final report: one group submission through Canvas, December 7 at midnight.
+- Presentation: approximately 15–20 minutes, late November or early December.
+- Individual peer assessment: December 7.
+- Team size: 3–5; add the assigned roster and required identifiers to the hand-in.
+  Confirmed repository contributor: PassengerAn.
+
+Check Canvas for the current rubric and any changed deadlines; those are not
+verified by this repository update. Identify reused software and the team's
+implementation/experiments separately, and preserve [attribution](THIRD_PARTY.md).

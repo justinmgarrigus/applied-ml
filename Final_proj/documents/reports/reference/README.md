@@ -7,6 +7,7 @@ documents here provide supplementary detail.
 |---|---|
 | [Proposal with appendices](SPRING_Multi_System_Optimizer_Proposal.pdf) | Four-page reading copy: the two-page proposal plus workflow and preliminary ED/NN benchmark appendices |
 | [ML explanation](ML_Explanation_Note.pdf) | Three-page guide to input/output arrays, a worked energy calculation and sampled batches |
+| [N=8 edge-potential note](N8_Edge_Potential_Note.pdf) | Three-page model and results note comparing confined and no-edge runs, with projected-wall and batch-size convergence hypotheses |
 | [Combined reading packet](SPRING_Proposal_With_ML_Explanation.pdf) | Seven-page convenience copy combining the proposal with appendices and the ML explanation |
 | [Paper reading report](2412_00618_reading_report.pdf) | Earlier analysis of arXiv:2412.00618 and possible follow-up research |
 

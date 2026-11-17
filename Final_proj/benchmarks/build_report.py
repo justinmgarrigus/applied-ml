@@ -21,8 +21,8 @@ def main():
     output = Path(__file__).resolve().parent
     project = output.parent
     inputs = {
-        "fqhe": project / "SPRING_Haldane_FQHE/results/ed_benchmarks/summary.json",
-        "ising": project / "SPRING_Ising_test/benchmarks/ed/summary.json",
+        "fqhe": output / "fqhe/ed/summary.json",
+        "ising": output / "ising/ed/summary.json",
     }
     fqhe, ising = (json.loads(inputs[key].read_text()) for key in ("fqhe", "ising"))
     fqhe_rows = sorted(fqhe["cases"], key=lambda row: row["ne"])
@@ -68,6 +68,11 @@ def main():
 
     lines = [
         "# Exact-diagonalization benchmarks", "",
+        "This is the shared ED database for SPRING, VMC-SGD and damped MinSR. "
+        "See [Ising inputs/outputs and solver](ising/README.md) and "
+        "[FQHE inputs/outputs and solver](fqhe/README.md). "
+        "Use `python Final_proj/benchmarks/run_ed.py --help` for fresh bounded ED. "
+        "The tables below describe the retained database snapshot, not all later research runs.", "",
         "These are executed small-system references for the implemented Hamiltonians. "
         "ED uses complete finite Hilbert sectors, with numerical eigenpair checks; "
         "there is no Monte Carlo sampling or new neural training in this benchmark.", "",
@@ -95,7 +100,7 @@ def main():
               "and verifies each reported L using full-space H and L² residuals. Existing N=6–8 reference files "
               "were not overwritten. Independent highest-weight ladder and fermion "
               "annihilation constructions validate the R=1 Hamiltonian for N=2–4.", "",
-              "[FQHE numerical tables, low eigenvectors and diagnostics](../SPRING_Haldane_FQHE/results/ed_benchmarks/README.md)", "",
+              "[FQHE numerical tables, low eigenvectors and diagnostics](fqhe/README.md)", "",
               "## Ising: periodic transverse-field chain", "",
               "The Hamiltonian is H=−J sum Z_i Z_(i+1)−h sum X_i, with Pauli "
               "eigenvalues ±1 and periodic boundaries. Site i is bit i of the basis "
@@ -111,7 +116,7 @@ def main():
               "fidelity bound can use the larger even-parity gap. At h=J=1, the "
               "ED results also match the independent finite-ring expressions "
               "E0=−2 csc[π/(2N)], full gap=2 tan[π/(4N)], and even gap=8 sin[π/(2N)].", "",
-              "[Ising spectra, observables and saved states](../SPRING_Ising_test/benchmarks/ed/README.md)", "",
+              "[Ising spectra, observables and saved states](ising/README.md)", "",
               "## Existing neural states compared with ED", "",
               "These are comparisons of retained checkpoints with the appropriate "
               "exact ground state. They are different physical problems and different "
@@ -135,7 +140,7 @@ def main():
               "## Reproduce and use the benchmarks", "",
               "The model-specific READMEs give the ED generation commands. After "
               "generating both suites, rebuild this report and figure from the course root:", "",
-              "```bash", "Final_proj/SPRING_Ising_test/.venv/bin/python Final_proj/benchmarks/build_report.py", "```", "",
+              "```bash", "python Final_proj/benchmarks/build_report.py", "```", "",
               "The report builder requires NumPy and Matplotlib; the numerical ED "
               "scripts specify their own requirements. `summary.json` records source "
               "data hashes and the cross-model tables. PDF and PNG versions of the "

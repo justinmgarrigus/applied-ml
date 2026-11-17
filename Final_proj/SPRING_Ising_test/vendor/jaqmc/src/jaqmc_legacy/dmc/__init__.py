@@ -1,4 +1,0 @@
-# Copyright (c) 2022-2026 ByteDance Ltd. and/or its affiliates
-# SPDX-License-Identifier: Apache-2.0
-
-from .dmc import run

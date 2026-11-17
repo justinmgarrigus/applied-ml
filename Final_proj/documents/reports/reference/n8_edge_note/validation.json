@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-10T19:41:56.739603+00:00",
+  "pdf": "Final_proj/documents/reports/reference/N8_Edge_Potential_Note.pdf",
+  "pdf_sha256": "1e5ed29b9c6e08140ea730fadb7fc26414174d5b2a3464525e7001ed3b48d591",
+  "source_sha256": "b4078730eea75f29e6a0f4bb5ce949172de11619bf2d6ad9764af14cadb19f5d",
+  "previous_pdf_sha256": "ed21bb653810825d708dd393ed66f77d5fab834506d72b42f306af54db503f6d",
+  "pages": 3,
+  "requested_page_range": [
+    2,
+    3
+  ],
+  "new_scope": "N10 complete-sector trajectory through130000 updates, batch300 and eta3e-5 branch, compared with previously tabulated N8 results",
+  "verified_n10_table_rows": 8,
+  "verified_n10_frozen_evaluations": 67,
+  "previous_n8_table_rows_unchanged": 9,
+  "latest_n10": {
+    "total_updates": 130000,
+    "batch": 300,
+    "learning_rate": 3e-05,
+    "fidelity_percent": 57.07036528807754,
+    "energy_excess_V1": 0.5368918347420126,
+    "cumulative_active_minutes": 43.98055977593334
+  },
+  "latex_build": "latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=/tmp/edge_note_n10_build N8_Edge_Potential_Note.tex",
+  "latex_warnings": 0,
+  "all_three_pages_visually_reviewed": true,
+  "body_to_footer_gaps_pt": [
+    20.38366099999996,
+    92.737661,
+    49.77287000000001
+  ],
+  "body_horizontal_bounds_pt": [
+    [
+      46.227,
+      567.133167
+    ],
+    [
+      46.364,
+      567.136822
+    ],
+    [
+      45.634,
+      566.920279
+    ]
+  ],
+  "independent_scientific_and_numeric_review": "passed",
+  "archived_project_checksum_check": "passed",
+  "training_launched": false,
+  "scientific_qualification": "Same cutoff not size rescaled; no N10 no-edge control; joint batch/rate change has no matched control; residual state variance is not force noise; wall and expressivity causal hypotheses remain untested."
+}

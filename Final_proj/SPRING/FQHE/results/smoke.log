@@ -1,0 +1,16 @@
+Jax plugin configuration error: Exception when calling jax_plugins.xla_cuda12.initialize()
+Traceback (most recent call last):
+  File "/home/leean/research/Applied_machine_learning_course/.venv-fqh-gpu/lib/python3.12/site-packages/jax/_src/xla_bridge.py", line 497, in discover_pjrt_plugins
+    plugin_module.initialize()
+  File "/home/leean/research/Applied_machine_learning_course/.venv-fqh-gpu/lib/python3.12/site-packages/jax_plugins/xla_cuda12/__init__.py", line 348, in initialize
+    _check_cuda_versions(raise_on_first_error=True)
+  File "/home/leean/research/Applied_machine_learning_course/.venv-fqh-gpu/lib/python3.12/site-packages/jax_plugins/xla_cuda12/__init__.py", line 274, in _check_cuda_versions
+    for d in range(cuda_versions.cuda_device_count())
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: jaxlib/cuda/versions_helpers.cc:126: operation cuInit(0) failed: Unknown CUDA error 100; cuGetErrorName failed. This probably means that JAX was unable to load the CUDA libraries.
+Compiling mlp spring on TFRT_CPU_0; 0/20 updates
+update 5: E_MC=3.09046961, accept=0.434, distinct=15.0/32
+update 10: E_MC=3.28637472, accept=0.441, distinct=15.0/32
+update 15: E_MC=2.74530205, accept=0.383, distinct=14.0/32
+update 20: E_MC=2.82001779, accept=0.387, distinct=15.0/32
+completed: 20/20; checkpoint /home/leean/research/Applied_machine_learning_course/Final_proj/SPRING/FQHE/results/runs/ne4_spring_20261117T192405Z_7b7479d9/checkpoint_latest.npz

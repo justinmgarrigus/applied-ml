@@ -1,0 +1,13 @@
+# The original physics-first trees are local frozen research archives.
+/SPRING_Haldane_FQHE/
+/SPRING_Ising_test/
+# Fresh runs are not curated scientific evidence automatically.
+**/results/runs/
+**/jax_cache*/
+**/.jax_cache*/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.venv*/
+**/*.egg-info/
+**/build/
