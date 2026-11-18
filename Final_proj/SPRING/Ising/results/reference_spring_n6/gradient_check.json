@@ -1,8 +1,0 @@
-{
-  "parameter_count": 73,
-  "finite_difference_step": 1e-05,
-  "covariance_vs_autodiff_max_abs": 1.942890293094024e-15,
-  "covariance_vs_finite_difference_max_abs": 2.8707036747732673e-10,
-  "exact_physical_gradient_norm": 2.796402129360154,
-  "normalization_gauge_gradient": 6.938893903907228e-16
-}

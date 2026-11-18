@@ -1,9 +1,0 @@
-{
-  "basis_bits.npy": "bbe698b85b83b81534e2fe3f9007b83fdb029597407ada5e1bb7f8ce4cd03a1e",
-  "hamiltonian.npz": "1de1f7193bac4ddee1a2c18f5d172513311d106c4eaa193881fcf4d60400da83",
-  "raising_operator.npz": "7439a626705748158e103f60556a10e9637de66b1116e1eb5f7fa0247804e710",
-  "eigenvalues.npy": "1fdffce21dbb275f208ed712a2740f448994757baffef226b07fe0e96cf480d9",
-  "eigenvectors.npy": "5c7a4e4626186080d11ca2181923bb59fc37a0f8aeb6edb5e445c42b9957e76b",
-  "raising_target_basis_bits.npy": "9ad79547794fb662588d4da255ec4d7ff674675d4e2d748d153e394d4eec14a3",
-  "metadata.json": "91fd8bb1cba9ee940c7a06ee60bbf7aa118ca339feda158d7fee8c15d2ebb81d"
-}
