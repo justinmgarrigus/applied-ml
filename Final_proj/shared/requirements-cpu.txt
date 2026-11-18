@@ -1,8 +1,0 @@
-# Captured Python 3.12 CPU project environment.
-numpy==2.5.4
-scipy==1.18.1
-jax==0.9.1
-jaxlib==0.9.1
-optax==0.2.8
-matplotlib==3.11.2
-pytest==9.1.1
