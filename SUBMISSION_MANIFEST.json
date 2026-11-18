@@ -1,5 +1,5 @@
 {
-  "bytes_excluding_manifest": 46525558,
+  "bytes_excluding_manifest": 46544329,
   "contributor_handle": "PassengerAn",
   "excluded_local_content": [
     "legacy raw research trees",
@@ -163,8 +163,8 @@
       "sha256": "41ddabc2057210d6f88b29dcb112c94b49ef79c02e23f475cb70d5df0d9d7185"
     },
     "Final_proj/MinSR/README.md": {
-      "bytes": 2085,
-      "sha256": "486cf28214300b492a86e89ab795a9987368426c93dff8ba13c499f94b4a0af9"
+      "bytes": 8543,
+      "sha256": "4449f91d14945e9fa586cb797ece984df7ff43767c8312f0090d0712c6e9aff5"
     },
     "Final_proj/README.md": {
       "bytes": 2986,
@@ -172,7 +172,7 @@
     },
     "Final_proj/SOURCE_CATALOG.json": {
       "bytes": 96282,
-      "sha256": "9bff4aae9cecdb8670eb4fdd8568d3a2ebadb5078d95d1923e841f931c75b5d1"
+      "sha256": "85e26600a0904547db20d59789f036db27e06d9f812ff6e97846d9beeeb5e56a"
     },
     "Final_proj/SPRING/FQHE/PHYSICS.md": {
       "bytes": 1961,
@@ -707,8 +707,8 @@
       "sha256": "c77abd0b6bd631cc9639557cf143eb4f2575198926cd51ebf10a9852abfbc677"
     },
     "Final_proj/SPRING/README.md": {
-      "bytes": 2408,
-      "sha256": "b0e122f5fa0d4f53ee4a28ee42703103feda51c5d1f795892a6f3911b28023b5"
+      "bytes": 8557,
+      "sha256": "3dd58daf009eb6d7bf11749edd3b2bee31ea19fe826be6bf8e574eb2bee79662"
     },
     "Final_proj/SUBMISSION.md": {
       "bytes": 2845,
@@ -855,8 +855,8 @@
       "sha256": "6670efef594c61f17aeb1219f0fc33314450bd2960b2027a33a4628f9fe338f7"
     },
     "Final_proj/VMC/README.md": {
-      "bytes": 1992,
-      "sha256": "cb9756479b4df6ba4faa49d232bb22637dee0fbde3392161155e2ecfc4a3b41b"
+      "bytes": 8156,
+      "sha256": "ae04149bead617e814660c39edf22d9c4d957febc14551f1d2272774e3f230ca"
     },
     "Final_proj/benchmarks/README.md": {
       "bytes": 5607,
@@ -2212,7 +2212,7 @@
     },
     "Final_proj/validation/reorganization_validation.json": {
       "bytes": 3557,
-      "sha256": "024c9a82825eb10f395494b179aaa3f0502ec6a9a21febc8ca265371cb24ee3e"
+      "sha256": "084465c2d516c95d3b6a1d043e38c5b2ce2ada3299250502f29fcfb0824df6f9"
     },
     "README.md": {
       "bytes": 1122,
