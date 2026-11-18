@@ -1,0 +1,16 @@
+\begin{frame}{More layers alone did not solve the N=8 accuracy problem}
+\vspace{1.2mm}
+\includegraphics[width=.98\textwidth,height=3.0cm,keepaspectratio]{slide_n8_depth.pdf}
+\small\renewcommand{\arraystretch}{1.15}
+\begin{center}
+\begin{tabular}{@{}lrrr@{}}\toprule
+Hidden layers (width 64) & Mean $E/V_1$ & Mean fidelity & Real parameters\\\midrule
+1 &1.56252&3.54\%&1,602\\
+2 &1.80107&2.26\%&5,890\\
+6 &2.13634&0.98\%&23,042\\\bottomrule
+\end{tabular}
+\end{center}
+\take{At this 5k-update budget, every depth is far from ED. Learned support is only 1.3--4.6 configurations, versus 641.3 for ED.}
+\src{ne8\_depth\_ablation\_20261103: pure $V_1$, flux 21, Born batch 32, two paired initializations; identical initial wavefunctions across depths. Means/ranges are descriptive, not confidence intervals. This does not establish a network-capacity limit.}
+\end{frame}
+

@@ -1,0 +1,113 @@
+{
+  "SOURCE_CATALOG_sha256": "85e26600a0904547db20d59789f036db27e06d9f812ff6e97846d9beeeb5e56a",
+  "curated_bytes": 46443040,
+  "curated_files": 548,
+  "errors": [],
+  "excluded_paths": [
+    {
+      "path": "SPRING/FQHE/results/runs",
+      "reason": "fresh results/runs output; curated fixed evidence remains eligible"
+    },
+    {
+      "path": "SPRING/FQHE/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "SPRING/Ising/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "VMC/FQHE/results/runs",
+      "reason": "fresh results/runs output; curated fixed evidence remains eligible"
+    },
+    {
+      "path": "VMC/FQHE/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "VMC/Ising/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "MinSR/FQHE/results/runs",
+      "reason": "fresh results/runs output; curated fixed evidence remains eligible"
+    },
+    {
+      "path": "MinSR/FQHE/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "MinSR/Ising/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/fqh_spring/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/tests/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/optimizer/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/optimizer/sr/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/utils/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "benchmarks/ising/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "documents/presentations/spring_fqhe_20261112/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "documents/presentations/spring_fqhe_20261112/build",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "tools/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE",
+      "reason": "legacy research tree retained locally, never recursively exported"
+    },
+    {
+      "path": "SPRING_Ising_test",
+      "reason": "legacy research tree retained locally, never recursively exported"
+    }
+  ],
+  "legacy_index": "MIGRATION.md",
+  "links": {
+    "Markdown_anchor_fragments_checked": false,
+    "checked_local_paths": 155,
+    "errors": [],
+    "historical_scope": "Frozen snapshot/vendor/ED/report-source documents are preserved, not rewritten as current launch instructions",
+    "historical_unresolved_links": [],
+    "network_links_checked": false,
+    "permitted_archive_index_links": []
+  },
+  "max_file_bytes_exclusive": 50000000,
+  "no_network_training_NN_MC_or_Git_mutations": true,
+  "schema_version": 1,
+  "secret_scan_scope": "forbidden paths plus private-key/GitHub-token/AWS-ID patterns in known text files",
+  "small_NPZ_reference_files_permitted": true,
+  "status": "passed",
+  "symlinks_never_followed_or_exported": true
+}

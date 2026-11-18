@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "date": "2026-11-16",
+  "main_slides": 20,
+  "backup_slides": 5,
+  "pdf_sha256": "a57dec92ae0593cd5a5d446d4f2e00445cfadfe75d6f5cb2beb9a255bc657fa7",
+  "no_new_training": true,
+  "no_new_ED": true,
+  "no_new_NN_evaluation": true,
+  "removed_confinement_section": true,
+  "only_referenced_current_graphics_in_package": true,
+  "previous_version_preserved": "support/archive/pre_symmetry_update_20261116",
+  "physical_target": "Ne7 flux18 M0 H/V1=P1+.8P3+.6P5",
+  "matched_control_label": "no coherent L2 penalty; same head auxiliary retained",
+  "long_comparison": "historical unequal budgets; not a causal L2-only test",
+  "evolution": "ideal e_H+lambda e_C; implemented sampled full-loss primal equation",
+  "ordering": "joint eigenbasis and within-sector ordering; global ordering requires pairwise inequalities",
+  "ground_preservation_conditions": "C positive semidefinite; C annihilates an original ground state; lambda nonnegative",
+  "visual_inspection_sha256": "fe0d74221809b512c8a73e6a6b14f25c4b61799e16e73c6d6ea6ef407ac9cac4",
+  "portable_archive_rebuild": {
+    "status": "passed",
+    "extracted_into": "/tmp/spring_symmetry_portable_zivcgg6l",
+    "pages": 25,
+    "build_warnings": [],
+    "bundled_graphics_only": true,
+    "external_provenance_available": 269,
+    "external_provenance_unavailable": 0,
+    "retained_Ising_source_unavailable": 1,
+    "recompiled_visual_status": "pending",
+    "scope": "Fresh shallow directory compiled from bundled source and graphics; the canonical final PDF has the passed visual receipt"
+  }
+}

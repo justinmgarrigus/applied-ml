@@ -4,8 +4,8 @@
     "ising": "Periodic Pauli H=-J sum ZZ-h sum X, J=1; full Hilbert space resolved into spin-flip parity blocks"
   },
   "input_sha256": {
-    "SPRING_Haldane_FQHE/results/ed_benchmarks/summary.json": "b7c00febed6f2996ee7d09dec7956057b422bbfd0a8789dd37b7fac098a3bd2f",
-    "SPRING_Ising_test/benchmarks/ed/summary.json": "ff890328390273e186bad4f1fa234635e8a74fd5d6464177234064a1ec287293"
+    "benchmarks/fqhe/ed/summary.json": "b7c00febed6f2996ee7d09dec7956057b422bbfd0a8789dd37b7fac098a3bd2f",
+    "benchmarks/ising/ed/summary.json": "ff890328390273e186bad4f1fa234635e8a74fd5d6464177234064a1ec287293"
   },
   "fqhe": [
     {

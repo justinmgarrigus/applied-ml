@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "source_sha256": "cb903797db7647c39d38dfea68fb3f3c7dcdf9e87c1387828caba267c894039c",
+  "checks": {
+    "wall_operator": true,
+    "indexed_metric": true,
+    "indexed_force": true,
+    "batch_gradient_estimate": true,
+    "monopole_harmonic": true,
+    "spinor_gauge": true
+  },
+  "scope": "Final narrow physics and covariance notation audit; no deck edits"
+}

@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "reviewer": "root",
+  "reviewed_UTC": "2026-11-17T16:23:17.091733+00:00",
+  "user_stop_honored": true,
+  "final_step": 13721,
+  "canonical_completed_attempts": 3721,
+  "no_training_or_evaluator_process_remaining": true,
+  "numerical_review": "Independent NumPy reconstruction of source and stopped raw MC, four-leg counts, accepted/rejected attempts and checkpoint hashes passed",
+  "visual_review": "Actual PNG and separately rendered PDF page viewed; all six panels/titles/labels/data/legends visible without clipping",
+  "report_review": "README agrees with raw data, user-stopped partial count, historical solver failures/replays and costs; H8 finite-batch negative-estimate clarification recorded; no ground-state convergence or variance-improvement claim",
+  "checkpoint_resumability": "Final archive/latest hashes equal; full weights/memory/six RNG/cache/history/guard saved; resume requires later user request",
+  "no_further_training_authorized": true,
+  "bound_files_sha256": {
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/study.json": "384480e8899a55a1acaa83a163b93bf83d32a52d5171a53c84247a703597fe94",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/user_stop_receipt.json": "ac6db6e12250ecb1ce7ad3079a70d32f5c83b2518c304140c08d535e09066f55",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/manager_target_incomplete_status.json": "8d99f4475aca5b8007adb2e8a1446ccf8ba081e65917889f89481ef3c65f00e7",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/root_stopped_numerical_review.json": "dfff06d68ed50279f51a000c39e114bb5e6ee8a6d7dd5f6ae7e4e504059fbab5",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/stopped_process_check.json": "c5ea8eb191a5d651d5c0b0785378da5800de087e073eae258810c62323453fb2",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/stopped_evaluation_process.json": "4b267260d4ec057e787afeacc57b753efe5fb2c7513227e2670a3e1433c1275f",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/README.md": "6922491886d486838034a20447757bc4bfdfa7886b8323af4f36a0e683d6cc17",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/user_stopped_evaluation_comparison.json": "61c363838964acaa347fd8a7cf19a84a4f589f5f5406540df89bc86caeca64b3",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/pure_v1_user_stopped.png": "adb4719fc99d6cde3d1774b9843af8743019711157c4e3d6a9835773e1cd62cd",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/pure_v1_user_stopped.pdf": "0599796ab6804240150466e6a1d895e8e743a2fa7286775ce1b1e48232482b42",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/pure_v1_user_stopped_pdf_preview.png": "48f6d304f6bdff7498ac9996197875901cddcfac8848fa85ffcddb4ec585aadf",
+    "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/user_stopped_report_text_refresh.json": "0441cb87d9638082adb3f16c8efb4de015c39430fec7cd19ae5adbe113aeda86"
+  }
+}
