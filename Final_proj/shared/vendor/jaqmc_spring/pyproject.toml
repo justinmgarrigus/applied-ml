@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jaqmc-spring-subset"
+version = "0.1.0"
+description = "Minimal packaged subset of the pinned JaQMC SPRING optimizer"
+requires-python = ">=3.12"
+license = {text = "Apache-2.0"}
+dependencies = ["jax==0.9.1", "numpy==2.5.4", "optax==0.2.8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

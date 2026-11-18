@@ -1,0 +1,96 @@
+{
+  "scope": "Read-only check of latest22 source pins and stopped checkpoint; originals left at unchanged paths.",
+  "checkpoint_path": "SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/train_seed71/checkpoint_latest.npz",
+  "checkpoint_sha256": "54458312dae2fa4841c4053397b677018a09cd3e403fce54111ea7407c672a18",
+  "pinned_sources": [
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/train_ne12_pure_v1_batch256_cg65536.py",
+      "sha256": "73673f64d996875e0a8f1d3a5e15655468e5f1a3e6f46048b9b5556e7cb32b4f"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/ne12_pure_v1_batch256_cg65536_runtime.py",
+      "sha256": "f11dde811a7a5457aebb9540521a4080447b7dab2ebde0d8c2c5d9ef90d7aeac"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/train_ne12_pure_v1_batch256_pcg.py",
+      "sha256": "79f84c0e647e97100764ba758a7fc73726757e7000f8cf9e928daf0fc74cf31c"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/ne12_pure_v1_batch256_pcg_runtime.py",
+      "sha256": "3298498bb2d23b2f2e57f2edd0b01d0920906154d2f32147cba56bec2d30190c"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/train_ne12_pure_v1_batch256_cg4096.py",
+      "sha256": "4fa0329f5b1fd3283eba9b4f25d68c12c50c871b1c2e295d998fea761529a112"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/ne12_pure_v1_batch256_cg4096_runtime.py",
+      "sha256": "c5ad1174bf363011bb71ad76dd465ef86cbbbe14b3f6331462c118dcb3489c7c"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/train_ne12_pure_v1_batch256.py",
+      "sha256": "308af822efefae517759e3b3c7f61d94448e413e6d4b51f8d9a467ab487a05c2"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/ne12_pure_v1_batch256_runtime.py",
+      "sha256": "2a42e7ff6855054d1f19704b254b3341012eecde984c63f7faed6ab7207dc555"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/train_ne12_v1_l2_spring.py",
+      "sha256": "dcb7dffcdf42d0870e3be2e4fde0440ebd924f4d0336a7062cc8d748a04efc86"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/ne12_l2_spring_runtime.py",
+      "sha256": "be0333380fa09a334dc0fbad373e143c1d8127d1bf3ee52a9bbae68ae72df4e4"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/ne8_spring_runtime.py",
+      "sha256": "446d7d555a9f8aed34c598a1af422de66048e8498c4a36b24c417b18ea849732"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/learned_sector_nonlinear_model.py",
+      "sha256": "0b4f800bc6ec1f8bc110e9c099e7900f57849a4d1e91ce9fc563f8980a65ec1b"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/residual_geometry_runtime.py",
+      "sha256": "ac1b3da474358c0fb486be018943e03cb549d1f537044da5f35b97ac0eb1e2e4"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/residual_geometry_policy.py",
+      "sha256": "ecb4a2a86fdbcbc4f2b144ac19db1f044745a3417316ba70d7416e6f9424dfa8"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/residual_geometry_operators.py",
+      "sha256": "fcf905601561542840455e9988b4175bc9a9c9fa5998380835a81598c8662b28"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/learned_sector_operators.py",
+      "sha256": "b691761ffc7987b87930368523ba973e55c7bdb6851f322e86f6937fbd7fe39c"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/l0_positive_penalty_runtime.py",
+      "sha256": "b9902371cdc98adccee5741bded52114c642b7e41b889458ad9136c4d4096a3c"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/experiments/pseudopotential_v5_operator.py",
+      "sha256": "07b231ca8d4053b3d14797ab9f12679ed4d0dcff92ef61b4d2023c354c499730"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/src/fqh_spring/physics.py",
+      "sha256": "9f8ee5e76654bd88ad77da9eddeb40f0dbd278e85567dee7701cea2223d3212f"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/src/fqh_spring/model.py",
+      "sha256": "513b2027ebfb3f7fd79d7bf1a0490c888fd27f6446c4a508a85672a30f16f325"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/src/fqh_spring/legacy_model.py",
+      "sha256": "04cc73d2fd73bfcd6e9e5a384d6b1e111d1463f178f3962e055ba8ea52dc2829"
+    },
+    {
+      "path": "SPRING_Haldane_FQHE/src/fqh_spring/geometry_sampling.py",
+      "sha256": "c98ae420c6464fc295c6831314be9b8bed289482834fafc64e61564cf2b961ed"
+    }
+  ],
+  "status": "passed"
+}

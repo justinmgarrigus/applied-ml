@@ -1,0 +1,24 @@
+{
+  "SOURCE_CATALOG_sha256": "135633d86874d1ed413c717c273b66d850216f37608d9e19814f9aa296d4dcd4",
+  "curated_bytes": 24548537,
+  "curated_files": 424,
+  "errors": [],
+  "excluded_paths": [],
+  "legacy_index": "MIGRATION.md",
+  "links": {
+    "Markdown_anchor_fragments_checked": false,
+    "checked_local_paths": 144,
+    "errors": [],
+    "historical_scope": "Frozen snapshot/vendor/ED/report-source documents are preserved, not rewritten as current launch instructions",
+    "historical_unresolved_links": [],
+    "network_links_checked": false,
+    "permitted_archive_index_links": []
+  },
+  "max_file_bytes_exclusive": 50000000,
+  "no_network_training_NN_MC_or_Git_mutations": true,
+  "schema_version": 1,
+  "secret_scan_scope": "forbidden paths plus private-key/GitHub-token/AWS-ID patterns in known text files",
+  "small_NPZ_reference_files_permitted": true,
+  "status": "passed",
+  "symlinks_never_followed_or_exported": true
+}

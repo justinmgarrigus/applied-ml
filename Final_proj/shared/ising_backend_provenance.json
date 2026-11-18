@@ -1,0 +1,13 @@
+{
+  "source": "../SPRING_Ising_test/ising_spring.py",
+  "source_sha256": "bd597ccb0624e2d8f25ebf0f066db08f11ac955628e2127820af954aa9d6f04e",
+  "preserved_numerical_model": true,
+  "changes": [
+    "Shared vendor import path and distribution-name alias reporting",
+    "Fresh output directories; refuses to overwrite existing outputs",
+    "Fixed-algorithm wrapper helper; labels zero-memory damped SR control explicitly",
+    "Adds backend/optimizer source hashes to new metrics; no ED labels in updates",
+    "VMC-SGD applies the same update-norm radius through an Optax cap; optimizer identity is reported conditionally. SPRING/SR equations remain unchanged."
+  ],
+  "upstream_optimizer_commit": "71f94158f2aca88ded904451f5314f71cdff5666"
+}

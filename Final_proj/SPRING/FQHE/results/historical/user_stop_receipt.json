@@ -1,0 +1,17 @@
+{
+  "status": "training_safely_stopped_by_user",
+  "instruction": "Stop here and store the result",
+  "final_step": 13721,
+  "canonical_additional_attempts": 3721,
+  "canonical_accepted": 3653,
+  "canonical_rejected": 68,
+  "current_leg_attempts": 564,
+  "current_leg_accepted": 555,
+  "current_leg_rejected": 9,
+  "final_checkpoint": "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING_Haldane_FQHE/results/ne12_pure_v1_kappa001_batch256_continue7k_round2_20261117/recovery_cg65536/train_seed71/checkpoints/step_000013721.npz",
+  "checkpoint_sha256": "54458312dae2fa4841c4053397b677018a09cd3e403fce54111ea7407c672a18",
+  "stop_reason": "signal_SIGUSR1",
+  "training_process_exit_code": 0,
+  "no_training_continuation_authorized": true,
+  "fixed_target_supervisor_status_preserved": "manager_target_incomplete_status.json"
+}

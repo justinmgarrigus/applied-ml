@@ -1,0 +1,31 @@
+{
+  "actual_submission_checkout_modified": false,
+  "checks": [
+    "small_NPZ_retained",
+    "symlink_directory_not_followed",
+    "fresh_results_runs_excluded_but_fixed_evidence_retained",
+    "legacy_exception_only_in_MIGRATION",
+    "historical_links_nonblocking",
+    "catalog_paths_relative",
+    "legacy_link_in_current_algorithm_doc_rejected",
+    "file_at_50MB_refused",
+    "private_path_refused",
+    "missing_destination_refused",
+    "research_container_Git_root_refused_before_other_Git_inspection",
+    "wrong_destination_refused_without_Git_call",
+    "verified_curated_swap_and_old_payload_backup",
+    "unrelated_files_and_Git_metadata_preserved",
+    "source_legacy_research_preserved",
+    "manifest_hashes_verified",
+    "source_hash_change_refused_before_swap",
+    "transaction_failure_rolls_back_payload_and_owned_metadata"
+  ],
+  "helper_sha256": {
+    "check_prepare_submission_safety.py": "6c23404e01896a90b1ed33757f9cebebec7cd12a76a5d73b0b51c027f539bbf7",
+    "prepare_submission.py": "c594e127db35c8c36af271633dc63d8212b41b51c10f4915ab33b7f231267abf",
+    "validate_reorganization.py": "e9b08e19ba40156d39952ed1965fb7e2b82d411fd9e3a43d0f057300c5cbe6cb"
+  },
+  "real_Git_processes_or_network_used": false,
+  "scratch_scope": "/tmp only; temporary fake-Git fixture removed",
+  "status": "passed"
+}
