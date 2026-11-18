@@ -1,0 +1,1 @@
+{"Hamiltonian":"sum P_R=1 + v3 sum P_R=3; normalized sphere LLL pair projectors","basis_convention":"Ascending orbital Slater basis; a=m+flux/2","dimension":73,"flux":12,"format_version":1,"ne":5,"purpose":"Independent post-training diagnostics only; no ED labels enter SPRING","raising_target_dimension":71,"two_lz":0,"v3":0.0}

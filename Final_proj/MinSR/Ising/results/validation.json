@@ -1,0 +1,182 @@
+{
+  "status": "passed",
+  "method": "damped-minsr",
+  "scope": "Three-update CPU execution check; no convergence or optimizer-ranking claim",
+  "configuration": {
+    "n": 4,
+    "hidden": 3,
+    "J": 1.0,
+    "h": 1.0,
+    "steps": 3,
+    "batch_size": 16,
+    "learning_rate": 0.05,
+    "damping": 0.001,
+    "mu": 0.0,
+    "max_norm": 0.1,
+    "seed": 7,
+    "log_every": 1,
+    "optimizer": "damped-minsr",
+    "output": "/home/leean/research/Applied_machine_learning_course/Final_proj/MinSR/Ising/results/check_cpu_n4"
+  },
+  "checks": {
+    "explicit_optimizer_identity": true,
+    "memory_setting_correct": true,
+    "cpu_backend": true,
+    "parameter_shapes": true,
+    "recorded_steps": true,
+    "all_saved_values_finite": true,
+    "variational_bound": true,
+    "physical_gradient_autodiff": true,
+    "finite_difference_gradient": true,
+    "numpy_replayed_parameters_agree": true,
+    "numpy_replayed_update_diagnostics_agree": true,
+    "legacy_sources_unchanged": true,
+    "norm_cap_respected": true,
+    "relative_document_links_exist": true,
+    "executed_backend_hash_explicitly_recorded": true
+  },
+  "independent_verification": {
+    "method": "Replay IID sample keys using saved initial theta; independent NumPy logcosh, analytic tanh score, local-energy sum and SGD or dense regularized SR solve. No JAX autodiff or upstream optimizer used for replay.",
+    "final_parameter_max_abs_error": 5.359574943151046e-15,
+    "diagnostic_max_abs_errors": {
+      "sampled_energy_before_update": 1.7763568394002505e-15,
+      "sampled_physical_gradient_norm": 3.774758283725532e-15,
+      "raw_direction_norm": 2.717825964282383e-13,
+      "parameter_update_norm": 1.3877787807814457e-17
+    },
+    "step_diagnostics": [
+      {
+        "step": 1,
+        "sampled_energy_before_update": -3.5936742514998357,
+        "sampled_physical_gradient_norm": 1.6496740288178846,
+        "raw_direction_norm": 9.79020568592816,
+        "parameter_update_norm": 0.09999999989785709
+      },
+      {
+        "step": 2,
+        "sampled_energy_before_update": -3.629065481033688,
+        "sampled_physical_gradient_norm": 0.36042721697479846,
+        "raw_direction_norm": 6.981473164244519,
+        "parameter_update_norm": 0.09999999985676378
+      },
+      {
+        "step": 3,
+        "sampled_energy_before_update": -3.9654509635522053,
+        "sampled_physical_gradient_norm": 0.7389531475492412,
+        "raw_direction_norm": 5.91973222465364,
+        "parameter_update_norm": 0.09999999983107344
+      }
+    ]
+  },
+  "gradient_check": {
+    "parameter_count": 13,
+    "finite_difference_step": 1e-05,
+    "covariance_vs_autodiff_max_abs": 4.440892098500626e-16,
+    "covariance_vs_finite_difference_max_abs": 1.2194045773128437e-10,
+    "exact_physical_gradient_norm": 1.039925503860919,
+    "normalization_gauge_gradient": 0.0
+  },
+  "link_checks": [
+    {
+      "file": "MinSR/Ising/RUN_TRAINING.md",
+      "target": "../../shared/README.md#install-once-from-the-courserepository-root",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/RUN_TRAINING.md",
+      "target": "PHYSICS.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/RUN_TRAINING.md",
+      "target": "training/PARAMETERS.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/RUN_TRAINING.md",
+      "target": "../../benchmarks/README.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/RUN_TRAINING.md",
+      "target": "results/README.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/PHYSICS.md",
+      "target": "../../benchmarks/README.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/PHYSICS.md",
+      "target": "results/README.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/PHYSICS.md",
+      "target": "../../shared/ising_backend.py",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/PHYSICS.md",
+      "target": "../../shared/vendor/jaqmc_spring/LICENSE",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/PHYSICS.md",
+      "target": "../../shared/vendor/jaqmc_spring/NOTICE",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/PHYSICS.md",
+      "target": "../../shared/vendor/jaqmc_spring/PROVENANCE.json",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/results/README.md",
+      "target": "../../../benchmarks/README.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/training/PARAMETERS.md",
+      "target": "../../../shared/ising_backend.py",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/training/PARAMETERS.md",
+      "target": "../PHYSICS.md",
+      "exists": true
+    },
+    {
+      "file": "MinSR/Ising/training/PARAMETERS.md",
+      "target": "../../../benchmarks/README.md",
+      "exists": true
+    }
+  ],
+  "source_and_artifact_sha256": {
+    "MinSR/Ising/RUN_TRAINING.md": "288f5a4bde9cff8233ceb22548575f0158f76c6eaf948b1e7ee1431c1e01450c",
+    "MinSR/Ising/PHYSICS.md": "7e8526cbee7ec1d9f49013217c691647c56b0c3e8e25354d7933132169635813",
+    "MinSR/Ising/results/README.md": "ccad5e9600bf06ad4bd849ccaba3d6395b4ae0c5ca0f7b11b2faba985724cf39",
+    "MinSR/Ising/training/PARAMETERS.md": "8cdbe8a521ec032f39fcbac3ced91181124b763ebb29af068bb2f56ed3f2468d",
+    "MinSR/Ising/training/run.py": "41ddabc2057210d6f88b29dcb112c94b49ef79c02e23f475cb70d5df0d9d7185",
+    "MinSR/Ising/results/check_cpu_n4/trained_parameters.npz": "be54bbd07c684b6b02f4d7ed94cf43ad78cdee505d68777dcc10e0df20d3295a",
+    "MinSR/Ising/results/check_cpu_n4/gradient_check.npz": "9bb658f5e9863aa6dc707bfbe2f32c9dd526028a30f2f7b0f396305d6483f1e5",
+    "MinSR/Ising/results/check_cpu_n4/metrics.json": "4d1b2a5445b65e6f73c1fce153fe0b502f4ae97ca59b99859f0a5a720c503b2c",
+    "MinSR/Ising/results/check_cpu_n4/diagnostics.pdf": "610c0042ceae4e497915da43a33a69d33b5c90da9ca196d3a88a6a6992f32e72",
+    "MinSR/Ising/results/check_cpu_n4/gradient_check.json": "3c769f9efc825fd5e746e1708e6c03c6252137f40483917226f091a1b131ec15",
+    "MinSR/Ising/results/check_cpu_n4/training.csv": "d545e421e83f5e8a8ed7010cfa5d584cc00fe4fe1807a478d21ba2f6062a2fbc",
+    "MinSR/Ising/results/check_cpu_n4/diagnostics.png": "1eccf1bf7a646ceab00f7bd8896577a4430d93e97ed9ca95b82d516ee55014d4",
+    "shared/ising_backend.py": "26f9e3c46d8195c9b39f0619f397d8d2d6c452028f183bfb9b8135822868ed5c",
+    "shared/vendor/jaqmc_spring/src/jaqmc/optimizer/sr/jasr.py": "1d2a36b8b766018dfc459ff22c82841d7eb1f3250f4c17443e99785f7f3bb16d",
+    "VMC/Ising/results/optimizer_cap_tests.xml": "6f14d2a15809371028c816355eff950ac9419d2ee1a1c5005e9dd4feb02b0f3f"
+  },
+  "plots_visually_inspected": true,
+  "limitations": [
+    "N=4 only; no accuracy or speed ranking.",
+    "Parameters-only NPZ cannot resume optimizer or RNG state."
+  ],
+  "current_backend_sha256": "26f9e3c46d8195c9b39f0619f397d8d2d6c452028f183bfb9b8135822868ed5c",
+  "executed_backend_sha256": "02b3291bfe056d6e8e917e756b9bd4db023fec682443217478c619eb79a83471",
+  "current_source_amendment": "Only the SGD branch gained an applied-update cap and corrected optimizer metadata. SPRING/zero-memory SR equations, inputs and sampled updates are unchanged. The three existing SPRING optimizer tests were rerun with the new active/inactive SGD-cap test: all four passed.",
+  "post_amendment_optimizer_test_count": 4
+}

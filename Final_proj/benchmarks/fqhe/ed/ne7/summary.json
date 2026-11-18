@@ -1,0 +1,273 @@
+{
+  "ne": 7,
+  "flux": 18,
+  "two_lz": 0,
+  "v3": 0.0,
+  "dimension": 1656,
+  "orbitals": 19,
+  "full_fixed_N_dimension": 50388,
+  "Hamiltonian": "sum_(i<j) P_R=1(ij), normalized sphere LLL projectors; V1=1",
+  "basis": "Complete fixed-N, fixed-M=0 LLL Slater basis, ascending sorted bitstrings",
+  "reference": "references/ne7",
+  "reference_manifest_sha256": "f29dcde8b71344b86446c053e35380a10d26018b81f079b0f180b2a3276d4b9f",
+  "eigenpairs_file": "eigenpairs.npz",
+  "eigenpairs_sha256": "d3181a2dc7979b7b1ba48760e1ada6ea5106db801de90828e587bc88b614cf0e",
+  "states": [
+    {
+      "index": 0,
+      "energy_V1": 2.3583815911329638e-17,
+      "excitation_energy_V1": 0.0,
+      "L": 0,
+      "L_resolved": true,
+      "L2": 3.9270668752527243e-28,
+      "L2_eigenvector_residual": 4.752245487232909e-13,
+      "eigenpair_residual_V1": 3.994793163275876e-15
+    },
+    {
+      "index": 1,
+      "energy_V1": 0.5487487546122989,
+      "excitation_energy_V1": 0.5487487546122989,
+      "L": 5,
+      "L_resolved": true,
+      "L2": 30.0,
+      "L2_eigenvector_residual": 1.4425333567364206e-12,
+      "eigenpair_residual_V1": 5.885848116817044e-15
+    },
+    {
+      "index": 2,
+      "energy_V1": 0.5719455717691144,
+      "excitation_energy_V1": 0.5719455717691144,
+      "L": 6,
+      "L_resolved": true,
+      "L2": 42.00000000000015,
+      "L2_eigenvector_residual": 4.4552494142683535e-12,
+      "eigenpair_residual_V1": 4.9783000332592645e-15
+    },
+    {
+      "index": 3,
+      "energy_V1": 0.5736147097456311,
+      "excitation_energy_V1": 0.5736147097456311,
+      "L": 7,
+      "L_resolved": true,
+      "L2": 55.99999999999997,
+      "L2_eigenvector_residual": 4.6883728860274596e-12,
+      "eigenpair_residual_V1": 4.5115699540793505e-15
+    },
+    {
+      "index": 4,
+      "energy_V1": 0.5941044784047771,
+      "excitation_energy_V1": 0.5941044784047771,
+      "L": 4,
+      "L_resolved": true,
+      "L2": 20.00000000000011,
+      "L2_eigenvector_residual": 1.0618438264913546e-12,
+      "eigenpair_residual_V1": 5.751078044242295e-15
+    },
+    {
+      "index": 5,
+      "energy_V1": 0.8328565516400899,
+      "excitation_energy_V1": 0.8328565516400899,
+      "L": 3,
+      "L_resolved": true,
+      "L2": 11.999999999999993,
+      "L2_eigenvector_residual": 1.6518191840702334e-12,
+      "eigenpair_residual_V1": 5.080261705500969e-15
+    },
+    {
+      "index": 6,
+      "energy_V1": 0.9431183679919118,
+      "excitation_energy_V1": 0.9431183679919118,
+      "L": 10,
+      "L_resolved": true,
+      "L2": 110.00000000000011,
+      "L2_eigenvector_residual": 5.229062286357764e-12,
+      "eigenpair_residual_V1": 5.1341032216859785e-15
+    },
+    {
+      "index": 7,
+      "energy_V1": 0.9471207225354521,
+      "excitation_energy_V1": 0.9471207225354521,
+      "L": 11,
+      "L_resolved": true,
+      "L2": 131.99999999999983,
+      "L2_eigenvector_residual": 4.656568724430168e-12,
+      "eigenpair_residual_V1": 4.716835980773582e-15
+    },
+    {
+      "index": 8,
+      "energy_V1": 0.9646210040346979,
+      "excitation_energy_V1": 0.9646210040346979,
+      "L": 12,
+      "L_resolved": true,
+      "L2": 155.9999999999999,
+      "L2_eigenvector_residual": 1.7077208807015285e-11,
+      "eigenpair_residual_V1": 5.62682819879684e-15
+    },
+    {
+      "index": 9,
+      "energy_V1": 0.9771822270696732,
+      "excitation_energy_V1": 0.9771822270696732,
+      "L": 8,
+      "L_resolved": true,
+      "L2": 71.99999999999994,
+      "L2_eigenvector_residual": 1.71803867094966e-11,
+      "eigenpair_residual_V1": 6.0022475879833336e-15
+    },
+    {
+      "index": 10,
+      "energy_V1": 1.021597916314383,
+      "excitation_energy_V1": 1.021597916314383,
+      "L": 10,
+      "L_resolved": true,
+      "L2": 110.00000000000006,
+      "L2_eigenvector_residual": 2.613535631892268e-12,
+      "eigenpair_residual_V1": 4.6665670248820544e-15
+    },
+    {
+      "index": 11,
+      "energy_V1": 1.0319169691018137,
+      "excitation_energy_V1": 1.0319169691018137,
+      "L": 9,
+      "L_resolved": true,
+      "L2": 90.00000000000017,
+      "L2_eigenvector_residual": 2.4859718302661634e-12,
+      "eigenpair_residual_V1": 5.457254865107129e-15
+    },
+    {
+      "index": 12,
+      "energy_V1": 1.1023993913615653,
+      "excitation_energy_V1": 1.1023993913615653,
+      "L": 6,
+      "L_resolved": true,
+      "L2": 42.0000000000001,
+      "L2_eigenvector_residual": 2.2726386712551744e-12,
+      "eigenpair_residual_V1": 6.277742517590171e-15
+    },
+    {
+      "index": 13,
+      "energy_V1": 1.121308452602146,
+      "excitation_energy_V1": 1.121308452602146,
+      "L": 8,
+      "L_resolved": true,
+      "L2": 71.99999999999994,
+      "L2_eigenvector_residual": 5.466533592851708e-12,
+      "eigenpair_residual_V1": 3.71614962389995e-15
+    },
+    {
+      "index": 14,
+      "energy_V1": 1.1272801136863966,
+      "excitation_energy_V1": 1.1272801136863966,
+      "L": 2,
+      "L_resolved": true,
+      "L2": 6.000000000000001,
+      "L2_eigenvector_residual": 5.358935070566004e-12,
+      "eigenpair_residual_V1": 4.2903715996225695e-15
+    },
+    {
+      "index": 15,
+      "energy_V1": 1.148953157525609,
+      "excitation_energy_V1": 1.148953157525609,
+      "L": 1,
+      "L_resolved": true,
+      "L2": 2.000000000000001,
+      "L2_eigenvector_residual": 4.012858653310783e-12,
+      "eigenpair_residual_V1": 4.4834718018538475e-15
+    },
+    {
+      "index": 16,
+      "energy_V1": 1.1574117529656684,
+      "excitation_energy_V1": 1.1574117529656684,
+      "L": 4,
+      "L_resolved": true,
+      "L2": 19.999999999999982,
+      "L2_eigenvector_residual": 2.558886374161191e-12,
+      "eigenpair_residual_V1": 5.198730746120846e-15
+    },
+    {
+      "index": 17,
+      "energy_V1": 1.1616692695032538,
+      "excitation_energy_V1": 1.1616692695032538,
+      "L": 6,
+      "L_resolved": true,
+      "L2": 42.00000000000006,
+      "L2_eigenvector_residual": 4.41581747528271e-12,
+      "eigenpair_residual_V1": 5.230818464348074e-15
+    },
+    {
+      "index": 18,
+      "energy_V1": 1.1907275843555671,
+      "excitation_energy_V1": 1.1907275843555671,
+      "L": 9,
+      "L_resolved": true,
+      "L2": 90.00000000000009,
+      "L2_eigenvector_residual": 3.1219095815513255e-12,
+      "eigenpair_residual_V1": 5.529317301362744e-15
+    },
+    {
+      "index": 19,
+      "energy_V1": 1.2188421087201158,
+      "excitation_energy_V1": 1.2188421087201158,
+      "L": 8,
+      "L_resolved": true,
+      "L2": 71.99999999999994,
+      "L2_eigenvector_residual": 5.858786345239147e-12,
+      "eigenpair_residual_V1": 6.951311694461574e-15
+    }
+  ],
+  "validation": {
+    "hermiticity_max_error": 0.0,
+    "orthogonality_max_error": 5.995204332975845e-15,
+    "maximum_eigenpair_residual_V1": 6.951311694461574e-15,
+    "maximum_L2_eigenvector_residual": 1.71803867094966e-11,
+    "maximum_H_L2_commutator_on_low_states": 4.3983521824596164e-13,
+    "all_reported_L_resolved": true
+  },
+  "solver": "scipy.sparse.linalg.eigsh (lowest algebraic)",
+  "diagonalization_seconds": 0.02553472900763154,
+  "ground_energy_V1": 2.3583815911329638e-17,
+  "neutral_gap_V1": 0.5487487546122989,
+  "zero_modes_in_saved_spectrum": 1,
+  "computed_full_spectrum": false,
+  "requested_eigenpairs": 20,
+  "saved_eigenpairs": 20,
+  "cutoff_observed_energy_cluster_complete": true,
+  "cutoff_guard": "Eight extra Ritz pairs; extend observed cutoff cluster and omit outer computed cluster if touched",
+  "seed": 1729,
+  "runtime_reconstruction": {
+    "performed": false,
+    "scope": "Rebuild omitted above configured small-N bound"
+  },
+  "ground": {
+    "L2": 3.926919035964575e-28,
+    "residual_variance_V1_squared": 1.6043031887980304e-29,
+    "fidelity_with_retained_ED_ground": 1.0000000000000027,
+    "orbital_occupations": [
+      0.3684210526315788,
+      0.3684210526315787,
+      0.3684210526315791,
+      0.36842105263157926,
+      0.3684210526315794,
+      0.368421052631579,
+      0.368421052631579,
+      0.368421052631579,
+      0.3684210526315788,
+      0.36842105263157876,
+      0.3684210526315791,
+      0.36842105263157904,
+      0.3684210526315787,
+      0.36842105263157887,
+      0.36842105263157915,
+      0.3684210526315791,
+      0.36842105263157904,
+      0.3684210526315789,
+      0.36842105263157876
+    ],
+    "maximum_occupation_error_from_uniform": 4.996003610813204e-16,
+    "density_RMS_contrast": 5.019443085025789e-16,
+    "density_particle_number_integral": 7.000000000225537
+  },
+  "ed_used_for_training": false,
+  "gap_definition": "First positive eigenenergy minus E0 at fixed N and flux; neutral finite-size gap, not charged gap",
+  "lowest_L0_excitation_gap_V1": null,
+  "L0_gap_status": "No certified lowest positive L=0 state in saved levels; not determined"
+}

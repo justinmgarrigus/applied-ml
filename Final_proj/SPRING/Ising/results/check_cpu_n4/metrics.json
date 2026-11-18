@@ -1,0 +1,67 @@
+{
+  "configuration": {
+    "n": 4,
+    "hidden": 3,
+    "J": 1.0,
+    "h": 1.0,
+    "steps": 3,
+    "batch_size": 16,
+    "learning_rate": 0.05,
+    "damping": 0.001,
+    "mu": 0.9,
+    "max_norm": 0.1,
+    "seed": 7,
+    "log_every": 1,
+    "optimizer": "spring",
+    "output": "/home/leean/research/Applied_machine_learning_course/Final_proj/SPRING/Ising/results/check_cpu_n4"
+  },
+  "upstream_commit": "71f94158f2aca88ded904451f5314f71cdff5666",
+  "backend": "[CpuDevice(id=0)]",
+  "dtype": "float64",
+  "versions": {
+    "jax": "0.9.1",
+    "jaxlib": "0.9.1",
+    "optax": "0.2.8",
+    "numpy": "2.5.4",
+    "jaqmc-spring-subset": "0.1.0"
+  },
+  "code_provenance": {
+    "backend_sha256": "dc35eadee7c28cd182de471c632686659098552782fe4ae58a871522a01fb4e0",
+    "legacy_backend_sha256": "bd597ccb0624e2d8f25ebf0f066db08f11ac955628e2127820af954aa9d6f04e",
+    "optimizer_source": "/home/leean/research/Applied_machine_learning_course/Final_proj/shared/vendor/jaqmc_spring/src/jaqmc/optimizer/sr/jasr.py",
+    "optimizer_sha256": "1d2a36b8b766018dfc459ff22c82841d7eb1f3250f4c17443e99785f7f3bb16d"
+  },
+  "optimizer_description": "JaQMC SPRING, covariance force and previous-direction memory",
+  "optimizer_module": "jaqmc.optimizer.sr.jasr",
+  "parameter_count": 13,
+  "exact_ground_energy": -5.226251859505506,
+  "initial": {
+    "step": 0,
+    "exact_energy": -3.991789704310212,
+    "energy_error": 1.2344621551952941,
+    "exact_variance": 3.4508736782993896,
+    "ground_state_fidelity": 0.6415055278563183
+  },
+  "final": {
+    "step": 3,
+    "exact_energy": -4.242553455426102,
+    "energy_error": 0.9836984040794041,
+    "exact_variance": 2.720305080363001,
+    "ground_state_fidelity": 0.7046867137052882,
+    "parameter_update_norm": 0.09999999985866673,
+    "raw_direction_norm": 7.07547431973923,
+    "sampled_energy_before_update": -3.965995049253568,
+    "sampled_physical_gradient_norm": 0.7265075131843188
+  },
+  "gradient_check": {
+    "parameter_count": 13,
+    "finite_difference_step": 1e-05,
+    "covariance_vs_autodiff_max_abs": 4.440892098500626e-16,
+    "covariance_vs_finite_difference_max_abs": 1.2194045773128437e-10,
+    "exact_physical_gradient_norm": 1.039925503860919,
+    "normalization_gauge_gradient": 0.0
+  },
+  "training_seconds_including_jit": 0.2585925650000718,
+  "sampling": "iid categorical draws from enumerated |psi|^2; exact expectations used for evaluation only",
+  "spring_force_convention": "physical_gradient/2; SGD uses physical_gradient"
+}
