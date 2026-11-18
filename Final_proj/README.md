@@ -24,7 +24,7 @@ Final_proj/
 ├── MinSR/                  # Ising/ and FQHE/, same structure
 ├── shared/                 # common physics/model backend + licensed optimizer
 ├── benchmarks/             # shared ED solvers, inputs, outputs, validation
-├── documents/              # proposal, papers and presentations
+├── documents/              # reports and presentations
 ├── tools/                  # layout checks and curated Git export
 └── AGENTS.md               # instructions for the next agent
 ```
