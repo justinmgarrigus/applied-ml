@@ -3,9 +3,9 @@
 This example minimizes the energy of a one-dimensional transverse-field Ising
 ring. It uses Pauli matrices, whose spin eigenvalues are **−1 and +1**:
 
-\[
+```math
 H=-J\sum_{i=0}^{N-1}Z_iZ_{(i+1)\bmod N}-h\sum_{i=0}^{N-1}X_i.
-\]
+```
 
 The default is `N=6`, `J=h=1`. The code supports `3 <= N <= 10`,
 with `h>0`; complete enumeration makes it a small correctness experiment.
@@ -19,10 +19,10 @@ For example, the six-site complete input table has shape `(64, 6)`.
 
 The network returns one **log wavefunction amplitude**, not an energy:
 
-\[
+```math
 f_\theta(\mathbf s)=\log\psi_\theta(\mathbf s)
 =c+\sum_{a=1}^{N_h}\log\cosh\!\left(\sum_i s_iW_{ia}\right).
-\]
+```
 
 The parameters are `W[N, hidden]` and scalar `c`, so their count is
 `P=N*hidden+1`. This positive real RBM sums over a single set of
@@ -37,20 +37,20 @@ complex structures. Translation symmetry is not imposed.
 
 The scalar loss is the normalized Rayleigh quotient:
 
-\[
+```math
 E(\theta)=\frac{\langle\psi_\theta|H|\psi_\theta\rangle}
 {\langle\psi_\theta|\psi_\theta\rangle}
 =\mathbb E_{p_\theta}[E_{\rm loc}(\mathbf s)],\qquad
 p_\theta(\mathbf s)\propto|\psi_\theta(\mathbf s)|^2.
-\]
+```
 
 All off-diagonal terms are evaluated exactly for each sampled input. If
 `s^(i)` flips only site `i`, then
 
-\[
+```math
 E_{\rm loc}(\mathbf s)=-J\sum_i s_is_{i+1}
 -h\sum_i\exp[f_\theta(\mathbf s^{(i)})-f_\theta(\mathbf s)].
-\]
+```
 
 Each update draws `batch_size` independent categorical samples **with
 replacement** from the fully enumerated Born distribution. There is no Markov
@@ -59,9 +59,9 @@ its size exceeds `2**N`.
 
 With `O_j = d f_theta / d theta_j`, the physical gradient is
 
-\[
+```math
 g_j=2\,\operatorname{Cov}_{p_\theta}(O_j,E_{\rm loc}).
-\]
+```
 
 The code estimates covariance using empirical means with divisor `B`. This
 finite-batch estimate has the usual covariance-estimator bias; exact gradient
@@ -74,11 +74,11 @@ robust-SR/MARCH features disabled. It supplies the SPRING force `f = g/2`.
 For the centered score covariance `S = O_centered.T @ O_centered / B`, the regularized
 parameter-space identity checked by tests is
 
-\[
+```math
 (S+\lambda I)d_k=f_k+\lambda\mu d_{k-1},\qquad
 \theta_{k+1}=\theta_k-\alpha_kd_k,
 \quad\alpha_k=\min\!\left(\eta,\frac{r}{\|d_k\|+10^{-8}}\right).
-\]
+```
 
 `--max-norm` is the update-norm radius `r`, **not** its square.
 The optimizer stores the raw direction `d_k`, before clipping, as memory.

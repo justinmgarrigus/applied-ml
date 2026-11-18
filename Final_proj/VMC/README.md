@@ -14,8 +14,8 @@ See the [shared implementation and environment](../shared/README.md).
 
 ## From the Rayleigh quotient to local energy
 
-Let $x$ denote one whole basis configuration. With real trainable parameters
-$\theta$, the model assigns a coefficient $\psi_\theta(x)$ to each $|x\rangle$.
+Let $`x`$ denote one whole basis configuration. With real trainable parameters
+$`\theta`$, the model assigns a coefficient $`\psi_\theta(x)`$ to each $`|x\rangle`$.
 The model can work with unnormalized coefficients because the energy is a
 Rayleigh quotient.
 
@@ -24,14 +24,14 @@ Z_\theta=\langle\psi_\theta|\psi_\theta\rangle,\qquad
 E(\theta)=\frac{\langle\psi_\theta|H|\psi_\theta\rangle}{Z_\theta}.
 ```
 
-For orthonormal energy eigenstates $|u_m\rangle$, write
-$|\psi_\theta\rangle=\sum_m c_m|u_m\rangle$. Then
-$E=\sum_m |c_m|^2E_m/\sum_m |c_m|^2$. This weighted average is bounded below
+For orthonormal energy eigenstates $`|u_m\rangle`$, write
+$`|\psi_\theta\rangle=\sum_m c_m|u_m\rangle`$. Then
+$`E=\sum_m |c_m|^2E_m/\sum_m |c_m|^2`$. This weighted average is bounded below
 by the lowest eigenvalue in the chosen Hilbert space. The optimizer seeks a
 low-energy state within the available neural ansatz.
 
 In the configuration basis, rearrange each numerator term as
-$\psi_\theta(x)^*(H\psi_\theta)(x)=|\psi_\theta(x)|^2E_{\rm loc}(x)$.
+$`\psi_\theta(x)^*(H\psi_\theta)(x)=|\psi_\theta(x)|^2E_{\rm loc}(x)`$.
 This gives the Born average
 
 ```math
@@ -42,7 +42,7 @@ E_{\rm loc}(x)=\sum_{x'}H_{xx'}
 ```
 
 A common nonzero factor in all coefficients cancels from the Born weights and
-amplitude ratios. The Ising row of $H$ connects a spin vector to itself and
+amplitude ratios. The Ising row of $`H`$ connects a spin vector to itself and
 its one-spin flips. The FQHE row connects occupations through signed fermionic
 pair matrix elements. The model evaluates coefficients for these connected
 configurations as part of the local-energy computation.
@@ -50,8 +50,8 @@ configurations as part of the local-energy computation.
 
 ## Derive the full energy gradient
 
-Define $O_j(x)=\partial_{\theta_j}\log\psi_\theta(x)$, so that
-$\partial_j\psi_\theta(x)=O_j(x)\psi_\theta(x)$. Hermiticity makes the two
+Define $`O_j(x)=\partial_{\theta_j}\log\psi_\theta(x)`$, so that
+$`\partial_j\psi_\theta(x)=O_j(x)\psi_\theta(x)`$. Hermiticity makes the two
 numerator derivatives conjugates. The quotient rule includes the change in
 normalization through the second term.
 
@@ -59,23 +59,22 @@ normalization through the second term.
 \begin{aligned}
 g_j=\partial_j E
   &=\frac{2\operatorname{Re}\langle\partial_j\psi|H|\psi\rangle}{Z_\theta}
-    -E\frac{2\operatorname{Re}\langle\partial_j\psi|\psi\rangle}{Z_\theta}\\
+    -E\frac{2\operatorname{Re}\langle\partial_j\psi|\psi\rangle}{Z_\theta}\\[0pt]
   &=2\operatorname{Re}\,\mathbb E_{p_\theta}
     \big[O_j(x)^*(E_{\rm loc}(x)-E)\big].
 \end{aligned}
 ```
 
-Because the energy residual has zero Born mean, replacing $O_j$ by
-$O_j-\mathbb E_{p_\theta}[O_j]$ leaves the gradient unchanged. A constant log
+Because the energy residual has zero Born mean, replacing $`O_j`$ by
+$`O_j-\mathbb E_{p_\theta}[O_j]`$ leaves the gradient unchanged. A constant log
 amplitude or phase therefore contributes zero gradient. For the FQHE ansatz
-$\log\psi=a+i\varphi$, both derivatives enter the real force. The real part
-of $O_j^*(E_{\rm loc}-E)$ is
-$(\partial_j a)\operatorname{Re}(E_{\rm loc}-E)+
-(\partial_j\varphi)\operatorname{Im}(E_{\rm loc}-E)$.
+$`\log\psi=a+i\varphi`$, both derivatives enter the real force. The real part
+of $`O_j^*(E_{\rm loc}-E)`$ is
+$`(\partial_j a)\operatorname{Re}(E_{\rm loc}-E)+ (\partial_j\varphi)\operatorname{Im}(E_{\rm loc}-E)`$.
 
-For a batch $x_1,\ldots,x_B$, let $e_i=E_{\rm loc}(x_i)$ and
-$\bar e=B^{-1}\sum_i e_i$. With $P$ trainable scalars, the scores have $B$ rows
-and $P$ columns, indexed by $i$ and $j$ respectively. The implementation uses
+For a batch $`x_1,\ldots,x_B`$, let $`e_i=E_{\rm loc}(x_i)`$ and
+$`\bar e=B^{-1}\sum_i e_i`$. With $`P`$ trainable scalars, the scores have $`B`$ rows
+and $`P`$ columns, indexed by $`i`$ and $`j`$ respectively. The implementation uses
 the empirical estimator
 
 ```math
@@ -86,16 +85,16 @@ the empirical estimator
 The sum of batch residuals is zero, so the trainer can use raw score rows and
 center only the local energies in this product. The empirical mean retains
 its imaginary part for that centering. The logged physical energy uses its
-real part. The factor $2$ comes from differentiating the bra and the ket.
-Here SGD consumes $\widehat g$. The SR-family adapters use the force
-$f=\widehat g/2$. The divisor $B$ is the empirical covariance convention.
-For IID draws its expectation at fixed parameters is $(1-1/B)g$, since the
+real part. The factor $`2`$ comes from differentiating the bra and the ket.
+Here SGD consumes $`\widehat g`$. The SR-family adapters use the force
+$`f=\widehat g/2`$. The divisor $`B`$ is the empirical covariance convention.
+For IID draws its expectation at fixed parameters is $`(1-1/B)g`$, since the
 batch mean is estimated from the same draws. Persistent FQHE walkers also
 depend on mixing and the changing parameters.
 
 ## Apply one SGD update
 
-Let $\eta$ be the nominal learning rate and $r$ the applied update norm radius
+Let $`\eta`$ be the nominal learning rate and $`r`$ the applied update norm radius
 (`max_norm`). For a nonzero estimated gradient, the update is
 
 ```math
@@ -106,7 +105,7 @@ u=-\eta\widehat g,\qquad
 
 A zero gradient produces a zero update. The norm is taken across all real
 parameter arrays together. When clipping is active, the step retains the SGD
-direction and its length is $r$. This update uses the Euclidean parameter
+direction and its length is $`r`$. This update uses the Euclidean parameter
 gradient and the current batch. The shared implementations chain
 `optax.sgd` with `optax.clip_by_global_norm`.
 [Ising `make_sgd`](../shared/ising_backend.py) · [FQHE `make_optimizer`](../shared/fqh_spring/optimizer.py)
@@ -127,16 +126,16 @@ For each requested optimizer update:
 One step means one optimizer update. The sampling stage produces fresh draws
 for Ising or advances the walkers for FQHE.
 
-- **Ising.** The backend enumerates the $2^N$ spin configurations and uses
+- **Ising.** The backend enumerates the $`2^N`$ spin configurations and uses
   independent categorical draws with replacement from logits
-  $2\log\psi_\theta(x)$. `energy_covariance_gradient` forms the real full
+  $`2\log\psi_\theta(x)`$. `energy_covariance_gradient` forms the real full
   gradient from the sampled spins and single-flip local energies.
   [Ising trainer](../shared/ising_backend.py)
 - **FQHE.** The trainer starts walkers from uniform configurations in the
   chosen sector, burns them in, and advances them by Metropolis pair moves.
   Equal orbital-index sums before and after a move preserve `Lz`. For a valid
-  symmetric proposal $x\to x'$, the acceptance probability is
-  $\min(1,\exp[2\operatorname{Re}(\log\psi(x')-\log\psi(x))])$. The
+  symmetric proposal $`x\to x'`$, the acceptance probability is
+  $`\min(1,\exp[2\operatorname{Re}(\log\psi(x')-\log\psi(x))])`$. The
   runner also schedules uniform-sector Metropolis refreshes. Each update
   uses the resulting walker rows, including repetitions. `train_step`
   combines the complex local energies and `model.score_tree` derivatives
