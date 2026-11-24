@@ -5,6 +5,14 @@ sparse pure-V1 Hamiltonians, raising operators, low eigenpairs and integrity
 manifests. The implementation is shared/fqh_spring/{physics,references}.py.
 `ed/` records the more detailed low-spectrum and angular-momentum analysis.
 
+The pure-V1 reference uses the sphere Hamiltonian
+
+```math
+H/V_1=\sum_{i<j}P_{R=1}(i,j),\qquad N_\phi=3(N-1),\qquad L_z=0.
+```
+
+[Frozen exact-diagonalization results](ed/README.md)
+
 Input: Ne, flux 3(Ne-1), fixed Lz=0, LLL, normalized V1 pair projectors (V1=1).
 Output: basis_bits.npy, hamiltonian.npz, raising_operator.npz, eigenvalues.npy,
 eigenvectors.npy, metadata.json and manifest.json. Decode orbital occupations

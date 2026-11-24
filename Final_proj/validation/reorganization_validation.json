@@ -1,6 +1,6 @@
 {
-  "SOURCE_CATALOG_sha256": "9b6d45aab3095607078b6329c05852bd146559a731fe28845b29def7a4f862eb",
-  "curated_bytes": 28523440,
+  "SOURCE_CATALOG_sha256": "fd0eae13abcf510b78e32f899473106da91a17e3b77435f9eb81ab713eb8ded8",
+  "curated_bytes": 28524441,
   "curated_files": 463,
   "errors": [],
   "excluded_paths": [
@@ -12,7 +12,7 @@
   "legacy_index": "MIGRATION.md",
   "links": {
     "Markdown_anchor_fragments_checked": false,
-    "checked_local_paths": 164,
+    "checked_local_paths": 166,
     "errors": [],
     "historical_scope": "Frozen snapshot/vendor/ED/report-source documents are preserved, not rewritten as current launch instructions",
     "historical_unresolved_links": [],

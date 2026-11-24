@@ -6,6 +6,17 @@ The latest requested segment retained 3,721 of 7,000 attempts; the remaining
 no wall, kappa=0.001, batch 256 and a 1,024-row sampling pool. Its angular-head
 model/objective differs from the portable baseline.
 
+The [archived objective and SPRING solve](ARCHIVED_REPORT.md#same-physical-loss-and-spring-linear-equation) are
+
+```math
+\begin{aligned}
+J &= E_H+A_{\rm heads}+0.001\langle L^2/\hbar^2\rangle,\\[0pt]
+(G_{\rm aug}+\lambda I)\phi &=
+\tfrac12\nabla\widehat J+\lambda\mu\phi_{\rm prev},
+\qquad \lambda=0.1,\quad \mu=0.9.
+\end{aligned}
+```
+
 Independent frozen Born-MC evaluation gives physical energy
 **3.6344834 +/- 0.02660 V1**, compared with analytical E0=0. There is no Ne12
 ED fidelity. The variance is 2.1301881 +/- 0.36019 V1²; coherent

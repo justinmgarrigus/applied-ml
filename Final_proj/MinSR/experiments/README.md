@@ -8,21 +8,21 @@ cost because every sampled run ended above the target.
 
 ## Experimental protocol
 
-We use \(r=(E-E_0)/\Delta_{\rm sector}\) with a target of \(r\leq 0.01\). ED
+We use $`r=(E-E_0)/\Delta_{\rm sector}`$ with a target of $`r\leq 0.01`$. ED
 provides the reference energy and sector gap. At each evaluation, we measure
 energy, residual variance, fidelity, and model-specific symmetry diagnostics.
 
 - **Ising.** Six periodic transverse-field Ising settings, batches of 16 or 64
-  independent Born draws, positive even-parity RBM with \(2N\) hidden units, and
+  independent Born draws, positive even-parity RBM with $`2N`$ hidden units, and
   an even-sector gap. Each method and batch size had eight tuning settings and
-  two tuning seeds at \(N=6,h/J=1\). Each tuning run used 1,000 updates. We
-  froze the settings that minimized median final \(r\). Production used five
+  two tuning seeds at $`N=6,h/J=1`$. Each tuning run used 1,000 updates. We
+  froze the settings that minimized median final $`r`$. Production used five
   new paired seeds, 3,000 updates, and exact evaluations every 20 updates.
 - **FQHE.** Four electrons on the sphere in the lowest Landau level, flux 9,
-  \(L_z=0\), pure \(V_1\), and a common six-layer, 64-wide complex MLP. Each
+  $`L_z=0`$, pure $`V_1`$, and a common six-layer, 64-wide complex MLP. Each
   method had four tuning settings, one tuning seed pair, and 250 updates per
   tuning run. Production used three new paired seeds, 1,000 updates,
-  \(B=32\), two sweeps per update, and exact checkpoint evaluation every
+  $`B=32`$, two sweeps per update, and exact checkpoint evaluation every
   100 updates.
 
 The comparisons use the same starting parameters, Hamiltonian, network,
@@ -36,7 +36,7 @@ recorded evaluation grid.
 ## Ising accuracy and cost
 
 All 180 production runs crossed the target and finished below it. The
-following results are medians across five paired seeds at \(h/J=1\).
+following results are medians across five paired seeds at $`h/J=1`$.
 
 | Spins | Batch | First target update MinSR / SPRING / SGD | Final energy error MinSR / SPRING / SGD (J) |
 |---:|---:|---:|---:|
@@ -45,17 +45,17 @@ following results are medians across five paired seeds at \(h/J=1\).
 | 10 | 16 | 180 / 180 / 280 | 2.12e-3 / 1.23e-3 / 4.63e-3 |
 | 10 | 64 | 100 / 60 / 100 | 5.46e-4 / 5.28e-4 / 1.29e-3 |
 
-At \(N=10,B=16\), MinSR beat SGD on the final energy in all five seed pairs.
-At \(N=10,B=64\), the two geometric methods had close median final errors
-and each won at least two seed pairs. For MinSR at \(N=10\), increasing the
+At $`N=10,B=16`$, MinSR beat SGD on the final energy in all five seed pairs.
+At $`N=10,B=64`$, the two geometric methods had close median final errors
+and each won at least two seed pairs. For MinSR at $`N=10`$, increasing the
 batch reduced the final error and the number of updates to target. It increased
 the observed median time to target from about 55 to 80 ms. These measurements
 include training and scheduled evaluation on the local CPU and separate JIT
 warm-up. The complete tables also report comparisons at common wall time and
 32,000 Born draws.
 
-In the \(N=6,h/J=1,B=16\) memory ablation, \(\mu=0,0.5,0.9\) gave final
-median \(r\) of \(9.17\times 10^{-5},4.79\times 10^{-5},1.81\times 10^{-5}\).
+In the $`N=6,h/J=1,B=16`$ memory ablation, $`\mu=0,0.5,0.9`$ gave final
+median $`r`$ of $`9.17\times 10^{-5},4.79\times 10^{-5},1.81\times 10^{-5}`$.
 All three first crossed the target at a median of 40 updates. The exact
 Born-weighted counterparts reached floating-point resolution by the final
 update. The radius and damping ablations hold the other tuned settings fixed.
@@ -69,19 +69,19 @@ update. The radius and damping ablations hold the other tuned settings fixed.
 
 ## FQHE accuracy and cost
 
-| Method | Median final energy (\(V_1\)) | Median final fidelity | Median training time | Successes |
+| Method | Median final energy ($`V_1`$) | Median final fidelity | Median training time | Successes |
 |---|---:|---:|---:|---:|
 | MinSR | 0.872 | 0.392 | 20.6 s | 0/3 |
 | SPRING | 0.865 | 0.396 | 21.1 s | 0/3 |
 | SGD | 0.973 | 0.220 | 3.85 s | 0/3 |
 
 The ground energy is zero to numerical accuracy and the target error is
-approximately \(0.00681V_1\). The separately evaluated full-sector states
+approximately $`0.00681V_1`$. The separately evaluated full-sector states
 show that the geometric optimizers gave lower median errors and higher median
 fidelity than SGD at this update budget. SGD used less time and peak resident
 memory. The three-seed pilot has limited resolution for distinguishing MinSR
 and SPRING. The exact Born-weighted MinSR control improved on all three
-paired MCMC endpoints, but finished at \(0.461,0.852,0.852V_1\). Removing the
+paired MCMC endpoints, but finished at $`0.461,0.852,0.852V_1`$. Removing the
 sampling noise was insufficient to reach the target within the tested budget.
 
 [All FQHE results](results/fqhe_results.csv) ·
@@ -93,7 +93,7 @@ sampling noise was insufficient to reach the target within the tested budget.
 
 The Ne4 runs were repeated on an RTX 4060 Laptop GPU. All nine CPU/CUDA pairs
 had identical initial parameter arrays and post-burn-in walkers. The largest
-absolute difference in endpoint fidelity was \(3.4\times10^{-12}\). The
+absolute difference in endpoint fidelity was $`3.4\times10^{-12}`$. The
 medians below cover 1,000 updates and exclude JIT compilation.
 
 | Method | CPU training | CUDA training |
@@ -103,7 +103,7 @@ medians below cover 1,000 updates and exclude JIT compilation.
 | SGD | 3.85 s | 4.88 s |
 
 The Ne6 CUDA feasibility run uses flux 15, 338 allowed configurations,
-\(B=64\), one MinSR seed, and the Ne4-selected hyperparameters. It completed
+$`B=64`$, one MinSR seed, and the Ne4-selected hyperparameters. It completed
 1,000 updates in 17.4 s and ended at fidelity 0.099. It provides evidence
 that the larger configuration runs on this device.
 
@@ -113,9 +113,9 @@ that the larger configuration runs on this device.
 
 ## Initialization checks across protocols
 
-The single-seed \(N=6,B=128\), 250-update replay reproduced the archived
-SPRING endpoint. Changing only \(\mu\) from 0.9 to 0 gave errors of
-\(1.58\times10^{-5} J\) for SPRING and \(1.71\times10^{-5} J\) for MinSR.
+The single-seed $`N=6,B=128`$, 250-update replay reproduced the archived
+SPRING endpoint. Changing only $`\mu`$ from 0.9 to 0 gave errors of
+$`1.58\times10^{-5} J`$ for SPRING and $`1.71\times10^{-5} J`$ for MinSR.
 The published SA initial parameter arrays on the teammate branch match
 the stock seed-7 RBM. SA uses the exact full-basis Rayleigh objective, and
 the three-method production comparison uses sampled gradients. A paired
