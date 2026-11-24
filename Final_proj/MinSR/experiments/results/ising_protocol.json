@@ -1,0 +1,227 @@
+{
+  "source_commit": "fb726d230b5f9efe59a5f4b5f994aaff8c9af0a0",
+  "upstream_commit": "71f94158f2aca88ded904451f5314f71cdff5666",
+  "versions": {
+    "jax": "0.9.1",
+    "jaxlib": "0.9.1",
+    "optax": "0.2.8",
+    "numpy": "2.5.4",
+    "jaqmc-spring-subset": "0.1.0"
+  },
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "python": "3.12.16",
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ],
+  "source_hash": "26f9e3c46d8195c9b39f0619f397d8d2d6c452028f183bfb9b8135822868ed5c",
+  "harness_hash": "ae7e22d7aaafd4e5b07f10d6bc58178e96ad53197223dbe6177323f15a817cf7",
+  "cases": [
+    [
+      4,
+      1.0
+    ],
+    [
+      6,
+      0.5
+    ],
+    [
+      6,
+      1.0
+    ],
+    [
+      6,
+      2.0
+    ],
+    [
+      8,
+      1.0
+    ],
+    [
+      10,
+      1.0
+    ]
+  ],
+  "batches": [
+    16,
+    64
+  ],
+  "pilot_seeds": [
+    7,
+    11
+  ],
+  "production_seeds": [
+    17,
+    29,
+    43,
+    59,
+    83
+  ],
+  "methods": [
+    "MinSR",
+    "SPRING",
+    "SGD"
+  ],
+  "grid": {
+    "MinSR": [
+      {
+        "learning_rate": 0.015,
+        "damping": 0.001,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.015,
+        "damping": 0.001,
+        "radius": 0.1,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.015,
+        "damping": 0.01,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.015,
+        "damping": 0.01,
+        "radius": 0.1,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.001,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.001,
+        "radius": 0.1,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.01,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.01,
+        "radius": 0.1,
+        "mu": 0.0
+      }
+    ],
+    "SPRING": [
+      {
+        "learning_rate": 0.015,
+        "damping": 0.001,
+        "radius": 0.03,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.015,
+        "damping": 0.001,
+        "radius": 0.1,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.015,
+        "damping": 0.01,
+        "radius": 0.03,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.015,
+        "damping": 0.01,
+        "radius": 0.1,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.001,
+        "radius": 0.03,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.001,
+        "radius": 0.1,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.01,
+        "radius": 0.03,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.01,
+        "radius": 0.1,
+        "mu": 0.9
+      }
+    ],
+    "SGD": [
+      {
+        "learning_rate": 0.01,
+        "damping": 0.0,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.01,
+        "damping": 0.0,
+        "radius": 0.1,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.03,
+        "damping": 0.0,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.03,
+        "damping": 0.0,
+        "radius": 0.1,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.06,
+        "damping": 0.0,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.06,
+        "damping": 0.0,
+        "radius": 0.1,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.12,
+        "damping": 0.0,
+        "radius": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.12,
+        "damping": 0.0,
+        "radius": 0.1,
+        "mu": 0.0
+      }
+    ]
+  },
+  "target": 0.01,
+  "pilot_steps": 1000,
+  "production_steps": 3000,
+  "evaluate_every": 20,
+  "pilot_selection": "lowest median final gap ratio",
+  "run_order_seed": 351,
+  "dtype": "float64",
+  "J": 1.0
+}

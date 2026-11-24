@@ -1,0 +1,59 @@
+{
+  "source_commit": "fb726d230b5f9efe59a5f4b5f994aaff8c9af0a0",
+  "production_ising_paired_groups_with_identical_initial_weights": 60,
+  "production_fqhe_paired_groups_with_identical_initial_parameters": 3,
+  "ne4_cpu_cuda_pairs_with_identical_initial_parameters_and_post_burn_in_walkers": 9,
+  "archived_ising_single_seed_replay": {
+    "MinSR": {
+      "configuration": {
+        "n": 6,
+        "hidden": 12,
+        "J": 1.0,
+        "h": 1.0,
+        "steps": 250,
+        "batch_size": 128,
+        "learning_rate": 0.05,
+        "damping": 0.001,
+        "mu": 0.0,
+        "max_norm": 0.1,
+        "seed": 7,
+        "log_every": 5,
+        "optimizer": "damped-minsr"
+      },
+      "initial_energy_J": -6.192017834495834,
+      "final_energy_J": -7.7273895476384515,
+      "final_error_J": 1.7062674094070474e-05,
+      "final_fidelity": 0.9999980934476961
+    },
+    "SPRING": {
+      "configuration": {
+        "n": 6,
+        "hidden": 12,
+        "J": 1.0,
+        "h": 1.0,
+        "steps": 250,
+        "batch_size": 128,
+        "learning_rate": 0.05,
+        "damping": 0.001,
+        "mu": 0.9,
+        "max_norm": 0.1,
+        "seed": 7,
+        "log_every": 5,
+        "optimizer": "spring"
+      },
+      "initial_energy_J": -6.192017834495834,
+      "final_energy_J": -7.727390852046698,
+      "final_error_J": 1.5758265847765074e-05,
+      "final_fidelity": 0.9999985691163893
+    }
+  },
+  "archived_spring_endpoint_reproduced": true,
+  "simulated_annealing_initialization_check": {
+    "repository_ref": "3dd777c59bf0d499aa68ef587e7f96d3a5694aa3",
+    "path": "Final_proj/SA/Ising/results/check_cpu_n6/initial_parameters.npz",
+    "npz_sha256": "af3e642d52d12ee3d0d95561f6eaace6901c37f6ac57b22a208967cac0988fe1",
+    "initial_W_sha256": "998bb8eca9544c10e218906bb8425039214f3906c8a274e56565542096e349da",
+    "initial_arrays_W_and_c_match": true,
+    "training_objective": "Exact full-basis Rayleigh energy"
+  }
+}

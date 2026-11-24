@@ -1,0 +1,58 @@
+{
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "driver_version": "580.159.03",
+  "vram_mib": 8188,
+  "jax_version": "0.9.1",
+  "ne4_paired_initial_parameters_and_walkers_verified": true,
+  "ne4_aggregate": {
+    "MinSR": {
+      "cpu_training_seconds": 20.577793223999834,
+      "gpu_training_seconds": 7.852129443999729,
+      "cpu_process_seconds": 25.58,
+      "gpu_process_seconds": 15.92,
+      "gpu_compilation_seconds": 5.419423119999919,
+      "gpu_final_energy": 0.8715028739214639,
+      "gpu_final_fidelity": 0.39220728255469367,
+      "training_speedup": 2.620664033974189,
+      "max_energy_delta": 1.2989609388114332e-14,
+      "max_fidelity_delta": 1.432187701766452e-14
+    },
+    "SPRING": {
+      "cpu_training_seconds": 21.11548898000001,
+      "gpu_training_seconds": 7.975322019999112,
+      "cpu_process_seconds": 26.14,
+      "gpu_process_seconds": 16.08,
+      "gpu_compilation_seconds": 5.489928750999752,
+      "gpu_final_energy": 0.8649434137842453,
+      "gpu_final_fidelity": 0.3958097530874136,
+      "training_speedup": 2.6476033101924026,
+      "max_energy_delta": 2.299049839393774e-12,
+      "max_fidelity_delta": 3.3614222516575865e-12
+    },
+    "SGD": {
+      "cpu_training_seconds": 3.850240969999959,
+      "gpu_training_seconds": 4.876684390000264,
+      "cpu_process_seconds": 7.98,
+      "gpu_process_seconds": 11.72,
+      "gpu_compilation_seconds": 4.248011955000038,
+      "gpu_final_energy": 0.9729275733043263,
+      "gpu_final_fidelity": 0.21998471984617374,
+      "training_speedup": 0.7895202276971117,
+      "max_energy_delta": 2.220446049250313e-16,
+      "max_fidelity_delta": 1.1102230246251565e-16
+    }
+  },
+  "ne6_pilot": {
+    "device": "cuda:0",
+    "steps": 1000,
+    "batch": 64,
+    "seed": 171,
+    "init_seed": 17,
+    "training_seconds": 17.416764512000555,
+    "compilation_seconds": 5.829289860999779,
+    "basis_dimension": 338,
+    "energy": 1.1776744438545017,
+    "fidelity": 0.09901910851830978,
+    "L0_probability": 0.10649892553034293
+  }
+}

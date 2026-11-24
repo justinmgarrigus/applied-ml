@@ -1,0 +1,47 @@
+{
+  "configuration": {
+    "method": "minsr",
+    "ne": 6,
+    "flux": 15,
+    "two_lz": 0,
+    "v3": 0.0,
+    "width": 64,
+    "layers": 6,
+    "variant": "mlp",
+    "readout": "legacy_additive",
+    "source": null,
+    "init_seed": 17,
+    "seed": 171,
+    "steps": 1000,
+    "batch": 64,
+    "sweeps": 2,
+    "burn_sweeps": 50,
+    "refresh_every": 25,
+    "max_norm": 0.03,
+    "pair_chunk": 6,
+    "checkpoint_every": 100,
+    "log_every": 100,
+    "keep_checkpoints": 11,
+    "native_threads": 1,
+    "cpus": 2,
+    "backend": "auto",
+    "learning_rate": 0.04,
+    "damping": 0.03,
+    "mu": 0.0,
+    "jax_platforms": "cuda",
+    "cpu_affinity": [
+      8,
+      10
+    ]
+  },
+  "checkpoint_sha256": "da2fb92280d8044ccb0301870dc337c73bdb7dc380563ff6c9c4228a63bdbcd9",
+  "reference_manifest_sha256": "df674e47571d1df1c2114bd9744ff0a867a6bca303b863cabd3421caf53c92e1",
+  "reference_path": "Final_proj/benchmarks/fqhe/references/ne6",
+  "endpoint": {
+    "exact_variational_energy_V1": 1.1776744438545017,
+    "exact_residual_variance_V1_squared": 0.702953832911386,
+    "ground_state_fidelity": 0.09901910851830978,
+    "exact_L0_probability": 0.10649892553034293,
+    "basis_dimension": 338
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "MinSR": {
+    "learning_rate": 0.04,
+    "damping": 0.03,
+    "mu": 0.0
+  },
+  "SPRING": {
+    "learning_rate": 0.04,
+    "damping": 0.003,
+    "mu": 0.9
+  },
+  "SGD": {
+    "learning_rate": 0.02,
+    "damping": 0.01,
+    "mu": 0.0
+  }
+}

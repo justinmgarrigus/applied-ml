@@ -1,0 +1,13 @@
+{
+  "commit": "fb726d230b5f9efe59a5f4b5f994aaff8c9af0a0",
+  "codeload_url": "https://codeload.github.com/justinmgarrigus/applied-ml/tar.gz/fb726d230b5f9efe59a5f4b5f994aaff8c9af0a0",
+  "archive_sha256": "68c2facada7841e53cba8acc8fa4ce0737bc18e6cb352573d5bf5d25f27482ea",
+  "tracked_archive_files_verified": 429,
+  "scripts": {
+    "fqhe_exact_control.py": "ae6efb64c76d02f78917c2aaa8dc4e9c2161d49aa8ee0c5c8e47451a2794a1ea",
+    "fqhe_study.py": "ffd0a499b869c87b75cbaaa70d6344f5ae980722f482a5d148b1a78e4edb76d6",
+    "ising_controls.py": "d5b057aafcf328586a4e81d219c0e2a985316f30d3bde9a7a3e74de1131c1e71",
+    "ising_study.py": "ae7e22d7aaafd4e5b07f10d6bc58178e96ad53197223dbe6177323f15a817cf7",
+    "summarize.py": "6716eb3fbf8baa3cdfb34ae6d56136bd3e4331dd65ae9cb4ff62cdb300aaa3fc"
+  }
+}

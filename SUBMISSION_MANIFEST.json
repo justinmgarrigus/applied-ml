@@ -1,5 +1,5 @@
 {
-  "bytes_excluding_manifest": 24622772,
+  "bytes_excluding_manifest": 28604322,
   "contributor_handle": "PassengerAn",
   "excluded_local_content": [
     "legacy raw research trees",
@@ -8,7 +8,7 @@
     "secret/private paths",
     "files >=50 MB"
   ],
-  "file_count_excluding_manifest": 428,
+  "file_count_excluding_manifest": 467,
   "files": {
     ".gitignore": {
       "bytes": 328,
@@ -163,16 +163,172 @@
       "sha256": "41ddabc2057210d6f88b29dcb112c94b49ef79c02e23f475cb70d5df0d9d7185"
     },
     "Final_proj/MinSR/README.md": {
-      "bytes": 8543,
-      "sha256": "4449f91d14945e9fa586cb797ece984df7ff43767c8312f0090d0712c6e9aff5"
+      "bytes": 8690,
+      "sha256": "da4d50ef8b59f7464d107fd5f07799c4e62179ee3a6e05fc9cb90e34f1520781"
+    },
+    "Final_proj/MinSR/experiments/README.md": {
+      "bytes": 8468,
+      "sha256": "f5421f79305f33415054b60378483936acd19d7b0e4a748634010de5268ca2e6"
+    },
+    "Final_proj/MinSR/experiments/reproduce.sh": {
+      "bytes": 1439,
+      "sha256": "14f32b7718cf8dd34b5fc1fafa4983e95306d04df64c0fa616c22b32d373e11e"
+    },
+    "Final_proj/MinSR/experiments/results/controls_protocol.json": {
+      "bytes": 545,
+      "sha256": "164d1990886d439b43739a902adb8c58a73d5b5f786fc227b68b2badd416e30b"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_exact_curves.csv.gz": {
+      "bytes": 1978,
+      "sha256": "6d58d882903bd8b075d45952438441e5618cca7e5c1ef8dc2d1b6ffb4f4a30b2"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_frozen_settings.json": {
+      "bytes": 243,
+      "sha256": "07e82b99b613a6ef712b6dcddb72d51ca92cf78fb9e362bc6ef3bf62b30ebf53"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_minsr_sampling_control.csv": {
+      "bytes": 613,
+      "sha256": "218ba5bb87439d682da9e036b2110482935c19d93c60cdf48a78fee810e856ab"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_minsr_sampling_control.pdf": {
+      "bytes": 22143,
+      "sha256": "5727a33001075942184e34eba356a8884710453c7e6fbea357d37c131d8f134a"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_ne4_learning_curves.pdf": {
+      "bytes": 22006,
+      "sha256": "86c43ff99e7ee8a626cf7de289236bdfcd4cf1ef04f1c6651c96790c2be9f3cc"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_protocol.json": {
+      "bytes": 1809,
+      "sha256": "0e0d71f8cd637040c96b640f203170e07a79bdb5fb12502eb06484ca1c4e613a"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_results.csv": {
+      "bytes": 1100,
+      "sha256": "6c6703891c06b070572d694f67b2a57f798505c9b82a4b99e70171ca1de4fb41"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_runs.csv": {
+      "bytes": 4015,
+      "sha256": "33c64a745e04bfebcfcfe870949f57723504821f2fb797ab28872e7ad02f953c"
+    },
+    "Final_proj/MinSR/experiments/results/fqhe_sampled_curves.csv.gz": {
+      "bytes": 16179,
+      "sha256": "36c416fb64633655f396b44eff734cdb79c931e442c1213609273a5364a156d0"
+    },
+    "Final_proj/MinSR/experiments/results/gpu/ne4_cpu_gpu.csv": {
+      "bytes": 1859,
+      "sha256": "f936659ed3d71462e61b5dc175f63eeb1a1fa749a341aabc3a9bea81b3a4d336"
+    },
+    "Final_proj/MinSR/experiments/results/gpu/ne6_configuration.json": {
+      "bytes": 1203,
+      "sha256": "33bbc8c744ca433805816a4ad7b7a48834bd646ac13a1a9f0a9897aececb7282"
+    },
+    "Final_proj/MinSR/experiments/results/gpu/summary.json": {
+      "bytes": 2020,
+      "sha256": "f223efb7955d5d9abe4e5dd6c70dc45bd5e787be635c67c2320d8e75005ef73f"
+    },
+    "Final_proj/MinSR/experiments/results/ising_all_runs.csv": {
+      "bytes": 92163,
+      "sha256": "3ef1bdb446eb53a0175af09013950bff6b502e584bbcc5fbc571b90f02d51a35"
+    },
+    "Final_proj/MinSR/experiments/results/ising_archived_protocol_replay.csv": {
+      "bytes": 9612,
+      "sha256": "56276cfbd3f5190e9e00807ba3c094bbe0b6108d0a5b0d61566d4d979f5742cb"
+    },
+    "Final_proj/MinSR/experiments/results/ising_curves.csv.gz": {
+      "bytes": 3616283,
+      "sha256": "f1ca16a42ff0642ac3f241daef1fdaf9a49fd3ff6f665143fdce00dbafbfcbfd"
+    },
+    "Final_proj/MinSR/experiments/results/ising_damping_radius.csv": {
+      "bytes": 2452,
+      "sha256": "11eccc3bcf897529521130c2a2386fec9eea847f330a50a5227fbdd19e99644b"
+    },
+    "Final_proj/MinSR/experiments/results/ising_frozen_settings.json": {
+      "bytes": 700,
+      "sha256": "aee7f3f5ba04e565126ae86c34a39b39d8f10b946dc7bcfa8b4e7f0c7c39b056"
+    },
+    "Final_proj/MinSR/experiments/results/ising_learning_curves.pdf": {
+      "bytes": 46678,
+      "sha256": "a65f0dd6857a351a4cef6c1a9b3a72e14f2f74f0f29af6c2d15c83fa1c2d5ef9"
+    },
+    "Final_proj/MinSR/experiments/results/ising_memory_ablation.csv": {
+      "bytes": 1928,
+      "sha256": "4a81c18d45002916262feedc4141b83ab68e9043e525e7d011d796e2dfeb079c"
+    },
+    "Final_proj/MinSR/experiments/results/ising_memory_ablation.pdf": {
+      "bytes": 29239,
+      "sha256": "fda275f55c5cbccbc667c1cfb96e2c804ed6c1a366d0608d943f58306f49ddbb"
+    },
+    "Final_proj/MinSR/experiments/results/ising_memory_profiles.csv": {
+      "bytes": 684,
+      "sha256": "fbf2d91021588714a520d12a0b1a8c45990b63be4c3330dad9f69b41814a0427"
+    },
+    "Final_proj/MinSR/experiments/results/ising_paired_differences.csv": {
+      "bytes": 5700,
+      "sha256": "894a06fb5d333da7374aece9e412074200ca51ab2cf71587cdd9046940f055bc"
+    },
+    "Final_proj/MinSR/experiments/results/ising_protocol.json": {
+      "bytes": 4027,
+      "sha256": "376cf477964d69881c1bf63d3032e325da7cfb4e16a69e5cfcf11788334180e6"
+    },
+    "Final_proj/MinSR/experiments/results/ising_results.csv": {
+      "bytes": 13599,
+      "sha256": "020891066ace6c94cbafd7f9d09b6486e669178f28f0c969dc415fcacef9c469"
+    },
+    "Final_proj/MinSR/experiments/scripts/fqhe_exact_control.py": {
+      "bytes": 7251,
+      "sha256": "ae6efb64c76d02f78917c2aaa8dc4e9c2161d49aa8ee0c5c8e47451a2794a1ea"
+    },
+    "Final_proj/MinSR/experiments/scripts/fqhe_study.py": {
+      "bytes": 10075,
+      "sha256": "ffd0a499b869c87b75cbaaa70d6344f5ae980722f482a5d148b1a78e4edb76d6"
+    },
+    "Final_proj/MinSR/experiments/scripts/gpu_trial.py": {
+      "bytes": 6205,
+      "sha256": "8def7adc7a4835fd4cf069a7a725b1a71f602122d87095c53890a744fb05861e"
+    },
+    "Final_proj/MinSR/experiments/scripts/ising_controls.py": {
+      "bytes": 3399,
+      "sha256": "d5b057aafcf328586a4e81d219c0e2a985316f30d3bde9a7a3e74de1131c1e71"
+    },
+    "Final_proj/MinSR/experiments/scripts/ising_study.py": {
+      "bytes": 15426,
+      "sha256": "ae7e22d7aaafd4e5b07f10d6bc58178e96ad53197223dbe6177323f15a817cf7"
+    },
+    "Final_proj/MinSR/experiments/scripts/summarize.py": {
+      "bytes": 19239,
+      "sha256": "6716eb3fbf8baa3cdfb34ae6d56136bd3e4331dd65ae9cb4ff62cdb300aaa3fc"
+    },
+    "Final_proj/MinSR/experiments/validation/environment.txt": {
+      "bytes": 403,
+      "sha256": "0df2e0e28946e55014215e04c37cace8c962a7722ebb514f729e060c6ea7c057"
+    },
+    "Final_proj/MinSR/experiments/validation/environment_cuda12.txt": {
+      "bytes": 845,
+      "sha256": "c261fd635db5b0da75f1c9a8ce48b445c1ce9f0f608ec8f54c8b5955633464cb"
+    },
+    "Final_proj/MinSR/experiments/validation/frozen_batch_validation.json": {
+      "bytes": 409,
+      "sha256": "6fd06903210436d42288806dd523f164baacb89b4adb2fbf6b62824770d52382"
+    },
+    "Final_proj/MinSR/experiments/validation/paired_initialization.json": {
+      "bytes": 1940,
+      "sha256": "ccbad6acb38f81ba3b401b192fe4bcfeaf0ac202ed27e2596d7cfc0d61fc2f21"
+    },
+    "Final_proj/MinSR/experiments/validation/pytest.log": {
+      "bytes": 100,
+      "sha256": "d816f271c2502091289111af7d899aa75301b43a738a92178c7a4bd61966ae9d"
+    },
+    "Final_proj/MinSR/experiments/validation/source_provenance.json": {
+      "bytes": 788,
+      "sha256": "00d16e83b2db3f34fc32fa4648f9ffe105ad5e94cad063b7081898ed162590e4"
     },
     "Final_proj/README.md": {
-      "bytes": 3121,
-      "sha256": "4940fbc86a22b47e8f81cf16b7ee0257bb9f6d36a1ed2f4b4b103d5f247667dd"
+      "bytes": 3112,
+      "sha256": "4d678796bb24dcc98fdd61befef547026514302619e503ea11d35257b0f1fbb5"
     },
     "Final_proj/SOURCE_CATALOG.json": {
-      "bytes": 71851,
-      "sha256": "135633d86874d1ed413c717c273b66d850216f37608d9e19814f9aa296d4dcd4"
+      "bytes": 78402,
+      "sha256": "9b6d45aab3095607078b6329c05852bd146559a731fe28845b29def7a4f862eb"
     },
     "Final_proj/SPRING/FQHE/PHYSICS.md": {
       "bytes": 1961,
@@ -1715,8 +1871,8 @@
       "sha256": "c451f7271dad6c19cf13fff0d6648a5917ac06764662f102d4303c3791db3f69"
     },
     "Final_proj/validation/reorganization_validation.json": {
-      "bytes": 934,
-      "sha256": "3e779b9f8f2203dd2b519677869130f9fbcd9bb3a650d5916a18ed61c877b6b2"
+      "bytes": 1030,
+      "sha256": "0fc716058e67e66c316913a09b87c562f1cb1d5f303e1314be75a76a1d64c6aa"
     },
     "README.md": {
       "bytes": 1122,
@@ -1725,5 +1881,5 @@
   },
   "repository": "https://github.com/justinmgarrigus/applied-ml",
   "scope": "Curated algorithm-first package; unrelated repository files are preserved and outside this manifest",
-  "snapshot_date": "2026-11-17"
+  "snapshot_date": "2026-11-24"
 }

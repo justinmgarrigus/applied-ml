@@ -1,0 +1,27 @@
+{
+  "parent_frozen_settings_sha256": "aee7f3f5ba04e565126ae86c34a39b39d8f10b946dc7bcfa8b4e7f0c7c39b056",
+  "harness_sha256": "d5b057aafcf328586a4e81d219c0e2a985316f30d3bde9a7a3e74de1131c1e71",
+  "seeds": [
+    17,
+    29,
+    43,
+    59,
+    83
+  ],
+  "batches": [
+    16,
+    64
+  ],
+  "steps": 3000,
+  "cases": {
+    "ablation": "Ising N=6 J=h=1; one setting changed from tuned MinSR",
+    "memory_profile": "Ising N=6 and N=10 J=h=1; seed 17, fresh process each"
+  },
+  "run_order_seed": 685,
+  "affinity": [
+    0,
+    2,
+    4,
+    6
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "0.001": {
+    "primal_dual_error": 1.0824674490095276e-13,
+    "primal_vendor_error": 1.4849232954361469e-12,
+    "applied_update_error": 4.187982338498899e-14
+  },
+  "0.01": {
+    "primal_dual_error": 1.4765966227514582e-14,
+    "primal_vendor_error": 1.4849232954361469e-13,
+    "applied_update_error": 4.252764251515727e-15
+  },
+  "stock_runner_final_energy_error_difference": 3.552713678800501e-15
+}

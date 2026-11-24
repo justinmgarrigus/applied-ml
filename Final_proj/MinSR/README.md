@@ -16,6 +16,9 @@ Both models use the variational energy and the same model-specific Hamiltonian,
 network and sampling procedure as the other optimizers. Install the shared
 environment before running either wrapper. [Shared setup](../shared/README.md)
 
+The [paired optimizer experiments](experiments/README.md) report accuracy,
+time to target, and computational cost for MinSR, SPRING, and VMC-SGD.
+
 ## Imaginary-time evolution and the network tangent space
 
 Let $x$ be a spin or occupation configuration and $\theta\in\mathbb R^P$

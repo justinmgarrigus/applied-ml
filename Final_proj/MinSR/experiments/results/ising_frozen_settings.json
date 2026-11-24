@@ -1,0 +1,42 @@
+{
+  "16": {
+    "MinSR": {
+      "learning_rate": 0.05,
+      "damping": 0.001,
+      "radius": 0.1,
+      "mu": 0.0
+    },
+    "SPRING": {
+      "learning_rate": 0.015,
+      "damping": 0.001,
+      "radius": 0.03,
+      "mu": 0.9
+    },
+    "SGD": {
+      "learning_rate": 0.06,
+      "damping": 0.0,
+      "radius": 0.1,
+      "mu": 0.0
+    }
+  },
+  "64": {
+    "MinSR": {
+      "learning_rate": 0.05,
+      "damping": 0.001,
+      "radius": 0.03,
+      "mu": 0.0
+    },
+    "SPRING": {
+      "learning_rate": 0.05,
+      "damping": 0.001,
+      "radius": 0.1,
+      "mu": 0.9
+    },
+    "SGD": {
+      "learning_rate": 0.06,
+      "damping": 0.0,
+      "radius": 0.1,
+      "mu": 0.0
+    }
+  }
+}

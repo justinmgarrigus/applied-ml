@@ -1,0 +1,100 @@
+{
+  "source_commit": "fb726d230b5f9efe59a5f4b5f994aaff8c9af0a0",
+  "harness_sha256": "ffd0a499b869c87b75cbaaa70d6344f5ae980722f482a5d148b1a78e4edb76d6",
+  "pilot_pair": [
+    7,
+    71
+  ],
+  "production_pairs": [
+    [
+      17,
+      171
+    ],
+    [
+      29,
+      291
+    ],
+    [
+      43,
+      431
+    ]
+  ],
+  "production_cpu_affinity": [
+    8,
+    10
+  ],
+  "pilot_steps": 250,
+  "production_steps": 1000,
+  "target": 0.01,
+  "pilot_selection": "least exact endpoint energy on the disjoint pilot pair",
+  "search": {
+    "MinSR": [
+      {
+        "learning_rate": 0.01,
+        "damping": 0.003,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.01,
+        "damping": 0.03,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.04,
+        "damping": 0.003,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.04,
+        "damping": 0.03,
+        "mu": 0.0
+      }
+    ],
+    "SPRING": [
+      {
+        "learning_rate": 0.01,
+        "damping": 0.003,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.01,
+        "damping": 0.03,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.04,
+        "damping": 0.003,
+        "mu": 0.9
+      },
+      {
+        "learning_rate": 0.04,
+        "damping": 0.03,
+        "mu": 0.9
+      }
+    ],
+    "SGD": [
+      {
+        "learning_rate": 0.005,
+        "damping": 0.01,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.02,
+        "damping": 0.01,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.05,
+        "damping": 0.01,
+        "mu": 0.0
+      },
+      {
+        "learning_rate": 0.1,
+        "damping": 0.01,
+        "mu": 0.0
+      }
+    ]
+  },
+  "run_order_seed": 901,
+  "evaluation": "frozen full-sector ED plus angular-momentum diagnostics every 100 updates"
+}
