@@ -1,5 +1,5 @@
 {
-  "bytes_excluding_manifest": 24622772,
+  "bytes_excluding_manifest": 24652199,
   "contributor_handle": "PassengerAn",
   "excluded_local_content": [
     "legacy raw research trees",
@@ -8,7 +8,7 @@
     "secret/private paths",
     "files >=50 MB"
   ],
-  "file_count_excluding_manifest": 428,
+  "file_count_excluding_manifest": 432,
   "files": {
     ".gitignore": {
       "bytes": 328,
@@ -167,20 +167,20 @@
       "sha256": "4449f91d14945e9fa586cb797ece984df7ff43767c8312f0090d0712c6e9aff5"
     },
     "Final_proj/README.md": {
-      "bytes": 3121,
-      "sha256": "4940fbc86a22b47e8f81cf16b7ee0257bb9f6d36a1ed2f4b4b103d5f247667dd"
+      "bytes": 3112,
+      "sha256": "4d678796bb24dcc98fdd61befef547026514302619e503ea11d35257b0f1fbb5"
     },
     "Final_proj/SOURCE_CATALOG.json": {
-      "bytes": 71851,
-      "sha256": "135633d86874d1ed413c717c273b66d850216f37608d9e19814f9aa296d4dcd4"
+      "bytes": 72492,
+      "sha256": "1d1215d5012ad9e884adbf5a923cb016acae8574b209354e01010ec4e2d199fc"
     },
     "Final_proj/SPRING/FQHE/PHYSICS.md": {
-      "bytes": 1961,
-      "sha256": "64562c086d9dfeff2bf171353142b7d767f6047df1d9d2a052850cb49253babe"
+      "bytes": 2343,
+      "sha256": "8a30785ab2591b235a3f7b069d21a4bda47cafd449f9ec725ac32f362d597254"
     },
     "Final_proj/SPRING/FQHE/RUN_TRAINING.md": {
-      "bytes": 2231,
-      "sha256": "0b84ea211ddddb1ffebf20a1dc9f508054a266d88f0d8cf4f7092e15e0dce6a6"
+      "bytes": 3532,
+      "sha256": "45f73674d1a619e8cb9a9f71dcc778ec80b3aabeb0cebabe52c8159671dbe026"
     },
     "Final_proj/SPRING/FQHE/results/README.md": {
       "bytes": 2002,
@@ -347,16 +347,24 @@
       "sha256": "0d53358888cb45c4ea3582c70a35d875e1dd47bb49bce14d13257cb839c821cf"
     },
     "Final_proj/SPRING/FQHE/training/PARAMETERS.md": {
-      "bytes": 3038,
-      "sha256": "903ee307d822d548fb59fd9b9b7cafb209d3b28ee78074a0fe4646ecfe58b0f7"
+      "bytes": 4610,
+      "sha256": "f393f5edaeb5fcb319cef379bc9976d91446efcb63044e777cb49926892fe478"
     },
     "Final_proj/SPRING/FQHE/training/configs/ne4.json": {
       "bytes": 594,
       "sha256": "6ccf9e85b0980b04016fb0e44856bdd14b852827f3c7348ea2d5a591a79a7ba6"
     },
+    "Final_proj/SPRING/FQHE/training/configs/ne4_cartesian.json": {
+      "bytes": 573,
+      "sha256": "2f67fbc2f5aeea402be8a953d974ba12af9d81e92743d6065cbd880a1af07d1a"
+    },
     "Final_proj/SPRING/FQHE/training/configs/ne6.json": {
       "bytes": 595,
       "sha256": "45191d7ecc40a356fe0f8f29068300679229d75fc8c8e3eaa1d4b2ac4de1ef1f"
+    },
+    "Final_proj/SPRING/FQHE/training/configs/ne8_cartesian.json": {
+      "bytes": 574,
+      "sha256": "ad050000b57093a631d26c9caed439a808e3c5d45ec7ad88d8006d6a5f61f527"
     },
     "Final_proj/SPRING/FQHE/training/research_snapshot/README.md": {
       "bytes": 3377,
@@ -611,8 +619,8 @@
       "sha256": "5ac518d2b0e178c463f04c288af59ef00bea2910410820f8184215552cb1fef6"
     },
     "Final_proj/SPRING/FQHE/training/run.py": {
-      "bytes": 1475,
-      "sha256": "dd8d5328553a05b78deee2900301ab56101fbead896ff966ddb68fd7e2b59de4"
+      "bytes": 1935,
+      "sha256": "ae46201021113e0851509c1e296d015bab6ec6426e1e5285abe137afcedbdcbb"
     },
     "Final_proj/SPRING/Ising/PHYSICS.md": {
       "bytes": 4115,
@@ -707,8 +715,8 @@
       "sha256": "c77abd0b6bd631cc9639557cf143eb4f2575198926cd51ebf10a9852abfbc677"
     },
     "Final_proj/SPRING/README.md": {
-      "bytes": 8557,
-      "sha256": "3dd58daf009eb6d7bf11749edd3b2bee31ea19fe826be6bf8e574eb2bee79662"
+      "bytes": 8701,
+      "sha256": "61c972c569886733c02e344a8ea401f659244ea2f80bb140e8ce7e2625878cab"
     },
     "Final_proj/SUBMISSION.md": {
       "bytes": 3064,
@@ -1458,6 +1466,10 @@
       "bytes": 4242,
       "sha256": "c003738956ef0ce4de0739b2f27c60a82f285935ec7bac9eb5652e16dbffb218"
     },
+    "Final_proj/shared/fqh_spring/cartesian.py": {
+      "bytes": 3184,
+      "sha256": "915e9a63dadfb71cf9099d93ab342f0adee159a3a0fb67595a96eb12b02ab0d0"
+    },
     "Final_proj/shared/fqh_spring/checkpoint.py": {
       "bytes": 9769,
       "sha256": "649d3f1751fc0c1b45845a559afd5d1f0ee186b1112a59c0669e57f489323261"
@@ -1471,8 +1483,8 @@
       "sha256": "66b7f86265b18f340ab533e8530a026361133d05f46b1bd5b8549c91385ea1a4"
     },
     "Final_proj/shared/fqh_spring/evaluate.py": {
-      "bytes": 12283,
-      "sha256": "6694b176e62e370f388db86bf95a624dbb068faa95aae8218435a3590b835158"
+      "bytes": 16069,
+      "sha256": "c69293aee4918387364885f6284607efe250b08ee8f65327a7863d2106a8b017"
     },
     "Final_proj/shared/fqh_spring/evaluate_broader_mc.py": {
       "bytes": 21088,
@@ -1495,8 +1507,8 @@
       "sha256": "04cc73d2fd73bfcd6e9e5a384d6b1e111d1463f178f3962e055ba8ea52dc2829"
     },
     "Final_proj/shared/fqh_spring/local_energy.py": {
-      "bytes": 5914,
-      "sha256": "d5bdfe1735ca2f4e05ce1577e2302d426b89f6fdb00ef60512052c4ec441d729"
+      "bytes": 7126,
+      "sha256": "074372fd5050d089f0415fa0970fd7af128dde5b48d21071a0ec390e80412169"
     },
     "Final_proj/shared/fqh_spring/model.py": {
       "bytes": 5575,
@@ -1531,8 +1543,8 @@
       "sha256": "fcedd4d0c6ca5cd565e2d83117e2335f15cb7e3911272dd286a5e6520a9d90ab"
     },
     "Final_proj/shared/fqh_spring/train.py": {
-      "bytes": 23253,
-      "sha256": "67e1d255eb7dc811943c9524b0363041e497f2721cb3484539ae9e154bf5b39d"
+      "bytes": 27113,
+      "sha256": "b84819c082f6aaa16f422c58a63b2545ac8030c1a77cc75627c61d9854625aad"
     },
     "Final_proj/shared/fqh_spring/train_broader_sphere.py": {
       "bytes": 18884,
@@ -1597,6 +1609,10 @@
     "Final_proj/shared/tests/test_fqh_algorithms.py": {
       "bytes": 5572,
       "sha256": "63b2960a9e2bfcd2d52bcb86efea75b0917f27d5662dfff77270a4b0b60041c7"
+    },
+    "Final_proj/shared/tests/test_fqh_cartesian.py": {
+      "bytes": 10820,
+      "sha256": "efda71aec64ad169a42236f7faf17b9684ff9675c29a57b03c319a9adda84a36"
     },
     "Final_proj/shared/tests/test_fqh_ed.py": {
       "bytes": 1588,
@@ -1715,8 +1731,8 @@
       "sha256": "c451f7271dad6c19cf13fff0d6648a5917ac06764662f102d4303c3791db3f69"
     },
     "Final_proj/validation/reorganization_validation.json": {
-      "bytes": 934,
-      "sha256": "3e779b9f8f2203dd2b519677869130f9fbcd9bb3a650d5916a18ed61c877b6b2"
+      "bytes": 1861,
+      "sha256": "0e706006cdbeac90d5f0dc4d59a6f60ec98e4b52c0353249ce9cc06298fd9428"
     },
     "README.md": {
       "bytes": 1122,
@@ -1725,5 +1741,5 @@
   },
   "repository": "https://github.com/justinmgarrigus/applied-ml",
   "scope": "Curated algorithm-first package; unrelated repository files are preserved and outside this manifest",
-  "snapshot_date": "2026-11-17"
+  "snapshot_date": "2026-11-26"
 }

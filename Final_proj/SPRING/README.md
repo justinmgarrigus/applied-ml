@@ -8,8 +8,8 @@ in that direction from earlier batches.
 
 ## From the energy to a batch equation
 
-For a configuration $x$, the network returns the log of its wavefunction
-coefficient $\psi_\theta(x)$. Write
+For the exponential/Born derivation, the network returns the log of its
+wavefunction coefficient $\psi_\theta(x)$ at configuration $x$. Write
 $p_\theta(x)=|\psi_\theta(x)|^2/\|\psi_\theta\|^2$ and
 $E_{\mathrm{loc}}(x)=(H\psi_\theta)(x)/\psi_\theta(x)$. The energy is
 $E=\mathbb E_{p_\theta}[E_{\mathrm{loc}}]$. For real parameters, define the
@@ -136,8 +136,8 @@ rates require a fixed linear system and their own sampling assumptions.
 initialize parameters, sampler and raw direction phi = 0
 for each optimizer update:
     draw B configurations at the current parameters
-    evaluate connected local energies and log derivatives
-    form the centered score metric and the half-gradient force
+    evaluate sampled coefficient derivatives and connected Hamiltonian rows
+    form the projective metric and the half-gradient force
     m = mu * phi
     solve the damped batch equation with prior direction m
     store the resulting raw direction phi
@@ -151,11 +151,12 @@ for each optimizer update:
   in `energy_covariance_gradient` and passes half to `make_spring`.
   Each local energy uses the diagonal $ZZ$ term and single-spin flips
   from $X$. [Backend](../shared/ising_backend.py)
-- **FQHE.** The runner advances Metropolis walkers in the fixed particle
-  number and $L_z$ sector. Local energy uses the sparse signed Hamiltonian
-  connections. `train_step` forms $f$, and `score_data` packages the complex
-  scores for the shared optimizer.
-  [Training loop](../shared/fqh_spring/train.py) · [Optimizer adapter](../shared/fqh_spring/optimizer.py)
+- **FQHE.** The default runner advances Metropolis walkers at fixed particle
+  number and $L_z$, with target proportional to $|u_\theta|^2+a$. It forms $f$
+  from the weighted amplitude tangent and the residual built with the signed
+  Hamiltonian rows. The same solver also supports the explicit exponential
+  baseline, which uses local energies and log derivatives.
+  [Cartesian fit](FQHE/training/PARAMETERS.md) · [Training loop](../shared/fqh_spring/train.py)
 - **JaQMC solve.** The pinned `robust_sr` receives $f$ directly.
   For the damping values in the supplied configs, the Woodbury form is
   $\phi=m+f/\delta-A^\mathsf T G^{-1}A(m+f/\delta)$, where

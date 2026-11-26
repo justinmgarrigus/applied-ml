@@ -23,7 +23,8 @@ import tempfile
 import time
 
 DEFAULTS = dict(method='spring', ne=8, flux=None, v3=0., two_lz=0, width=64, layers=6,
-                variant='mlp', readout='final', source=None, seed=71, init_seed=1729,
+                variant='mlp', readout='final', amplitude_map='exponential',
+                sampling_floor=0., source=None, seed=71, init_seed=1729,
                 steps=200000, batch=32, sweeps=2, learning_rate=.01,
                 damping=.01, mu=.9, max_norm=.03, refresh_every=25,
                 burn_sweeps=500, pair_chunk=2, checkpoint_every=1000,
@@ -33,6 +34,12 @@ DEFAULTS = dict(method='spring', ne=8, flux=None, v3=0., two_lz=0, width=64, lay
 # Administrative changes do not change the mathematical continuation state.
 OPERATIONAL = {'steps', 'output', 'checkpoint_every', 'log_every', 'keep_checkpoints',
                'native_threads', 'cpus', 'backend', 'max_runtime_seconds'}
+# Last published pre-Cartesian implementation. Its exponential/Born update is
+# preserved, so existing signed checkpoints can continue on that same path.
+LEGACY_BORN_SOURCES = {
+    'fqh_spring/train.py': '67e1d255eb7dc811943c9524b0363041e497f2721cb3484539ae9e154bf5b39d',
+    'fqh_spring/local_energy.py': 'd5bdfe1735ca2f4e05ce1577e2302d426b89f6fdb00ef60512052c4ec441d729',
+}
 
 
 def digest(path):
@@ -62,6 +69,16 @@ def load_config(path, overrides=None):
         raise ValueError('Require finite v3 and 0 <= mu < 1')
     if config['method'] not in ('spring', 'vmc_sgd', 'minsr'):
         raise ValueError('Implemented methods are spring, vmc_sgd, minsr')
+    mode, floor = config['amplitude_map'], config['sampling_floor']
+    if mode not in ('exponential', 'cartesian'):
+        raise ValueError('amplitude_map must be exponential or cartesian')
+    if isinstance(floor, bool) or not isinstance(floor, (int, float)) or not math.isfinite(floor):
+        raise ValueError('sampling_floor must be a finite number')
+    if mode == 'cartesian' and (config['method'] != 'spring' or floor <= 0):
+        raise ValueError('Cartesian amplitudes require method=spring and sampling_floor > 0')
+    if mode == 'exponential' and floor != 0:
+        raise ValueError('Exponential/Born mode requires sampling_floor=0')
+    config['sampling_floor'] = float(floor)
     if config['variant'] not in ('mlp', 'dense', 'attention') or config['backend'] not in ('auto', 'cpu', 'gpu'):
         raise ValueError('Unknown architecture or JAX backend')
     if config['readout'] not in ('final', 'legacy_additive'):
@@ -116,7 +133,19 @@ def _trim_csv(path, step):
     os.replace(temporary, path)
 
 
+def _scientific_signature(invariant):
+    return hashlib.sha256(json.dumps(invariant, sort_keys=True).encode()).hexdigest()
+
+
+def _legacy_born_invariant(invariant):
+    legacy = {key: value for key, value in invariant.items()
+              if key not in ('amplitude_map', 'sampling_floor')}
+    legacy['implementation_sha256'] = invariant['implementation_sha256'] | LEGACY_BORN_SOURCES
+    return legacy
+
+
 def run(config, *, resume=False):
+    config = {'amplitude_map': 'exponential', 'sampling_floor': 0., **config}
     _set_runtime(config)
     import jax
     jax.config.update('jax_enable_x64', True)
@@ -132,6 +161,8 @@ def run(config, *, resume=False):
     from .checkpoint import atomic_json, atomic_npz, save_checkpoint, load_checkpoint
 
     output = Path(config['output'])
+    anchor_path = output / 'initial_parameters.npz'
+    cartesian = config['amplitude_map'] == 'cartesian'
     if resume:
         if not (output / 'checkpoint_latest.npz').exists():
             raise FileNotFoundError(f'No resume checkpoint in {output}')
@@ -143,6 +174,8 @@ def run(config, *, resume=False):
     invariant['source_sha256'] = source_hash
     runtime_names = ('__init__', 'physics', 'base_model', 'legacy_model', 'structured_model', 'model',
                      'sampler', 'local_energy', 'optimizer', 'checkpoint', 'train')
+    if cartesian:
+        runtime_names += ('cartesian',)
     source_hashes = {f'fqh_spring/{name}.py': digest(Path(__file__).parent / f'{name}.py')
                      for name in runtime_names}
     vendor_root = Path(importlib.util.find_spec('jaqmc').origin).parent
@@ -150,12 +183,23 @@ def run(config, *, resume=False):
                  'optimizer/sr/jasr.py', 'utils/__init__.py', 'utils/chunked_vmap.py', 'array_types.py'):
         source_hashes[f'jaqmc/{name}'] = digest(vendor_root / name)
     invariant['implementation_sha256'] = source_hashes
-    signature = hashlib.sha256(json.dumps(invariant, sort_keys=True).encode()).hexdigest()
     if resume:
         old = json.loads((output / 'run_config.json').read_text())
+        if cartesian:
+            invariant['frozen_anchor_sha256'] = digest(anchor_path)
+            if old.get('frozen_anchor_sha256') != invariant['frozen_anchor_sha256']:
+                raise ValueError('Saved Cartesian anchor hash differs from the run configuration')
+        signature = _scientific_signature(invariant)
+        if old['config_sha256'] != signature and not cartesian:
+            legacy = _legacy_born_invariant(invariant)
+            legacy_signature = _scientific_signature(legacy)
+            if (old['config_sha256'] == legacy_signature
+                    and old.get('invariant_configuration') == legacy
+                    and old.get('runtime_implementation_sha256', source_hashes) == source_hashes):
+                invariant, signature = legacy, legacy_signature
         if old['config_sha256'] != signature:
             raise ValueError('Resume source code, physics, model, seed, sampling or optimizer settings changed; start a new run for intentional changes')
-        with np.load(output / 'initial_parameters.npz', allow_pickle=False) as archive:
+        with np.load(anchor_path, allow_pickle=False) as archive:
             initial = {name: jnp.asarray(archive[name]) for name in archive.files}
     elif config['source'] is not None:
         with np.load(config['source'], allow_pickle=False) as archive:
@@ -172,8 +216,18 @@ def run(config, *, resume=False):
     architecture = model.architecture(initial)
     optimizer = make_optimizer(config['method'], learning_rate=config['learning_rate'], damping=config['damping'],
                             mu=config['mu'], max_norm=config['max_norm'])
-    sampler = make_sampler(model.log_psi, operator.ne, operator.flux)
-    local = make_local_energy(operator, model.log_psi, pair_chunk_size=config['pair_chunk'])
+    if cartesian:
+        from .cartesian import make_amplitude, make_fit, make_proposal
+        from .local_energy import make_hamiltonian_action
+
+        amplitude = make_amplitude(initial)
+        log_target = make_proposal(amplitude, config['sampling_floor'])
+        local = make_hamiltonian_action(operator, amplitude, pair_chunk_size=config['pair_chunk'])
+        fit = make_fit(initial, config['sampling_floor'])
+    else:
+        log_target = model.log_psi
+        local = make_local_energy(operator, log_target, pair_chunk_size=config['pair_chunk'])
+    sampler = make_sampler(log_target, operator.ne, operator.flux)
     prefix = 'dense_' if config['variant'] == 'dense' else 'attn_'
     correction_keys = tuple(name for name in initial if name.startswith(prefix)) if config['variant'] != 'mlp' else ()
     readout_keys = tuple(name for name in correction_keys if name.startswith(prefix + 'head_'))
@@ -183,16 +237,25 @@ def run(config, *, resume=False):
     @jax.jit
     def train_step(params, state, walkers, key):
         walkers, key, acceptance = sampler(params, walkers, key, config['sweeps'])
-        energies = local(params, walkers)['energy']
-        residual = energies - jnp.mean(energies)
-        scores = model.score_tree(params, walkers)
-        force = jax.tree.map(lambda score: jnp.mean(residual.reshape((-1,) + (1,) * (score.ndim - 1)) * score.conj(), axis=0).real, scores)
+        evaluated = local(params, walkers)
+        if cartesian:
+            force, rows, estimates = fit(params, walkers, evaluated['amplitude'], evaluated['energy'])
+        else:
+            energies = evaluated['energy']
+            residual = energies - jnp.mean(energies)
+            scores = model.score_tree(params, walkers)
+            force = jax.tree.map(lambda score: jnp.mean(residual.reshape((-1,) + (1,) * (score.ndim - 1)) * score.conj(), axis=0).real, scores)
+            if config['method'] != 'vmc_sgd':
+                rows = score_data(params, scores)
+            estimates = dict(energy_estimate=jnp.mean(energies).real,
+                             energy_imaginary_estimate=jnp.mean(energies).imag,
+                             local_energy_variance=jnp.mean(jnp.abs(residual)**2))
         if config['method'] == 'vmc_sgd':
             physical_gradient = jax.tree.map(lambda value: 2.*value, force)
             direction = ravel_pytree(physical_gradient)[0]
             updates, state = optimizer.update(physical_gradient, state, params)
         else:
-            updates, state = optimizer.update(force, state, params, data=score_data(params, scores))
+            updates, state = optimizer.update(force, state, params, data=rows)
             direction = state[0].prev_delta
         raw_norm = jnp.linalg.norm(direction)
         flat_update = ravel_pytree(updates)[0]
@@ -203,8 +266,7 @@ def run(config, *, resume=False):
         next_params = optax.apply_updates(params, updates)
         same = jnp.all(walkers[:, None, :] == walkers[None, :, :], axis=-1)
         multiplicity = jnp.sum(same, axis=1)
-        row = dict(energy_estimate=jnp.mean(energies).real, energy_imaginary_estimate=jnp.mean(energies).imag,
-                   local_energy_variance=jnp.mean(jnp.abs(residual)**2), acceptance=acceptance,
+        row = dict(**estimates, acceptance=acceptance,
                    distinct_configurations=jnp.sum(1. / multiplicity),
                    configuration_mass_ess=walkers.shape[0]**2 / jnp.sum(same),
                    maximum_configuration_multiplicity=jnp.max(multiplicity),
@@ -219,6 +281,12 @@ def run(config, *, resume=False):
 
     rng = np.random.default_rng(config['seed'])
     initial_state = optimizer.init(initial)
+    if not resume:
+        output.mkdir(parents=True, exist_ok=False)
+        atomic_npz(anchor_path, **initial)
+        if cartesian:
+            invariant['frozen_anchor_sha256'] = digest(anchor_path)
+        signature = _scientific_signature(invariant)
     metadata = dict(configuration=config, config_sha256=signature, invariant_configuration=invariant,
                     architecture=architecture, sector_dimension=operator.dimension(),
                     flux=operator.flux, orbitals=operator.norb, parameter_count=ravel_pytree(initial)[0].size,
@@ -236,8 +304,14 @@ def run(config, *, resume=False):
                     versions={name: importlib.metadata.version(name) for name in ('jax', 'jaxlib', 'numpy', 'scipy', 'optax')},
                     device=str(jax.devices()[0]), devices=[str(device) for device in jax.devices()],
                     cpu_affinity=sorted(os.sched_getaffinity(0)) if hasattr(os, 'sched_getaffinity') else None)
-    if not resume:
-        output.mkdir(parents=True, exist_ok=False)
+    if cartesian:
+        metadata.update(
+            frozen_anchor_sha256=invariant['frozen_anchor_sha256'],
+            sampling='Metropolis target |u|^2 + sampling_floor, with inverse target weights',
+            force_convention='Real projected amplitude Jacobian adjoint times weighted residual, half the physical energy gradient',
+        )
+    if invariant['implementation_sha256'] != source_hashes:
+        metadata['runtime_implementation_sha256'] = source_hashes
     atomic_json(output / 'run_config.json', metadata)
     stop = {'signal': None}
     previous_handlers = {}
@@ -265,7 +339,6 @@ def run(config, *, resume=False):
                 walkers, key, burn_acceptance = sampler(params, walkers, key, config['burn_sweeps'])
                 jax.block_until_ready((walkers, key))
                 atomic_json(output / 'initialization.json', dict(burn_sweeps=config['burn_sweeps'], burn_acceptance=float(burn_acceptance), source_sha256=source_hash))
-            atomic_npz(output / 'initial_parameters.npz', **params)
         expected_shape = (config['batch'], operator.norb)
         w = np.asarray(walkers)
         if w.shape != expected_shape or not np.all((w == 0) | (w == 1)) or not np.all(w.sum(axis=1) == operator.ne) or not np.all(w @ np.arange(operator.norb) == operator.target_sum):
@@ -310,7 +383,7 @@ def run(config, *, resume=False):
             refresh_acceptance = None
             if config['refresh_every'] and index % config['refresh_every'] == 0:
                 proposals = jnp.asarray(operator.sample_uniform(rng, config['batch']), dtype=jnp.float64)
-                walkers, key, refresh_acceptance = global_refresh(model.log_psi, params, walkers, proposals, key)
+                walkers, key, refresh_acceptance = global_refresh(log_target, params, walkers, proposals, key)
             jax.block_until_ready((params, state, walkers, key, row))
             last_row = {name: float(value) for name, value in row.items()}
             if not all(math.isfinite(value) for value in last_row.values()):

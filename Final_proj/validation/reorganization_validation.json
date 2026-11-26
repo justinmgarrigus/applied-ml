@@ -1,13 +1,46 @@
 {
-  "SOURCE_CATALOG_sha256": "135633d86874d1ed413c717c273b66d850216f37608d9e19814f9aa296d4dcd4",
-  "curated_bytes": 24548537,
-  "curated_files": 424,
+  "SOURCE_CATALOG_sha256": "1d1215d5012ad9e884adbf5a923cb016acae8574b209354e01010ec4e2d199fc",
+  "curated_bytes": 24576396,
+  "curated_files": 428,
   "errors": [],
-  "excluded_paths": [],
+  "excluded_paths": [
+    {
+      "path": "shared/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/fqh_spring/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/tests/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/optimizer/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/optimizer/sr/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "shared/vendor/jaqmc_spring/src/jaqmc/utils/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "tools/__pycache__",
+      "reason": "cache/environment directory"
+    }
+  ],
   "legacy_index": "MIGRATION.md",
   "links": {
     "Markdown_anchor_fragments_checked": false,
-    "checked_local_paths": 144,
+    "checked_local_paths": 148,
     "errors": [],
     "historical_scope": "Frozen snapshot/vendor/ED/report-source documents are preserved, not rewritten as current launch instructions",
     "historical_unresolved_links": [],

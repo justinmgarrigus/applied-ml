@@ -17,25 +17,35 @@ levels and no background/kinetic offset. The reusable operator also supports
 an explicit `v3*P3` term. The pure-V1 Laughlin ground energy is analytically
 zero; the NN receives neither Laughlin coefficients nor ED eigenvectors.
 
-The network returns two real numbers, log magnitude `a(n)` and phase `phi(n)`,
-so `psi(n)=exp(a(n)+i*phi(n))`. The default is six tanh layers of width64 with
-an additive readout from **every** layer (`legacy_additive` is the parameter
-schema name). All weights/readouts are trainable. This portable NN has no
-private angular heads and no L-squared penalty. It is a fresh model, distinct
-from the historical Ne12 angular-head research runs.
-
-The objective and its sampled evaluation are
+The default network has six tanh layers of width 64 with additive readouts
+from every layer (`legacy_additive`). Its two real outputs form a complex
+number $\ell_\theta(n)$. The anchored Cartesian readout uses
 
 \[
- E_\theta=\frac{\psi^\dagger H\psi}{\psi^\dagger\psi},\qquad
- p_\theta(n)\propto|\psi_\theta(n)|^2,\qquad
- E_{\rm loc}(n)=\sum_{n'}H_{nn'}\psi(n')/\psi(n).
+ u_\theta(n)=e^{\ell_0(n)}[1+\ell_\theta(n)-\ell_0(n)],
 \]
 
-The sampler uses fixed-sum pair moves and periodic uniform-sector refreshes.
-There is no physical or artificial temperature in this portable protocol.
-The covariance force is half the physical energy gradient. SPRING applies the
-pinned upstream JaQMC optimizer with memory; ED remains post-training only.
+where $\ell_0(n)$ comes from the frozen initial parameters. The amplitude
+derivative inherits the fixed factor $e^{\ell_0(n)}$, so the current
+amplitude can pass through zero. The explicit Ne4 and Ne6 baseline configs
+use $\psi_\theta(n)=e^{\ell_\theta(n)}$ with Born sampling. All network
+weights and readouts are trainable. The portable objective uses only the
+physical Hamiltonian. The historical Ne12 angular-head runs have their own
+training objective and architecture.
+
+Both readouts use the physical energy objective
+
+\[
+ E_\theta=\frac{\psi^\dagger H\psi}{\psi^\dagger\psi}.
+\]
+
+The default sampler targets $q(n)\propto |u_\theta(n)|^2+a$ with $a=1/3$.
+SPRING uses inverse target weights and the undivided Hamiltonian action
+$(Hu)_n$ at sampled occupations, including at nodes. The sampler uses
+fixed-sum pair moves and periodic uniform-sector refresh proposals. The
+force estimates half the physical energy gradient. The pinned JaQMC SPRING
+optimizer carries memory across updates, and ED is used after training.
+[Fit parameters](training/PARAMETERS.md)
 
 Small shared ED references have M=0 dimensions18 (Ne4),73 (Ne5),338 (Ne6),
 1656 (Ne7),8512 (Ne8). The shared benchmark remains at
