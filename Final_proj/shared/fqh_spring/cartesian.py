@@ -1,6 +1,4 @@
-"""Anchored complex amplitudes and importance-weighted projective fitting."""
-import math
-
+"""Anchored complex amplitudes and projective fitting with Born samples."""
 import jax
 import jax.numpy as jnp
 from jax.flatten_util import ravel_pytree
@@ -18,37 +16,30 @@ def make_amplitude(anchor):
     return amplitude
 
 
-def _check_floor(floor):
-    if isinstance(floor, bool) or not math.isfinite(floor) or floor <= 0.0:
-        raise ValueError("The Cartesian sampling floor must be positive and finite")
-
-
-def make_proposal(amplitude, floor):
-    """Adapt the sampler's log-coefficient interface to the full-support target."""
-    _check_floor(floor)
-
+def make_proposal(amplitude):
+    """Return a log coefficient whose squared modulus defines the Born target."""
     def log_proposal(params, occupation):
-        return 0.5 * jnp.log(jnp.abs(amplitude(params, occupation))**2 + floor)
+        return jnp.log(jnp.abs(amplitude(params, occupation)))
 
     return log_proposal
 
 
-def make_fit(anchor, floor, *, metric_rows=True):
-    """Build the importance-weighted projected amplitude fit for sampled rows.
+def make_fit(anchor, *, metric_rows=True):
+    """Build the projected amplitude fit for ordinary Born samples.
 
     The input `acted` is the physical Hamiltonian action on the raw amplitude.
     Return the half-energy-gradient force, metric rows in JaQMC's convention,
-    and self-normalized Monte Carlo diagnostics. VMC-SGD sets metric_rows=False
+    and Monte Carlo diagnostics. VMC-SGD sets metric_rows=False
     to compute its force without preparing a metric solve.
     """
-    _check_floor(floor)
-
     def fit(params, occupations, amplitudes, acted):
         density = jnp.abs(amplitudes)**2
-        inverse_target = 1.0 / (density + floor)
-        norm_contributions = inverse_target * density
-        norm = jnp.sum(norm_contributions)
-        weights = inverse_target / norm
+        valid = density > 0.0
+        count = jnp.sum(valid)
+        # Born samples give equal estimator weight to nonzero amplitudes.
+        # A node has zero probability and contributes zero if present in a batch.
+        inverse_density = jnp.where(valid, 1.0 / jnp.where(valid, density, 1.0), 0.0)
+        weights = inverse_density / count
         root_weights = jnp.sqrt(weights)
 
         anchor_amplitudes = jnp.exp(model.batch_log_psi(anchor, occupations))
@@ -78,7 +69,7 @@ def make_fit(anchor, floor, *, metric_rows=True):
             energy_estimate=energy.real,
             energy_imaginary_estimate=energy.imag,
             local_energy_variance=jnp.vdot(residual, residual).real,
-            importance_ess=norm**2 / jnp.sum(norm_contributions**2),
+            valid_born_rows=count,
         )
         return unravel(force), optimizer_rows, diagnostics
 

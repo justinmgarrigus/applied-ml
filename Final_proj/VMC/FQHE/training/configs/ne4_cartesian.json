@@ -29,6 +29,5 @@
   "ne": 4,
   "flux": 9,
   "output": "../results/ne4_vmc_sgd_cartesian_example",
-  "amplitude_map": "cartesian",
-  "sampling_floor": 0.3333333333333333
+  "amplitude_map": "cartesian"
 }

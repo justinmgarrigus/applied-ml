@@ -7,7 +7,6 @@
   "variant": "mlp",
   "readout": "legacy_additive",
   "amplitude_map": "cartesian",
-  "sampling_floor": 0.3333333333333333,
   "width": 64,
   "layers": 6,
   "seed": 71,

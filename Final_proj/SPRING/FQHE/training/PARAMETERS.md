@@ -8,7 +8,6 @@
 | `width`, `layers` | 64,6 | Tanh hidden architecture |
 | `readout` | `legacy_additive` | The two output channels read every layer |
 | `amplitude_map` | `cartesian` | Anchored amplitude fit for SPRING |
-| `sampling_floor` | 1/3 | Fixed floor in raw squared-amplitude units |
 | `source` | null | Fresh model; no historical/ED/Laughlin weights |
 | `init_seed`, `seed` | 7,71 | Parameter and sampling seeds |
 | `steps` | 20 | Total optimizer-update target, not fixed-dataset epochs |
@@ -24,7 +23,7 @@
 | `backend`, `cpus` | cpu,2 | Execution choices, not physical parameters |
 
 The default uses `ne4_cartesian.json`. The explicit `ne4.json` and `ne6.json`
-baseline configs use exponential amplitudes and a zero sampling floor.
+baseline configs use exponential amplitudes and Born sampling.
 The optional `ne8_cartesian.json` config uses the anchored map with eight
 electrons at flux 21.
 Finite-batch energy/variance estimates are not exact-sector measurements.
@@ -50,23 +49,18 @@ u_\theta(n)=e^{\ell_0(n)}[1+\ell_\theta(n)-\ell_0(n)].
 ~~~
 
 It gives the same initial state and derivative as the exponential map. The
-derivative scale $e^{\ell_0(n)}$ stays fixed even if the current amplitude
-passes through zero. With `sampling_floor` set to $a>0$, the Metropolis
-target is proportional to $|u_\theta(n)|^2+a$ for burn-in, pair moves, and
-uniform-sector refreshes. The positive floor gives configurations at nodes
-finite sampling probability.
+derivative scale $e^{\ell_0(n)}$ stays fixed as the current amplitude changes.
+The sampler targets the Born distribution
+$p_\theta(n)\propto |u_\theta(n)|^2$ during burn-in, local pair moves, and
+uniform-sector refreshes.
 
-The fit uses inverse target weights $w_n\propto 1/(|u_\theta(n)|^2+a)$.
-It evaluates the undivided action $(Hu)_n$ through the signed pair hops at
-sampled occupations and normalizes the weighted fit by
-$\sum_n w_n|u_\theta(n)|^2$. The logged `importance_ess` is the effective
-sample size of the Born importance weights. Correlated walkers and
-self-normalized estimates still require separate frozen-state checks.
-
-The shipped Cartesian configs use a fixed floor of $a=1/3$ in the units of $|u|^2$. Its
-effective uniform fraction is $Da/(\|u\|_2^2+Da)$ in a sector of dimension
-$D$, so that fraction can move as the wavefunction changes.
-
+For sampled occupations, the fit uses equal empirical weights in the Born
+expectation. In the amplitude-space calculation, inverse Born-density factors
+express the projected wavefunction derivative and Hamiltonian residual in
+that expectation. The raw action $(Hu)_n$ uses the signed pair hops at sampled
+occupations. Exact zero amplitudes have zero Born sampling probability.
+Correlated walkers and finite-batch estimates require separate frozen-state
+energy, variance, and fidelity checks.
 
 For `x=2n-1`, the hidden layers obey `h1=tanh(xW1+b1)` and
 `hl=tanh(h(l-1)Wl+bl)`. The two real outputs forming $\ell_\theta(n)$ are

@@ -20,9 +20,9 @@ environment before running either wrapper. [Shared setup](../shared/README.md)
 
 The FQHE entry point defaults to the anchored Cartesian amplitude
 $u_\theta=e^{\ell_0}(1+\ell_\theta-\ell_0)$ and the sampling target
-$q\propto |u_\theta|^2+a$ with $a=1/3$. The fit uses inverse target
-weights to construct the projected amplitude Jacobian and Hamiltonian
-residual. The resulting real matrix $A$ and residual $b$ enter the damped
+$p_\theta\propto |u_\theta|^2$. The fit uses equal empirical weights
+to construct the projected amplitude Jacobian and Hamiltonian residual.
+The resulting real matrix $A$ and residual $b$ enter the damped
 sample-space solve below. MinSR uses the half-gradient force and recomputes
 the direction for each batch. [FQHE parameters](FQHE/training/PARAMETERS.md)
 
@@ -131,10 +131,10 @@ diagonal damping and a Cholesky solve. [MinSR paper, Methods](https://arxiv.org/
 
 1. Draw configurations from the current sampling target. Ising draws from
    its Born distribution. FQHE advances sector-preserving Metropolis walkers
-   with target $q\propto |u|^2+a$ and periodic uniform-sector refreshes.
+   with Born target $p_\theta\propto |u|^2$ and periodic uniform-sector refreshes.
    [Ising sampling](Ising/PHYSICS.md) · [FQHE sampling](FQHE/PHYSICS.md)
 2. Evaluate connected Hamiltonian terms and coefficient derivatives. The
-   FQHE default constructs the raw action $(Hu)_n$ and uses inverse target
+   FQHE default constructs the raw action $(Hu)_n$ and uses equal sampled
    weights in the projected amplitude fit. The exponential/Born derivation
    above uses centered log scores and local energies.
 3. Solve the damped SR equation with half-gradient force $f$. The FQHE

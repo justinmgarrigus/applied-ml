@@ -8,7 +8,6 @@
 | `width`, `layers` | 64,6 | Tanh hidden architecture |
 | `readout` | `legacy_additive` | Both network output channels read every layer |
 | `amplitude_map` | `cartesian` | Anchored complex amplitude readout |
-| `sampling_floor` | 1/3 | Fixed positive floor in raw squared-amplitude units |
 | `source` | null | Fresh model; no historical/ED/Laughlin weights |
 | `init_seed`, `seed` | 7,71 | Parameter and sampling seeds |
 | `steps` | 5 | Total optimizer-update target, not fixed-dataset epochs |
@@ -49,22 +48,20 @@ $\ell_0(n)$, the default amplitude is
 u_\theta(n)=e^{\ell_0(n)}[1+\ell_\theta(n)-\ell_0(n)].
 ```
 
-The fixed factor $e^{\ell_0(n)}$ sets its derivative scale. The sampler uses
-$q(n)\propto |u_\theta(n)|^2+a$ and the fit uses weights
-$w_n\propto 1/(|u_\theta(n)|^2+a)$, normalized by the weighted amplitude
-norm. The positive floor lets a zero-amplitude configuration enter a batch.
-The raw action $(Hu)_n$ uses the connected signed Hamiltonian rows.
-
-The shipped Cartesian floor is $a=1/3$ in raw squared-amplitude units. Its
-uniform fraction in a sector of dimension $D$ is
-$Da/(\|u\|^2+Da)$, so its value can vary throughout training even with a
-fixed floor. The logged `importance_ess` measures the effective size
-of the Born importance weights. Correlated walkers and self-normalized
-ratios require independent checkpoint evaluation.
+The fixed factor $e^{\ell_0(n)}$ sets its derivative scale as the current
+amplitude changes. The sampler targets the Born distribution
+$p_\theta(n)\propto |u_\theta(n)|^2$. Each sampled row has equal empirical
+weight in the physical energy and gradient estimators. The amplitude-space
+fit expresses the projected derivative and Hamiltonian residual in that Born
+expectation, with inverse density factors. The raw action $(Hu)_n$ uses the
+connected signed Hamiltonian rows. Exact zero amplitudes have zero Born
+sampling probability. Correlated walkers and finite-batch estimates require
+independent checkpoint evaluation.
 
 The explicit `ne4.json` and `ne6.json` configurations use exponential
-amplitudes and zero floor. Resume with the original configuration and frozen
-anchor. The shared evaluator reconstructs either map from the run metadata.
+amplitudes with the same Born sampling target. Resume with the original
+configuration and frozen anchor. The shared evaluator reconstructs either
+amplitude map from the run metadata.
 
 For x=2n-1, h1=tanh(xW1+b1) and hl=tanh(h(l-1)Wl+bl).
 The two real outputs combine as $\ell_\theta(n)$ and obey

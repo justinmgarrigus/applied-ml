@@ -24,7 +24,7 @@ import time
 
 DEFAULTS = dict(method='spring', ne=8, flux=None, v3=0., two_lz=0, width=64, layers=6,
                 variant='mlp', readout='final', amplitude_map='exponential',
-                sampling_floor=0., source=None, seed=71, init_seed=1729,
+                source=None, seed=71, init_seed=1729,
                 steps=200000, batch=32, sweeps=2, learning_rate=.01,
                 damping=.01, mu=.9, max_norm=.03, refresh_every=25,
                 burn_sweeps=500, pair_chunk=2, checkpoint_every=1000,
@@ -40,10 +40,10 @@ LEGACY_BORN_SOURCES = {
     'fqh_spring/train.py': '67e1d255eb7dc811943c9524b0363041e497f2721cb3484539ae9e154bf5b39d',
     'fqh_spring/local_energy.py': 'd5bdfe1735ca2f4e05ce1577e2302d426b89f6fdb00ef60512052c4ec441d729',
 }
-PUBLISHED_CARTESIAN_SOURCES = {
-    'fqh_spring/train.py': 'b84819c082f6aaa16f422c58a63b2545ac8030c1a77cc75627c61d9854625aad',
-    'fqh_spring/cartesian.py': '915e9a63dadfb71cf9099d93ab342f0adee159a3a0fb67595a96eb12b02ab0d0',
-}
+PUBLISHED_BORN_TRAINERS = (
+    'b84819c082f6aaa16f422c58a63b2545ac8030c1a77cc75627c61d9854625aad',
+    '458b058ee64c6c17717c7fa1b480905b1d8a8b4e4f301d76356e0b906cfcd815',
+)
 
 
 def digest(path):
@@ -73,16 +73,9 @@ def load_config(path, overrides=None):
         raise ValueError('Require finite v3 and 0 <= mu < 1')
     if config['method'] not in ('spring', 'vmc_sgd', 'minsr'):
         raise ValueError('Implemented methods are spring, vmc_sgd, minsr')
-    mode, floor = config['amplitude_map'], config['sampling_floor']
+    mode = config['amplitude_map']
     if mode not in ('exponential', 'cartesian'):
         raise ValueError('amplitude_map must be exponential or cartesian')
-    if isinstance(floor, bool) or not isinstance(floor, (int, float)) or not math.isfinite(floor):
-        raise ValueError('sampling_floor must be a finite number')
-    if mode == 'cartesian' and floor <= 0:
-        raise ValueError('Cartesian amplitudes require sampling_floor > 0')
-    if mode == 'exponential' and floor != 0:
-        raise ValueError('Exponential/Born mode requires sampling_floor=0')
-    config['sampling_floor'] = float(floor)
     if config['variant'] not in ('mlp', 'dense', 'attention') or config['backend'] not in ('auto', 'cpu', 'gpu'):
         raise ValueError('Unknown architecture or JAX backend')
     if config['readout'] not in ('final', 'legacy_additive'):
@@ -148,23 +141,19 @@ def _legacy_born_invariant(invariant):
     return legacy
 
 
-def _published_invariant(invariant):
-    previous = dict(invariant)
-    sources = dict(invariant['implementation_sha256'])
-    for name, fingerprint in PUBLISHED_CARTESIAN_SOURCES.items():
-        if name in sources:
-            sources[name] = fingerprint
-    previous['implementation_sha256'] = sources
-    return previous
-
-
 def _resume_invariant(invariant, recorded):
-    """Accept an exact match to one of the two audited prior implementations."""
-    candidates = [_published_invariant(invariant)]
-    if invariant['amplitude_map'] == 'exponential':
-        candidates.append(_legacy_born_invariant(invariant))
+    """Accept exact prior signatures only for the exponential/Born path."""
+    if invariant['amplitude_map'] != 'exponential':
+        return invariant, _scientific_signature(invariant)
+    candidates = [_legacy_born_invariant(invariant)]
+    for fingerprint in PUBLISHED_BORN_TRAINERS:
+        previous = dict(invariant, sampling_floor=0.0)
+        previous['implementation_sha256'] = invariant['implementation_sha256'] | {
+            'fqh_spring/train.py': fingerprint,
+        }
+        candidates.append(previous)
     allowed_runtime_sources = [invariant['implementation_sha256'],
-                               candidates[0]['implementation_sha256']]
+                               *(candidate['implementation_sha256'] for candidate in candidates)]
     for candidate in candidates:
         signature = _scientific_signature(candidate)
         runtime_sources = recorded.get('runtime_implementation_sha256')
@@ -176,7 +165,7 @@ def _resume_invariant(invariant, recorded):
 
 
 def run(config, *, resume=False):
-    config = {'amplitude_map': 'exponential', 'sampling_floor': 0., **config}
+    config = {'amplitude_map': 'exponential', **config}
     _set_runtime(config)
     import jax
     jax.config.update('jax_enable_x64', True)
@@ -247,9 +236,9 @@ def run(config, *, resume=False):
         from .local_energy import make_hamiltonian_action
 
         amplitude = make_amplitude(initial)
-        log_target = make_proposal(amplitude, config['sampling_floor'])
+        log_target = make_proposal(amplitude)
         local = make_hamiltonian_action(operator, amplitude, pair_chunk_size=config['pair_chunk'])
-        fit = make_fit(initial, config['sampling_floor'], metric_rows=config['method'] != 'vmc_sgd')
+        fit = make_fit(initial, metric_rows=config['method'] != 'vmc_sgd')
     else:
         log_target = model.log_psi
         local = make_local_energy(operator, log_target, pair_chunk_size=config['pair_chunk'])
@@ -333,8 +322,8 @@ def run(config, *, resume=False):
     if cartesian:
         metadata.update(
             frozen_anchor_sha256=invariant['frozen_anchor_sha256'],
-            sampling='Metropolis target |u|^2 + sampling_floor, with inverse target weights',
-            force_convention='Real projected amplitude Jacobian adjoint times weighted residual, half the physical energy gradient',
+            sampling='Direct Born |u|^2 using the anchored Cartesian amplitude',
+            force_convention='Born projected amplitude Jacobian adjoint times residual, half the physical energy gradient',
         )
     if invariant['implementation_sha256'] != source_hashes:
         metadata['runtime_implementation_sha256'] = source_hashes

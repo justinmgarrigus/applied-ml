@@ -15,8 +15,8 @@ Fresh launches without `--output` create a unique timestamp/UUID directory
 under `MinSR/FQHE/results/runs/`. Existing output is never overwritten.
 The default Ne4 check is 5 optimizer updates, not a convergence claim.
 The example uses a fresh six-layer, width-64, all-layer-readout model with
-initialization seed 7, sampling seed 71, and batch 32. It samples the target
-$q(n)\propto |u_\theta(n)|^2+a$ with fixed $a=1/3$ and uses inverse target
+initialization seed 7, sampling seed 71, and batch 32. It samples the Born
+distribution $p_\theta(n)\propto |u_\theta(n)|^2$ and uses equal empirical
 weights to estimate the physical energy force. The explicit
 [Ne4](training/configs/ne4.json) and [Ne6](training/configs/ne6.json) configs
 use exponential amplitudes and Born sampling.

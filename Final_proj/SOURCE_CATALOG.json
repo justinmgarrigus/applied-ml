@@ -1,5 +1,5 @@
 {
-  "bytes": 24588987,
+  "bytes": 24588903,
   "file_count": 430,
   "files": {
     ".gitignore": {
@@ -19,12 +19,12 @@
       "sha256": "4e4bc0be85f526bf27f41a177fa64252caa64e111b99eb17fbf11289013a162f"
     },
     "MinSR/FQHE/PHYSICS.md": {
-      "bytes": 1982,
-      "sha256": "edda891f41f501fdf76723053387a2cf14504a5b0c36c55c84ed224d95267d73"
+      "bytes": 1996,
+      "sha256": "9019366be2a53f7b9c66e6815a5313044548509d89779f03be9181d3ea3fe78b"
     },
     "MinSR/FQHE/RUN_TRAINING.md": {
-      "bytes": 2970,
-      "sha256": "add6dc32d072e18cfe66e77b34e90e992e44c606103c25ed1903da341667ba94"
+      "bytes": 2968,
+      "sha256": "c4b3a91c0b014e47f0d8e23193fdda23c4fd3620ed0c5daa9e1066917bfa739b"
     },
     "MinSR/FQHE/results/METHOD_CHECK.json": {
       "bytes": 2940,
@@ -83,16 +83,16 @@
       "sha256": "2031a9fbe5f6668902689f638fc35e0cdfed084fe036987a181a6f141dc0709d"
     },
     "MinSR/FQHE/training/PARAMETERS.md": {
-      "bytes": 4506,
-      "sha256": "27be76d1c51b0aac39392ab6c144f6bb7385058b39fa2f9c2dbf7a8acdbf6bfc"
+      "bytes": 4337,
+      "sha256": "7474018fece24b6286f4807cb0b79918764129f8f9f90abac036fad9393f05c8"
     },
     "MinSR/FQHE/training/configs/ne4.json": {
       "bytes": 591,
       "sha256": "d0c6044b1c53a97544b7786c37660deee3dfd108cdfa3950458fa1eaacd8b2f0"
     },
     "MinSR/FQHE/training/configs/ne4_cartesian.json": {
-      "bytes": 674,
-      "sha256": "7cac6d61ebac60dd467de91f33c3345d6b3749d9ad74294da0e70255eb77ffa7"
+      "bytes": 634,
+      "sha256": "6c8daf211e8c6473063d8121545ef3399dbab0239426f2fffda9915f60c0bb0a"
     },
     "MinSR/FQHE/training/configs/ne6.json": {
       "bytes": 592,
@@ -155,20 +155,20 @@
       "sha256": "41ddabc2057210d6f88b29dcb112c94b49ef79c02e23f475cb70d5df0d9d7185"
     },
     "MinSR/README.md": {
-      "bytes": 8933,
-      "sha256": "3932184383ca31b7f5b128011e810eb827093d3d6ab9590f85958b160b0dde09"
+      "bytes": 8935,
+      "sha256": "9feae288174b7e7956a669790c545b949ea76f67e1d13371ba4ebe9d84c32e6a"
     },
     "README.md": {
       "bytes": 3112,
       "sha256": "4d678796bb24dcc98fdd61befef547026514302619e503ea11d35257b0f1fbb5"
     },
     "SPRING/FQHE/PHYSICS.md": {
-      "bytes": 2343,
-      "sha256": "8a30785ab2591b235a3f7b069d21a4bda47cafd449f9ec725ac32f362d597254"
+      "bytes": 2402,
+      "sha256": "cb80b580a9e265979f8b469ba03efb8a894692bf0df70c2797396c1987504a56"
     },
     "SPRING/FQHE/RUN_TRAINING.md": {
-      "bytes": 3532,
-      "sha256": "45f73674d1a619e8cb9a9f71dcc778ec80b3aabeb0cebabe52c8159671dbe026"
+      "bytes": 3569,
+      "sha256": "d5a475acfe064941568c7c9f783836e2461d7fad29b59cf17237b97106a4b7dc"
     },
     "SPRING/FQHE/results/README.md": {
       "bytes": 2002,
@@ -335,24 +335,24 @@
       "sha256": "0d53358888cb45c4ea3582c70a35d875e1dd47bb49bce14d13257cb839c821cf"
     },
     "SPRING/FQHE/training/PARAMETERS.md": {
-      "bytes": 4610,
-      "sha256": "f393f5edaeb5fcb319cef379bc9976d91446efcb63044e777cb49926892fe478"
+      "bytes": 4280,
+      "sha256": "1d04ec8d0834b03dbaaf26ca94802c5ce90605d732a08459c6bc05625141869b"
     },
     "SPRING/FQHE/training/configs/ne4.json": {
       "bytes": 594,
       "sha256": "6ccf9e85b0980b04016fb0e44856bdd14b852827f3c7348ea2d5a591a79a7ba6"
     },
     "SPRING/FQHE/training/configs/ne4_cartesian.json": {
-      "bytes": 573,
-      "sha256": "2f67fbc2f5aeea402be8a953d974ba12af9d81e92743d6065cbd880a1af07d1a"
+      "bytes": 533,
+      "sha256": "06a0b46b9eb3c6d045cbca21d801246e107e04e86032c82067a07c5ab196451d"
     },
     "SPRING/FQHE/training/configs/ne6.json": {
       "bytes": 595,
       "sha256": "45191d7ecc40a356fe0f8f29068300679229d75fc8c8e3eaa1d4b2ac4de1ef1f"
     },
     "SPRING/FQHE/training/configs/ne8_cartesian.json": {
-      "bytes": 574,
-      "sha256": "ad050000b57093a631d26c9caed439a808e3c5d45ec7ad88d8006d6a5f61f527"
+      "bytes": 534,
+      "sha256": "9d7c7abf3d36df0f00513e5e0f4da338895a24c9c66f95ac1f57c3a7f3419347"
     },
     "SPRING/FQHE/training/research_snapshot/README.md": {
       "bytes": 3377,
@@ -703,8 +703,8 @@
       "sha256": "c77abd0b6bd631cc9639557cf143eb4f2575198926cd51ebf10a9852abfbc677"
     },
     "SPRING/README.md": {
-      "bytes": 8701,
-      "sha256": "61c972c569886733c02e344a8ea401f659244ea2f80bb140e8ce7e2625878cab"
+      "bytes": 8705,
+      "sha256": "b58f95eef3d06716c172b5a90c234cdf20e80f21e4aa86c3456891a8b640a083"
     },
     "SUBMISSION.md": {
       "bytes": 3064,
@@ -715,12 +715,12 @@
       "sha256": "01a86a69602e4b1669a5f8e0658f1cd844cd11750ddbd155b34006a67972c4c9"
     },
     "VMC/FQHE/PHYSICS.md": {
-      "bytes": 1763,
-      "sha256": "4a54607cb3da9025a0982e70f69172a8829d7a68d5ab9d48d5d1ed1d1f49e52f"
+      "bytes": 1765,
+      "sha256": "76101b3d968a69ee36993f7288555d888cc6fdbef044fb6b48d5a2a18e4f1c86"
     },
     "VMC/FQHE/RUN_TRAINING.md": {
-      "bytes": 2956,
-      "sha256": "d1081c5a0e137e3c20a2163c8ef7c9a0786f7e30772c330a2d425ecfd51308d0"
+      "bytes": 2954,
+      "sha256": "4d04ced2698900548443c1e8a02677afc8d5b3b4371ee7e0cc4da2b3fcfe9f32"
     },
     "VMC/FQHE/results/METHOD_CHECK.json": {
       "bytes": 2929,
@@ -779,16 +779,16 @@
       "sha256": "1669aa7eaccb16b2a2c50a9624f46664f9201e2dc6a2477bf58294d682fd547b"
     },
     "VMC/FQHE/training/PARAMETERS.md": {
-      "bytes": 4486,
-      "sha256": "a61972af0008217661e99b318537bd7b224a50e07aa4ba223e0fe85b6e479109"
+      "bytes": 4317,
+      "sha256": "f691a3d2fc140515bb2e850b0cef2e8d00945ae2b96844c30c6ff3fd2fed6a16"
     },
     "VMC/FQHE/training/configs/ne4.json": {
       "bytes": 595,
       "sha256": "44acd627d045d4c246dd63608aec6fc68070247df807f6eb1d898f0a67d6ea69"
     },
     "VMC/FQHE/training/configs/ne4_cartesian.json": {
-      "bytes": 678,
-      "sha256": "ac4395aa3e956c3d10e092087b87c890da049b7b5c60b22e027657ee1a9fd06e"
+      "bytes": 638,
+      "sha256": "4d6342736ecd66132b2145904345b6a0c932b4b8623f186b0091357e4360f495"
     },
     "VMC/FQHE/training/configs/ne6.json": {
       "bytes": 596,
@@ -855,8 +855,8 @@
       "sha256": "6670efef594c61f17aeb1219f0fc33314450bd2960b2027a33a4628f9fe338f7"
     },
     "VMC/README.md": {
-      "bytes": 8471,
-      "sha256": "921ff3eed3531899fde09c3a6b9956dcd4fe44ed2875fb57bee32bbe2f95a9d9"
+      "bytes": 8459,
+      "sha256": "31d3358a09f451da5ff04fe608bcf80317e8b531386b4ea24de03836ada81858"
     },
     "benchmarks/README.md": {
       "bytes": 5607,
@@ -1459,8 +1459,8 @@
       "sha256": "c003738956ef0ce4de0739b2f27c60a82f285935ec7bac9eb5652e16dbffb218"
     },
     "shared/fqh_spring/cartesian.py": {
-      "bytes": 3392,
-      "sha256": "74c6a269959936223ce48e214d1b09f0913d70708f6eb6c2f9d1926b775c9065"
+      "bytes": 3204,
+      "sha256": "9d20bea87d438ef85ec04047197687ce5f9b9893a822741eaa0285e2eb96af6e"
     },
     "shared/fqh_spring/checkpoint.py": {
       "bytes": 9769,
@@ -1535,8 +1535,8 @@
       "sha256": "fcedd4d0c6ca5cd565e2d83117e2335f15cb7e3911272dd286a5e6520a9d90ab"
     },
     "shared/fqh_spring/train.py": {
-      "bytes": 28205,
-      "sha256": "458b058ee64c6c17717c7fa1b480905b1d8a8b4e4f301d76356e0b906cfcd815"
+      "bytes": 27528,
+      "sha256": "c5cf974c3e136e0aa716169013a7fc43f681a072344eaf5e8122b9884da2a8fb"
     },
     "shared/fqh_spring/train_broader_sphere.py": {
       "bytes": 18884,
@@ -1603,8 +1603,8 @@
       "sha256": "63b2960a9e2bfcd2d52bcb86efea75b0917f27d5662dfff77270a4b0b60041c7"
     },
     "shared/tests/test_fqh_cartesian.py": {
-      "bytes": 13187,
-      "sha256": "5917caf79a2af3f3b02b7df86cfd4a384ba944e817737c8340ceb123862d7e7e"
+      "bytes": 14694,
+      "sha256": "bb4fce2d3e3734fd1a9dc376ddcf6fae1a066418771f88443bfd1e81f63c9490"
     },
     "shared/tests/test_fqh_ed.py": {
       "bytes": 1588,

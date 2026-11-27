@@ -61,7 +61,7 @@ def test_raw_hamiltonian_rows_agree_with_exact_action_at_a_node():
         np.testing.assert_allclose(actual[channel], values, atol=2e-12, rtol=2e-12)
 
 
-def test_floor_weighted_fit_matches_exact_metric_and_optimizer_steps():
+def test_born_fit_matches_exact_metric_and_optimizer_steps():
     operator = SphereOperator(4)
     bits, hamiltonian, _, _ = sparse_operators(operator)
     occupations = occupations_from_bits(bits, operator.norb)
@@ -71,24 +71,22 @@ def test_floor_weighted_fit_matches_exact_metric_and_optimizer_steps():
         "final_out": jnp.zeros((1, 2)),
         "bias": jnp.zeros(2),
     }
-    params = dict(anchor, final_out=jnp.asarray([[2.0, 2.0]]), bias=jnp.asarray([-1.0, 0.0]))
+    params = dict(anchor, final_out=jnp.asarray([[0.0, 2.0 * np.sqrt(2.0)]]))
     amplitude = make_amplitude(anchor)
     batch_amplitude = jax.vmap(amplitude, in_axes=(None, 0))
     np.testing.assert_allclose(batch_amplitude(anchor, occupations),
                                jnp.exp(model.batch_log_psi(anchor, occupations)), atol=1e-14)
 
-    u = np.asarray(occupations[:, 0]) * (1.0 + 1.0j)
+    u = 1.0 + 1j * np.sqrt(2.0) * np.asarray(occupations[:, 0])
     np.testing.assert_allclose(batch_amplitude(params, occupations), u, atol=2e-15)
     acted = hamiltonian @ u
-    assert np.any(np.abs(acted[u == 0]) > 0.1)
 
-    floor = 1.0
-    proposal = jax.vmap(make_proposal(amplitude, floor), in_axes=(None, 0))
-    # These integer counts realize q exactly, including on cells with u=0.
-    counts = np.where(u == 0, 1, 3)
+    proposal = jax.vmap(make_proposal(amplitude), in_axes=(None, 0))
+    # These integer counts realize the Born distribution over every coordinate.
+    counts = np.where(np.asarray(occupations[:, 0]) == 0, 1, 3)
     np.testing.assert_allclose(jnp.exp(2 * proposal(params, occupations)), counts, atol=2e-15)
     sample = np.repeat(np.arange(len(u)), counts)
-    fit = make_fit(anchor, floor)
+    fit = make_fit(anchor)
     force, rows, diagnostics = fit(params, occupations[sample], jnp.asarray(u[sample]),
                                    jnp.asarray(acted[sample]))
 
@@ -128,7 +126,7 @@ def test_floor_weighted_fit_matches_exact_metric_and_optimizer_steps():
             repeated, _ = optimizer.update(force, state, params, data=rows)
             np.testing.assert_allclose(ravel_pytree(repeated)[0], ravel_pytree(updates)[0], atol=2e-12)
 
-    gradient_fit = make_fit(anchor, floor, metric_rows=False)
+    gradient_fit = make_fit(anchor, metric_rows=False)
     gradient_force, unused_rows, gradient_diagnostics = gradient_fit(
         params, occupations[sample], jnp.asarray(u[sample]), jnp.asarray(acted[sample]),
     )
@@ -153,13 +151,48 @@ def test_floor_weighted_fit_matches_exact_metric_and_optimizer_steps():
     assert float(jnp.linalg.norm(ravel_pytree(updates)[0])) <= radius + 1e-12
 
 
+def test_born_fit_discards_zero_probability_rows():
+    operator = SphereOperator(4)
+    bits, hamiltonian, _, _ = sparse_operators(operator)
+    occupations = occupations_from_bits(bits, operator.norb)
+    anchor = {
+        "W": jnp.zeros((operator.norb, 1)).at[0, 0].set(np.arctanh(0.5) / 2),
+        "b": jnp.asarray([np.arctanh(0.5) / 2]),
+        "final_out": jnp.zeros((1, 2)),
+        "bias": jnp.zeros(2),
+    }
+    params = dict(anchor, final_out=jnp.asarray([[2.0, 2.0]]), bias=jnp.asarray([-1.0, 0.0]))
+    amplitude = make_amplitude(anchor)
+    u = np.asarray(occupations[:, 0]) * (1.0 + 1.0j)
+    acted = hamiltonian @ u
+    valid = np.flatnonzero(u != 0)
+    node = np.flatnonzero(u == 0)[0]
+    proposal = make_proposal(amplitude)
+    assert np.isneginf(float(proposal(params, occupations[node])))
+    fit = make_fit(anchor)
+
+    def solve(indices):
+        return fit(params, occupations[indices], jnp.asarray(u[indices]), jnp.asarray(acted[indices]))
+
+    force, rows, diagnostics = solve(valid)
+    padded = np.append(valid, node)
+    padded_force, padded_rows, padded_diagnostics = solve(padded)
+    np.testing.assert_allclose(ravel_pytree(padded_force)[0], ravel_pytree(force)[0], atol=2e-12)
+    gram = (np.asarray(rows).conj().T @ np.asarray(rows)).real / len(valid)
+    padded_gram = (np.asarray(padded_rows).conj().T @ np.asarray(padded_rows)).real / len(padded)
+    np.testing.assert_allclose(padded_gram, gram, atol=2e-12)
+    for key in diagnostics:
+        np.testing.assert_allclose(padded_diagnostics[key], diagnostics[key], atol=2e-12)
+    assert padded_diagnostics["valid_born_rows"] == len(valid)
+
+
 @pytest.mark.parametrize("algorithm,method", (("SPRING", "spring"), ("MinSR", "minsr"), ("VMC", "vmc_sgd")))
 def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path, algorithm, method):
     root = Path(__file__).resolve().parents[2]
     entry = root / algorithm / "FQHE/training/run.py"
     config = {
         "method": method, "ne": 4, "width": 4, "layers": 2, "amplitude_map": "cartesian",
-        "sampling_floor": 0.25, "batch": 4, "sweeps": 1, "burn_sweeps": 2, "refresh_every": 1,
+        "batch": 4, "sweeps": 1, "burn_sweeps": 2, "refresh_every": 1,
         "checkpoint_every": 1, "log_every": 1, "keep_checkpoints": 4, "pair_chunk": 2,
         "backend": "cpu", "cpus": 2,
     }
@@ -196,13 +229,13 @@ def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path, algor
     with (split / "metrics.csv").open(newline="") as stream:
         rows = list(csv.DictReader(stream))
     assert [int(row["step"]) for row in rows] == [1, 2, 3]
-    assert all(0 < float(row["importance_ess"]) <= config["batch"] + 1e-12 for row in rows)
+    assert all(0 < float(row["valid_born_rows"]) <= config["batch"] for row in rows)
     run_config = split / "run_config.json"
     provenance = run_config.read_bytes()
     metadata = json.loads(provenance)
     assert metadata["configuration"]["method"] == method
     assert metadata["configuration"]["amplitude_map"] == "cartesian"
-    assert metadata["configuration"]["sampling_floor"] == config["sampling_floor"]
+    assert "sampling_floor" not in metadata["configuration"]
     anchor_path = split / "initial_parameters.npz"
     assert metadata["frozen_anchor_sha256"] == hashlib.sha256(anchor_path.read_bytes()).hexdigest()
 
@@ -229,7 +262,7 @@ def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path, algor
         assert result["amplitude_map"] == "cartesian"
         assert result["frozen_anchor_sha256"] == metadata["frozen_anchor_sha256"]
 
-    config["sampling_floor"] = 0.5
+    config["damping"] = 0.02
     path.write_text(json.dumps(config))
     failed = launch(split, 4, resume=True, success=False)
     assert "settings changed" in failed.stderr
@@ -258,7 +291,7 @@ def test_default_cli_uses_cartesian(tmp_path, algorithm, method):
     assert config["method"] == method
     assert config["ne"] == 4
     assert config["amplitude_map"] == "cartesian"
-    assert config["sampling_floor"] == 1/3
+    assert "sampling_floor" not in config
     resumed = subprocess.run(
         [sys.executable, str(entry), "--resume", "--steps", "2", "--output", str(output)],
         env=env, capture_output=True, text=True, timeout=180,

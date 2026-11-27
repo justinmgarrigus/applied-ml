@@ -152,8 +152,8 @@ for each optimizer update:
   Each local energy uses the diagonal $ZZ$ term and single-spin flips
   from $X$. [Backend](../shared/ising_backend.py)
 - **FQHE.** The default runner advances Metropolis walkers at fixed particle
-  number and $L_z$, with target proportional to $|u_\theta|^2+a$. It forms $f$
-  from the weighted amplitude tangent and the residual built with the signed
+  number and $L_z$, with Born target proportional to $|u_\theta|^2$. It forms $f$
+  from the projected amplitude tangent and the residual built with the signed
   Hamiltonian rows. The same solver also supports the explicit exponential
   baseline, which uses local energies and log derivatives.
   [Cartesian fit](FQHE/training/PARAMETERS.md) · [Training loop](../shared/fqh_spring/train.py)

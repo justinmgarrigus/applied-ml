@@ -20,11 +20,12 @@ seed 7, sampling seed 71, and batch 32. The explicit
 [Ne4](training/configs/ne4.json) and [Ne6](training/configs/ne6.json) configs
 use the exponential readout and Born sampling for the baseline comparison.
 
-## Cartesian SPRING with full-support sampling
+## Cartesian SPRING with Born sampling
 
 The default fits the physical residual at sampled occupations in the
-pure-$V_1$, $L_z=0$ sector. It uses a fixed floor $a=1/3$ in the Metropolis
-target. The same approach is available for eight electrons.
+pure-$V_1$, $L_z=0$ sector. Its Metropolis target is the current Born
+distribution $p_\theta(n)\propto |u_\theta(n)|^2$. The same approach is
+available for eight electrons.
 
 ~~~bash
 python Final_proj/SPRING/FQHE/training/run.py \
@@ -36,7 +37,7 @@ Keep `initial_parameters.npz` and `run_config.json` beside the latest checkpoint
 one directory above `checkpoints/step_*.npz`. They identify the frozen initial
 amplitudes and the readout used to reconstruct the state. The evaluator accepts
 `--run-dir` when a checkpoint is copied away from its original run directory.
-The floor and frozen anchor are part of the run signature.
+The amplitude map and frozen anchor are part of the run signature.
 
 ## Resume and evaluate
 

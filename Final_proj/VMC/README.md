@@ -16,8 +16,8 @@ See the [shared implementation and environment](../shared/README.md).
 
 The FQHE entry point defaults to the anchored Cartesian amplitude
 $u_\theta=e^{\ell_0}(1+\ell_\theta-\ell_0)$ and target
-$q(n)\propto |u_\theta(n)|^2+a$ with $a=1/3$. It computes the physical
-energy gradient from the weighted raw amplitude derivatives and Hamiltonian
+$p_\theta(n)\propto |u_\theta(n)|^2$. It computes the physical
+energy gradient from the sampled amplitude derivatives and Hamiltonian
 actions. SGD applies the full gradient $g=2f$. The exponential/Born
 expressions below are an alternative form of that energy derivative at
 nonzero amplitudes. [Cartesian parameters](FQHE/training/PARAMETERS.md)
@@ -126,7 +126,7 @@ Initialize wavefunction parameters and sampling state
 For each requested optimizer update:
     Draw or advance B configurations using the current sampling target
     Evaluate connected Hamiltonian actions and coefficient derivatives
-    Form the physical energy half-gradient force f with the target weights
+    Form the physical energy half-gradient force f with equal sampled weights
     g = 2 * f
     update = -learning_rate * g
     If norm(update) exceeds max_norm, scale update to that radius
@@ -143,10 +143,10 @@ for Ising or advances the walkers for FQHE.
   gradient from the sampled spins and single-flip local energies.
   [Ising trainer](../shared/ising_backend.py)
 - **FQHE.** The trainer starts walkers from uniform configurations in the
-  chosen sector and targets $q\propto |u|^2+a$ during burn-in, local pair
+  chosen sector and targets $p_\theta\propto |u|^2$ during burn-in, local pair
   moves, and periodic global refreshes. Local moves preserve particle number
-  and $L_z$. Each update includes repeated walker rows and uses inverse
-  target weights in the raw amplitude fit. `train_step` multiplies the
+  and $L_z$. Each update includes repeated walker rows with equal
+  empirical weights in the amplitude fit. `train_step` multiplies the
   half-gradient force by two before passing it to ordinary SGD.
   [Sampler](../shared/fqh_spring/sampler.py) · [FQHE trainer](../shared/fqh_spring/train.py)
 

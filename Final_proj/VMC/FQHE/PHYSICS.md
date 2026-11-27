@@ -12,18 +12,18 @@ u_\theta(n)=e^{\ell_0(n)}[1+\ell_\theta(n)-\ell_0(n)].
 The frozen initial output $\ell_0$ gives the same initial amplitudes and
 Jacobian as the exponential map. Its fixed scale lets a coefficient respond
 at first order as its current amplitude passes through zero. The sampler
-targets $q(n)\propto |u_\theta(n)|^2+a$ with fixed $a=1/3$ by default. The
-fit uses inverse target weights and the raw Hamiltonian action $(Hu)_n$ from
-the connected signed pair hops. Both burn-in and periodic uniform-sector
-refresh proposals use that same target.
+targets the Born distribution $p_\theta(n)\propto |u_\theta(n)|^2$. The
+fit uses equal empirical weights for the sampled rows and the raw Hamiltonian
+action $(Hu)_n$ from the connected signed pair hops. Burn-in, local pair moves,
+and periodic uniform-sector refreshes use that same target.
 
 The loss is the physical energy expectation. ED supplies post-training
 reference values and supplies no coefficients to training. The explicit
 Ne4 and Ne6 baseline configurations use exponential amplitudes and Born
 sampling.
 
-Let $D$ be the importance-weighted amplitude Jacobian projected orthogonal to
-the state and let $b$ be the correspondingly weighted Hamiltonian residual.
+Let $D$ be the sampled amplitude Jacobian projected orthogonal to
+the state and let $b$ be the corresponding Hamiltonian residual.
 The physical energy gradient is $g=2\operatorname{Re}(D^\dagger b)$.
 Ordinary Optax SGD applies $-\eta g$ and clips the applied parameter update
 to radius 0.03. The factor of two includes both the bra and ket derivatives.

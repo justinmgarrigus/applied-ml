@@ -39,9 +39,10 @@ Both readouts use the physical energy objective
  E_\theta=\frac{\psi^\dagger H\psi}{\psi^\dagger\psi}.
 \]
 
-The default sampler targets $q(n)\propto |u_\theta(n)|^2+a$ with $a=1/3$.
-SPRING uses inverse target weights and the undivided Hamiltonian action
-$(Hu)_n$ at sampled occupations, including at nodes. The sampler uses
+The default sampler targets the Born distribution
+$p_\theta(n)\propto |u_\theta(n)|^2$. SPRING uses equal empirical weights
+for the sampled rows and constructs the projected amplitude tangent and
+Hamiltonian residual from their coefficients and derivatives. The sampler uses
 fixed-sum pair moves and periodic uniform-sector refresh proposals. The
 force estimates half the physical energy gradient. The pinned JaQMC SPRING
 optimizer carries memory across updates, and ED is used after training.
