@@ -1,0 +1,6 @@
+{
+  "batch": 32,
+  "learning_rate": 0.04,
+  "damping": 0.03,
+  "max_norm": 0.03
+}

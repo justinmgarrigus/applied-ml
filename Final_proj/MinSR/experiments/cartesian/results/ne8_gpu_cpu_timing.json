@@ -1,0 +1,47 @@
+[
+  {
+    "device": "cuda:0",
+    "batch": 32,
+    "steps": 200,
+    "seconds_per_update": 0.029250571630000194,
+    "compile_seconds": 5.694098726999982,
+    "final_energy": 5.853073636985632,
+    "final_fidelity": 3.9962688631502196e-08
+  },
+  {
+    "device": "cuda:0",
+    "batch": 128,
+    "steps": 200,
+    "seconds_per_update": 0.07949240441500023,
+    "compile_seconds": 5.727054689000397,
+    "final_energy": 5.225564226391541,
+    "final_fidelity": 0.0005295501221006881
+  },
+  {
+    "device": "cuda:0",
+    "batch": 512,
+    "steps": 200,
+    "seconds_per_update": 0.4519828564799991,
+    "compile_seconds": 9.066163522999886,
+    "final_energy": 4.411902893929652,
+    "final_fidelity": 0.008365991866615206
+  },
+  {
+    "device": "TFRT_CPU_0",
+    "batch": 32,
+    "steps": 200,
+    "seconds_per_update": 0.06708331796000039,
+    "compile_seconds": 3.0377765420003016,
+    "final_energy": 5.853073636976655,
+    "final_fidelity": 3.9962688584207e-08
+  },
+  {
+    "device": "TFRT_CPU_0",
+    "batch": 128,
+    "steps": 200,
+    "seconds_per_update": 0.27487173886000166,
+    "compile_seconds": 3.0644387419997656,
+    "final_energy": 5.225564226390937,
+    "final_fidelity": 0.0005295501220983276
+  }
+]

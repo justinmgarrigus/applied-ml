@@ -1,0 +1,50 @@
+[
+  {
+    "grid": 0,
+    "batch": 32,
+    "learning_rate": 0.01,
+    "damping": 0.003,
+    "max_norm": 0.03,
+    "median_final_energy": 0.753917274645821,
+    "final_energies": [
+      0.7112140388503294,
+      0.7966205104413127
+    ]
+  },
+  {
+    "grid": 1,
+    "batch": 32,
+    "learning_rate": 0.01,
+    "damping": 0.03,
+    "max_norm": 0.03,
+    "median_final_energy": 0.7602554461342776,
+    "final_energies": [
+      0.7470621227337887,
+      0.7734487695347667
+    ]
+  },
+  {
+    "grid": 2,
+    "batch": 32,
+    "learning_rate": 0.04,
+    "damping": 0.003,
+    "max_norm": 0.03,
+    "median_final_energy": 0.6072182832466919,
+    "final_energies": [
+      0.5694994375450593,
+      0.6449371289483247
+    ]
+  },
+  {
+    "grid": 3,
+    "batch": 32,
+    "learning_rate": 0.04,
+    "damping": 0.03,
+    "max_norm": 0.03,
+    "median_final_energy": 0.6017222810339198,
+    "final_energies": [
+      0.5960139302748707,
+      0.6074306317929689
+    ]
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "grid": 0,
+    "batch": 128,
+    "learning_rate": 0.01,
+    "damping": 0.001,
+    "max_norm": 0.03,
+    "median_final_energy": 3.9431846269616804,
+    "final_energies": [
+      4.101135175760216,
+      3.785234078163145
+    ]
+  },
+  {
+    "grid": 1,
+    "batch": 128,
+    "learning_rate": 0.01,
+    "damping": 0.001,
+    "max_norm": 0.1,
+    "median_final_energy": 3.516930538815645,
+    "final_energies": [
+      3.355409239065959,
+      3.6784518385653313
+    ]
+  },
+  {
+    "grid": 2,
+    "batch": 128,
+    "learning_rate": 0.01,
+    "damping": 0.01,
+    "max_norm": 0.03,
+    "median_final_energy": 3.9877527325584303,
+    "final_energies": [
+      3.82503328744809,
+      4.150472177668771
+    ]
+  },
+  {
+    "grid": 3,
+    "batch": 128,
+    "learning_rate": 0.01,
+    "damping": 0.01,
+    "max_norm": 0.1,
+    "median_final_energy": 3.7178806786560603,
+    "final_energies": [
+      3.679608115652587,
+      3.756153241659533
+    ]
+  },
+  {
+    "grid": 4,
+    "batch": 128,
+    "learning_rate": 0.01,
+    "damping": 0.1,
+    "max_norm": 0.03,
+    "median_final_energy": 3.820838083803565,
+    "final_energies": [
+      3.9520478175474283,
+      3.6896283500597025
+    ]
+  },
+  {
+    "grid": 5,
+    "batch": 128,
+    "learning_rate": 0.01,
+    "damping": 0.1,
+    "max_norm": 0.1,
+    "median_final_energy": 3.820838083803565,
+    "final_energies": [
+      3.9520478175474283,
+      3.6896283500597025
+    ]
+  },
+  {
+    "grid": 6,
+    "batch": 128,
+    "learning_rate": 0.05,
+    "damping": 0.001,
+    "max_norm": 0.03,
+    "median_final_energy": 3.1993922124126817,
+    "final_energies": [
+      3.128771382359065,
+      3.270013042466298
+    ]
+  },
+  {
+    "grid": 7,
+    "batch": 128,
+    "learning_rate": 0.05,
+    "damping": 0.001,
+    "max_norm": 0.1,
+    "median_final_energy": 3.007759283956325,
+    "final_energies": [
+      3.101397250216359,
+      2.914121317696291
+    ]
+  },
+  {
+    "grid": 8,
+    "batch": 128,
+    "learning_rate": 0.05,
+    "damping": 0.01,
+    "max_norm": 0.03,
+    "median_final_energy": 3.3923820658518817,
+    "final_energies": [
+      3.2759821047328046,
+      3.508782026970959
+    ]
+  },
+  {
+    "grid": 9,
+    "batch": 128,
+    "learning_rate": 0.05,
+    "damping": 0.01,
+    "max_norm": 0.1,
+    "median_final_energy": 2.887796348164382,
+    "final_energies": [
+      2.6722447866972883,
+      3.1033479096314758
+    ]
+  },
+  {
+    "grid": 10,
+    "batch": 128,
+    "learning_rate": 0.05,
+    "damping": 0.1,
+    "max_norm": 0.03,
+    "median_final_energy": 2.9338417393112137,
+    "final_energies": [
+      2.939274840586536,
+      2.9284086380358914
+    ]
+  },
+  {
+    "grid": 11,
+    "batch": 128,
+    "learning_rate": 0.05,
+    "damping": 0.1,
+    "max_norm": 0.1,
+    "median_final_energy": 2.847935401987723,
+    "final_energies": [
+      2.656534435637711,
+      3.0393363683377355
+    ]
+  }
+]

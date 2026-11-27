@@ -125,6 +125,15 @@ exact-objective SA comparison would need its own settings and budget.
 [Paired initialization audit](validation/paired_initialization.json) ·
 [Teammate SA results](https://github.com/justinmgarrigus/applied-ml/blob/3dd777c59bf0d499aa68ef587e7f96d3a5694aa3/Final_proj/SA/Ising/results/README.md)
 
+## Follow-up: Cartesian amplitudes on FQHE (Ne4 and Ne8)
+
+The FQHE plateau above traces to the exponential amplitude map. The
+[Cartesian study](cartesian/README.md) repeats the paired MinSR protocol with
+the anchored Cartesian map from `main` (`73b18a8`) at Ne4 and Ne8. At Ne4,
+Cartesian lowers the median energy from 0.87 to 0.51 V1 (1,000 updates) and to
+0.25 V1 (5,000 updates). At Ne8, the exponential map is better in all five
+seed pairs: 1.31 vs 2.31 V1 after 5,000 updates.
+
 ## Reproduction and retained data
 
 Run on Linux in the [shared Python 3.12 CPU environment](../../shared/README.md).

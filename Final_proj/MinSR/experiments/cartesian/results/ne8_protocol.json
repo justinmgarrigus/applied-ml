@@ -1,0 +1,120 @@
+{
+  "source_commit": "73b18a8bbaa4501842818bd42e0595027b6b1fc5",
+  "harness_sha256": "77ec9681c46e9ce3c66edb71cfb18e2f1aa1fb0dd9320b192effd5c74dbd5f60",
+  "study_sha256": "557859d841be7bbfd5796462a9e3e317a9b34a323a733fe14d8266a4eb57a74d",
+  "ne": 8,
+  "tuning_pairs": [
+    [
+      7,
+      71
+    ],
+    [
+      11,
+      111
+    ]
+  ],
+  "production_pairs": [
+    [
+      17,
+      171
+    ],
+    [
+      29,
+      291
+    ],
+    [
+      43,
+      431
+    ],
+    [
+      59,
+      591
+    ],
+    [
+      83,
+      831
+    ]
+  ],
+  "selection": "lowest median final exact energy over tuning pairs",
+  "target": "(E-E0)/gap <= 0.01",
+  "device": "gpu",
+  "workers": 3,
+  "tune_steps": 1000,
+  "tune_every": 250,
+  "prod_steps": 5000,
+  "prod_every": 100,
+  "grid": [
+    {
+      "batch": 128,
+      "learning_rate": 0.01,
+      "damping": 0.001,
+      "max_norm": 0.03
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.01,
+      "damping": 0.001,
+      "max_norm": 0.1
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.01,
+      "damping": 0.01,
+      "max_norm": 0.03
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.01,
+      "damping": 0.01,
+      "max_norm": 0.1
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.01,
+      "damping": 0.1,
+      "max_norm": 0.03
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.01,
+      "damping": 0.1,
+      "max_norm": 0.1
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.05,
+      "damping": 0.001,
+      "max_norm": 0.03
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.05,
+      "damping": 0.001,
+      "max_norm": 0.1
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.05,
+      "damping": 0.01,
+      "max_norm": 0.03
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.05,
+      "damping": 0.01,
+      "max_norm": 0.1
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.05,
+      "damping": 0.1,
+      "max_norm": 0.03
+    },
+    {
+      "batch": 128,
+      "learning_rate": 0.05,
+      "damping": 0.1,
+      "max_norm": 0.1
+    }
+  ]
+}
