@@ -16,6 +16,16 @@ Both models use the variational energy and the same model-specific Hamiltonian,
 network and sampling procedure as the other optimizers. Install the shared
 environment before running either wrapper. [Shared setup](../shared/README.md)
 
+## Cartesian FQHE default
+
+The FQHE entry point defaults to the anchored Cartesian amplitude
+$u_\theta=e^{\ell_0}(1+\ell_\theta-\ell_0)$ and the sampling target
+$p_\theta\propto |u_\theta|^2$. The fit uses equal empirical weights
+to construct the projected amplitude Jacobian and Hamiltonian residual.
+The resulting real matrix $A$ and residual $b$ enter the damped
+sample-space solve below. MinSR uses the half-gradient force and recomputes
+the direction for each batch. [FQHE parameters](FQHE/training/PARAMETERS.md)
+
 ## Imaginary-time evolution and the network tangent space
 
 Let $x$ be a spin or occupation configuration and $\theta\in\mathbb R^P$
@@ -67,12 +77,12 @@ evaluating the trained state. [Shared ED benchmarks](../benchmarks/README.md)
 
 ## From configurations to the linear system
 
-For a batch $x_1,\dots,x_B$, let $M_{ij}=O_j(x_i)-B^{-1}\sum_k O_j(x_k)$
+For the exponential/Born derivation, take a batch $x_1,\dots,x_B$ and let $M_{ij}=O_j(x_i)-B^{-1}\sum_k O_j(x_k)$
 and $e_i=E_{\rm loc}(x_i)-B^{-1}\sum_k E_{\rm loc}(x_k)$. For real
 wavefunctions the score matrix and residual vector are
 $A=M/\sqrt{B}$ and $b=e/\sqrt{B}$.
-The FQHE network gives complex log amplitudes with real parameters. It uses
-both quadratures in one real regression:
+For complex wavefunctions with real parameters, use both quadratures in
+one real regression:
 
 ```math
 A=\frac{1}{\sqrt B}
@@ -119,20 +129,18 @@ diagonal damping and a Cholesky solve. [MinSR paper, Methods](https://arxiv.org/
 
 ## One training iteration
 
-1. Draw a batch from the current state's Born distribution. Ising makes
-   independent draws with replacement from its enumerated basis. FQHE
-   advances its configuration walkers using Metropolis–Hastings moves that
-   preserve particle number and $L_z$, with periodic uniform-sector refresh
-   proposals. [Ising sampling](Ising/PHYSICS.md) · [FQHE sampling](../shared/fqh_spring/sampler.py)
-2. Evaluate the connected Hamiltonian terms in $E_{\rm loc}$ and use
-   automatic differentiation to compute $O_j(x_i)$. Center the scores
-   and local energies over the batch and compute $f$.
-3. Solve the damped SR equation. The Ising wrapper passes $g/2$ to
-   JaQMC's SR solver with `spring_mu=0`. The FQHE trainer computes the
-   covariance force directly and passes scores through `score_data` to
-   `make_minsr`, which uses `spring_mu=None`. Both disable the contribution
-   of the previous direction. JaQMC retains `prev_delta` in its state so
-   the trainers can report the current raw direction's norm.
+1. Draw configurations from the current sampling target. Ising draws from
+   its Born distribution. FQHE advances sector-preserving Metropolis walkers
+   with Born target $p_\theta\propto |u|^2$ and periodic uniform-sector refreshes.
+   [Ising sampling](Ising/PHYSICS.md) · [FQHE sampling](FQHE/PHYSICS.md)
+2. Evaluate connected Hamiltonian terms and coefficient derivatives. The
+   FQHE default constructs the raw action $(Hu)_n$ and uses equal sampled
+   weights in the projected amplitude fit. The exponential/Born derivation
+   above uses centered log scores and local energies.
+3. Solve the damped SR equation with half-gradient force $f$. The FQHE
+   adapter uses `spring_mu=None` and the Ising adapter uses `spring_mu=0`.
+   Both recompute the direction from the current batch. JaQMC retains the
+   result in `prev_delta` so trainers can report its norm.
    [Ising backend](../shared/ising_backend.py) · [FQHE trainer](../shared/fqh_spring/train.py) · [FQHE optimizer](../shared/fqh_spring/optimizer.py)
 4. Apply the capped update
    $\theta\leftarrow\theta-\alpha\phi_\delta$, where

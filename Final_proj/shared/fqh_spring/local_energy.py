@@ -1,4 +1,4 @@
-"""Exact bounded-memory pair hopping for an arbitrary occupation log network.
+"""Exact bounded-memory pair hopping for occupation coefficients.
 
 The network is a callable ``log_fn(params, occupation)`` returning a complex
 log coefficient in the canonical LLL Slater basis.  All allowed occupied
@@ -31,6 +31,21 @@ def make_local_energy(operator: SphereOperator, log_fn, pair_chunk_size: int = 1
     valid configurations.  No cutoff, importance tempering, or hop sampling
     is used in this evaluation.
     """
+    return _make_pair_evaluator(operator, log_fn, pair_chunk_size, raw_amplitudes=False)
+
+
+def make_hamiltonian_action(operator: SphereOperator, amplitude_fn, pair_chunk_size: int = 1):
+    """Return the raw coefficient and operator actions at each occupation.
+
+    The `amplitude_fn(params, occupation)` callable returns a complex
+    coefficient. The output keys are `amplitude`, `energy` (the physical
+    Hamiltonian action), `C1`, `C3`, and `L2`. Each action is evaluated on
+    the raw wavefunction without dividing by the sampled coefficient.
+    """
+    return _make_pair_evaluator(operator, amplitude_fn, pair_chunk_size, raw_amplitudes=True)
+
+
+def _make_pair_evaluator(operator, coefficient_fn, pair_chunk_size, *, raw_amplitudes):
     if isinstance(pair_chunk_size, bool) or not isinstance(pair_chunk_size, Integral):
         raise TypeError("pair_chunk_size must be a positive integer")
     chunk_size = int(pair_chunk_size)
@@ -62,7 +77,7 @@ def make_local_energy(operator: SphereOperator, log_fn, pair_chunk_size: int = 1
     ne, v3 = operator.ne, operator.v3
     q = operator.flux / 2.0
     l2_shift = ne * (ne - 2) * q * (q + 1.0)
-    batch_log_fn = jax.vmap(log_fn, in_axes=(None, 0))
+    batch_coefficients = jax.vmap(coefficient_fn, in_axes=(None, 0))
 
     @jax.jit
     def evaluate(params, occupations):
@@ -70,7 +85,7 @@ def make_local_energy(operator: SphereOperator, log_fn, pair_chunk_size: int = 1
         batch_size = occupations.shape[0]
         occupied = jax.vmap(lambda n: jnp.nonzero(n, size=ne, fill_value=0)[0])(occupations)
         prefix = jnp.cumsum(occupations, axis=1) - occupations
-        base_logs = batch_log_fn(params, occupations)
+        base = batch_coefficients(params, occupations)
         sample = jnp.arange(batch_size)[:, None, None]
         sample_pair = jnp.arange(batch_size)[:, None]
 
@@ -98,20 +113,26 @@ def make_local_energy(operator: SphereOperator, log_fn, pair_chunk_size: int = 1
             neighbors = occupations[:, None, None, :] + delta
             neighbors = jnp.where(valid[..., None], neighbors,
                                   occupations[:, None, None, :])
-            logs = batch_log_fn(params, neighbors.reshape(-1, operator.norb))
-            logs = logs.reshape(valid.shape)
+            coefficients_at_neighbors = batch_coefficients(params, neighbors.reshape(-1, operator.norb))
+            coefficients_at_neighbors = coefficients_at_neighbors.reshape(valid.shape)
             diagonal = (a == c3) & (b == d3)
-            log_ratio = jnp.where(valid & ~diagonal,
-                                  logs - base_logs[:, None, None], 0.0 + 0.0j)
-            signed_ratio = jnp.where(valid, sign * jnp.exp(log_ratio), 0.0j)
-            increment = jnp.sum(coefficients[row] * signed_ratio[..., None], axis=(1, 2))
+            if raw_amplitudes:
+                values_at_neighbors = jnp.where(diagonal, base[:, None, None], coefficients_at_neighbors)
+            else:
+                log_ratio = jnp.where(valid & ~diagonal,
+                                      coefficients_at_neighbors - base[:, None, None], 0.0 + 0.0j)
+                values_at_neighbors = jnp.exp(log_ratio)
+            signed_values = jnp.where(valid, sign * values_at_neighbors, 0.0j)
+            increment = jnp.sum(coefficients[row] * signed_values[..., None], axis=(1, 2))
             return values + increment, None
 
         values, _ = jax.lax.scan(accumulate,
-            jnp.zeros((batch_size, 3), dtype=jnp.result_type(base_logs, 1j)),
+            jnp.zeros((batch_size, 3), dtype=jnp.result_type(base, 1j)),
             (position_chunks, active_chunks))
         first, third = values[:, 0], values[:, 1]
-        return {"energy": first + v3 * third, "C1": first, "C3": third,
-                "L2": values[:, 2] - l2_shift}
+        if raw_amplitudes:
+            return {"amplitude": base, "energy": first + v3 * third, "C1": first, "C3": third,
+                    "L2": values[:, 2] - l2_shift * base}
+        return {"energy": first + v3 * third, "C1": first, "C3": third, "L2": values[:, 2] - l2_shift}
 
     return evaluate

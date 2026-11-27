@@ -7,6 +7,7 @@ No reference coefficients are used to construct or optimize the network.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -17,6 +18,12 @@ from .references import load_reference, sha256
 
 def read_parameters(path):
     """Read finite flat real parameters without loading optimizer state/pickles."""
+    params, _ = _read_parameter_payload(path)
+    return params
+
+
+def _read_parameter_payload(path):
+    metadata = None
     with np.load(path, allow_pickle=False) as archive:
         if "metadata" in archive.files:
             raw = archive["metadata"]
@@ -33,7 +40,24 @@ def read_parameters(path):
     if not params or any(value.dtype.kind != "f" or not np.isfinite(value).all()
                          for value in params.values()):
         raise ValueError("Neural parameters must be finite real floating arrays")
-    return params
+    return params, metadata
+
+
+def _find_run_config(checkpoint, run_dir):
+    if run_dir is not None:
+        candidates = (Path(run_dir),)
+    elif checkpoint.parent.name == "checkpoints":
+        candidates = (checkpoint.parent, checkpoint.parent.parent)
+    else:
+        candidates = (checkpoint.parent,)
+    for directory in candidates:
+        for name in ("run_config.json", "config.json"):
+            path = directory / name
+            if path.is_file():
+                return path
+    if run_dir is not None:
+        raise FileNotFoundError(f"No run_config.json or config.json in {run_dir}")
+    return None
 
 
 def angular_measure(psi, raising, max_l):
@@ -158,7 +182,7 @@ def state_diagnostics(psi, reference, *, angular=False):
     return result
 
 
-def evaluate(checkpoint, reference, output, *, batch=256, save_psi=False, angular=False):
+def evaluate(checkpoint, reference, output, *, batch=256, save_psi=False, angular=False, run_dir=None):
     """Evaluate a frozen checkpoint using the complete independent reference."""
     import jax
     jax.config.update("jax_enable_x64", True)
@@ -170,39 +194,85 @@ def evaluate(checkpoint, reference, output, *, batch=256, save_psi=False, angula
     if batch < 1:
         raise ValueError("Evaluation batch must be positive")
     checkpoint_hash = sha256(checkpoint)
-    params = {name: jnp.asarray(value) for name, value in read_parameters(checkpoint).items()}
+    params, checkpoint_metadata = _read_parameter_payload(checkpoint)
+    params = {name: jnp.asarray(value) for name, value in params.items()}
     info = model.architecture(params)
     data = load_reference(reference)
     metadata = data["metadata"]
     if params["W"].shape[0] != int(metadata["flux"]) + 1:
         raise ValueError("Neural input size disagrees with reference orbitals")
-    for filename in ("run_config.json", "config.json"):
-        config_file = checkpoint.with_name(filename)
-        if config_file.exists():
-            config = json.loads(config_file.read_text())
-            config = config.get("configuration", config)
-            for key in ("ne", "flux", "two_lz", "v3"):
-                if key in config and config[key] is not None and config[key] != metadata[key]:
-                    raise ValueError(f"Checkpoint and reference disagree on {key}")
-            break
+    config_file = _find_run_config(checkpoint, run_dir)
+    run_metadata, config = {}, {}
+    if config_file is not None:
+        config_hash = sha256(config_file)
+        run_metadata = json.loads(config_file.read_text())
+        config = run_metadata.get("configuration", run_metadata)
+        for key in ("ne", "flux", "two_lz", "v3"):
+            if key in config and config[key] is not None and config[key] != metadata[key]:
+                raise ValueError(f"Checkpoint and reference disagree on {key}")
+    amplitude_map = config.get("amplitude_map", "exponential")
+    signature = run_metadata.get("config_sha256")
+    invariant = run_metadata.get("invariant_configuration")
+    if invariant is not None and invariant.get("amplitude_map", "exponential") != amplitude_map:
+        raise ValueError("Reported amplitude map disagrees with the signed run configuration")
+    if checkpoint_metadata is not None and signature is not None:
+        if checkpoint_metadata.get("config_sha256") != signature:
+            raise ValueError("Checkpoint and run configuration signatures disagree")
+    anchor_path = None
+    if amplitude_map == "cartesian":
+        from .cartesian import make_amplitude
+
+        if checkpoint_metadata is not None and not signature:
+            raise ValueError("Cartesian checkpoint requires a signed run configuration")
+        anchor_path = config_file.with_name("initial_parameters.npz")
+        anchor_hash = run_metadata.get("frozen_anchor_sha256")
+        if not anchor_hash:
+            raise ValueError("Cartesian evaluation requires a frozen anchor SHA-256 in the run metadata")
+        if invariant is not None:
+            signed_hash = hashlib.sha256(json.dumps(invariant, sort_keys=True).encode()).hexdigest()
+            if signed_hash != signature or invariant.get("frozen_anchor_sha256") != anchor_hash:
+                raise ValueError("Cartesian run signature does not bind the reported anchor SHA-256")
+        if sha256(anchor_path) != anchor_hash:
+            raise ValueError("Cartesian frozen anchor SHA-256 disagrees with the run metadata")
+        anchor = read_parameters(anchor_path)
+        if set(anchor) != set(params) or any(
+            (anchor[name].shape, anchor[name].dtype) != (value.shape, value.dtype)
+            for name, value in params.items()
+        ):
+            raise ValueError("Cartesian frozen anchor and checkpoint parameter schemas differ")
+        anchor = {name: jnp.asarray(value) for name, value in anchor.items()}
+        forward = jax.jit(jax.vmap(make_amplitude(anchor), in_axes=(None, 0)))
+    elif amplitude_map == "exponential":
+        forward = jax.jit(model.batch_log_psi)
+    else:
+        raise ValueError(f"Unknown checkpoint amplitude map '{amplitude_map}'")
     occupations = data["occupations"]
-    forward = jax.jit(model.batch_log_psi)
-    logs = np.concatenate([np.asarray(forward(params, jnp.asarray(occupations[start:start + batch])))
-                           for start in range(0, len(occupations), batch)])
-    if not np.isfinite(logs).all():
+    values = np.concatenate([np.asarray(forward(params, jnp.asarray(occupations[start:start + batch])))
+                             for start in range(0, len(occupations), batch)])
+    if not np.isfinite(values).all():
         raise ArithmeticError("Nonfinite wavefunction coefficients")
-    psi = np.exp(logs - logs.real.max())
-    psi /= np.linalg.norm(psi)
+    psi = np.exp(values - values.real.max()) if amplitude_map == "exponential" else values
+    norm = np.linalg.norm(psi)
+    if not np.isfinite(norm) or norm <= 0:
+        raise ArithmeticError("Wavefunction must have finite nonzero norm")
+    psi /= norm
     result = state_diagnostics(psi, data, angular=angular)
     result.update(ne=int(metadata["ne"]), flux=int(metadata["flux"]),
                   two_lz=int(metadata["two_lz"]), v3=float(metadata["v3"]),
                   orbitals=int(metadata["flux"]) + 1, basis_dimension=len(occupations),
-                  architecture=info, parameter_count=int(sum(value.size for value in params.values())),
+                  architecture=info, amplitude_map=amplitude_map,
+                  parameter_count=int(sum(value.size for value in params.values())),
                   checkpoint=str(checkpoint), checkpoint_sha256=checkpoint_hash,
                   reference=str(reference), reference_manifest_sha256=sha256(reference / "manifest.json"),
                   reference_validation=data["validation"],
                   ed_used_for_training=False,
                   scope="Frozen complete-sector evaluation; independent sparse matrices and ED eigenvectors are never read by the training runner")
+    if anchor_path is not None:
+        if sha256(anchor_path) != anchor_hash:
+            raise RuntimeError("Frozen Cartesian anchor changed during evaluation")
+        result.update(frozen_anchor=str(anchor_path), frozen_anchor_sha256=anchor_hash)
+    if config_file is not None and sha256(config_file) != config_hash:
+        raise RuntimeError("Run configuration changed during frozen evaluation")
     if sha256(checkpoint) != checkpoint_hash:
         raise RuntimeError("Checkpoint changed during frozen evaluation")
     if any(sha256(reference / name) != expected for name, expected in data["manifest"].items()):
@@ -228,9 +298,10 @@ def main():
     parser.add_argument("--batch", type=int, default=256)
     parser.add_argument("--save-psi", action="store_true")
     parser.add_argument("--angular", action="store_true", help="Resolve total-L probabilities at M=0")
+    parser.add_argument("--run-dir", type=Path, help="Read run configuration and frozen anchor from this directory")
     args = parser.parse_args()
     evaluate(args.checkpoint, args.reference, args.output, batch=args.batch,
-             save_psi=args.save_psi, angular=args.angular)
+             save_psi=args.save_psi, angular=args.angular, run_dir=args.run_dir)
 
 
 if __name__ == "__main__":
