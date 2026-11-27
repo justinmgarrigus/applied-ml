@@ -10,7 +10,17 @@ See the [shared implementation and environment](../shared/README.md).
 | Model | Input and wavefunction output | Instructions |
 |---|---|---|
 | Ising | Spins in `{-1,+1}`. A positive real RBM returns a log amplitude. | [Physics](Ising/PHYSICS.md) · [Run](Ising/RUN_TRAINING.md) · [Parameters](Ising/training/PARAMETERS.md) · [Results](Ising/results/README.md) |
-| FQHE | A binary LLL occupation vector at fixed particle number and `Lz`. A six-layer MLP uses all-layer readouts for log magnitude and phase. | [Physics](FQHE/PHYSICS.md) · [Run](FQHE/RUN_TRAINING.md) · [Parameters](FQHE/training/PARAMETERS.md) · [Results](FQHE/results/README.md) |
+| FQHE | A binary LLL occupation vector at fixed particle number and `Lz`. A six-layer MLP uses all-layer readouts for an anchored complex Cartesian amplitude. | [Physics](FQHE/PHYSICS.md) · [Run](FQHE/RUN_TRAINING.md) · [Parameters](FQHE/training/PARAMETERS.md) · [Results](FQHE/results/README.md) |
+
+## Cartesian FQHE default
+
+The FQHE entry point defaults to the anchored Cartesian amplitude
+$u_\theta=e^{\ell_0}(1+\ell_\theta-\ell_0)$ and target
+$q(n)\propto |u_\theta(n)|^2+a$ with $a=1/3$. It computes the physical
+energy gradient from the weighted raw amplitude derivatives and Hamiltonian
+actions. SGD applies the full gradient $g=2f$. The exponential/Born
+expressions below are an alternative form of that energy derivative at
+nonzero amplitudes. [Cartesian parameters](FQHE/training/PARAMETERS.md)
 
 ## From the Rayleigh quotient to local energy
 
@@ -67,7 +77,7 @@ g_j=\partial_j E
 
 Because the energy residual has zero Born mean, replacing $O_j$ by
 $O_j-\mathbb E_{p_\theta}[O_j]$ leaves the gradient unchanged. A constant log
-amplitude or phase therefore contributes zero gradient. For the FQHE ansatz
+amplitude or phase therefore contributes zero gradient. For an exponential ansatz
 $\log\psi=a+i\varphi$, both derivatives enter the real force. The real part
 of $O_j^*(E_{\rm loc}-E)$ is
 $(\partial_j a)\operatorname{Re}(E_{\rm loc}-E)+
@@ -114,10 +124,10 @@ gradient and the current batch. The shared implementations chain
 ```text
 Initialize wavefunction parameters and sampling state
 For each requested optimizer update:
-    Draw or advance B configurations using the current Born weights
-    Evaluate local energies e and log-wavefunction derivatives O at those rows
-    residual = e - mean(e)
-    g = 2 * real(mean_over_configurations(conj(O) * residual))
+    Draw or advance B configurations using the current sampling target
+    Evaluate connected Hamiltonian actions and coefficient derivatives
+    Form the physical energy half-gradient force f with the target weights
+    g = 2 * f
     update = -learning_rate * g
     If norm(update) exceeds max_norm, scale update to that radius
     Add update to parameters
@@ -133,14 +143,11 @@ for Ising or advances the walkers for FQHE.
   gradient from the sampled spins and single-flip local energies.
   [Ising trainer](../shared/ising_backend.py)
 - **FQHE.** The trainer starts walkers from uniform configurations in the
-  chosen sector, burns them in, and advances them by Metropolis pair moves.
-  Equal orbital-index sums before and after a move preserve `Lz`. For a valid
-  symmetric proposal $x\to x'$, the acceptance probability is
-  $\min(1,\exp[2\operatorname{Re}(\log\psi(x')-\log\psi(x))])$. The
-  runner also schedules uniform-sector Metropolis refreshes. Each update
-  uses the resulting walker rows, including repetitions. `train_step`
-  combines the complex local energies and `model.score_tree` derivatives
-  to get `force`, then multiplies by two in the `vmc_sgd` branch.
+  chosen sector and targets $q\propto |u|^2+a$ during burn-in, local pair
+  moves, and periodic global refreshes. Local moves preserve particle number
+  and $L_z$. Each update includes repeated walker rows and uses inverse
+  target weights in the raw amplitude fit. `train_step` multiplies the
+  half-gradient force by two before passing it to ordinary SGD.
   [Sampler](../shared/fqh_spring/sampler.py) · [FQHE trainer](../shared/fqh_spring/train.py)
 
 ## Check the gradient and evaluate a saved state

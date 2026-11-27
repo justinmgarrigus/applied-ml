@@ -1,9 +1,17 @@
 {
-  "SOURCE_CATALOG_sha256": "1d1215d5012ad9e884adbf5a923cb016acae8574b209354e01010ec4e2d199fc",
-  "curated_bytes": 24576396,
-  "curated_files": 428,
+  "SOURCE_CATALOG_sha256": "c6d1df5bfc14a93c7630a80e571ae74ea635ae766f467db1b2e7b5e75b3a64de",
+  "curated_bytes": 24588987,
+  "curated_files": 430,
   "errors": [],
   "excluded_paths": [
+    {
+      "path": "VMC/FQHE/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
+    {
+      "path": "MinSR/FQHE/training/__pycache__",
+      "reason": "cache/environment directory"
+    },
     {
       "path": "shared/__pycache__",
       "reason": "cache/environment directory"
@@ -40,7 +48,7 @@
   "legacy_index": "MIGRATION.md",
   "links": {
     "Markdown_anchor_fragments_checked": false,
-    "checked_local_paths": 148,
+    "checked_local_paths": 158,
     "errors": [],
     "historical_scope": "Frozen snapshot/vendor/ED/report-source documents are preserved, not rewritten as current launch instructions",
     "historical_unresolved_links": [],

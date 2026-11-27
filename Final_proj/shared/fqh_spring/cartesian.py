@@ -1,4 +1,4 @@
-"""Anchored complex amplitudes and the full-support SPRING fit."""
+"""Anchored complex amplitudes and importance-weighted projective fitting."""
 import math
 
 import jax
@@ -33,12 +33,13 @@ def make_proposal(amplitude, floor):
     return log_proposal
 
 
-def make_fit(anchor, floor):
+def make_fit(anchor, floor, *, metric_rows=True):
     """Build the importance-weighted projected amplitude fit for sampled rows.
 
     The input `acted` is the physical Hamiltonian action on the raw amplitude.
     Return the half-energy-gradient force, metric rows in JaQMC's convention,
-    and self-normalized Monte Carlo diagnostics.
+    and self-normalized Monte Carlo diagnostics. VMC-SGD sets metric_rows=False
+    to compute its force without preparing a metric solve.
     """
     _check_floor(floor)
 
@@ -61,14 +62,16 @@ def make_fit(anchor, floor):
         residual = root_weights * (acted - energy * amplitudes)
         force = (residual @ tangent.conj()).real
 
-        # Rotate the weighted state to a real unit vector, then reflect that
-        # vector to the negative constant row direction. JaQMC's row centering
-        # then preserves the projected metric. Its 1/B cancels the row scale.
-        tangent = jnp.exp(-1j * jnp.angle(amplitudes))[:, None] * tangent
-        batch_size = amplitudes.shape[0]
-        reflection = root_weights * jnp.abs(amplitudes) + batch_size**-0.5
-        correction = 2.0 * (reflection @ tangent) / (reflection @ reflection)
-        optimizer_rows = batch_size**0.5 * (tangent - reflection[:, None] * correction)
+        optimizer_rows = None
+        if metric_rows:
+            # Rotate the weighted state to a real unit vector, then reflect that
+            # vector to the negative constant row direction. JaQMC's row centering
+            # then preserves the projected metric. Its 1/B cancels the row scale.
+            tangent = jnp.exp(-1j * jnp.angle(amplitudes))[:, None] * tangent
+            batch_size = amplitudes.shape[0]
+            reflection = root_weights * jnp.abs(amplitudes) + batch_size**-0.5
+            correction = 2.0 * (reflection @ tangent) / (reflection @ reflection)
+            optimizer_rows = batch_size**0.5 * (tangent - reflection[:, None] * correction)
 
         _, unravel = ravel_pytree(params)
         diagnostics = dict(

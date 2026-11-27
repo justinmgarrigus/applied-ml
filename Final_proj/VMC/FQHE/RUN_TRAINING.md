@@ -1,8 +1,8 @@
 # Run VMC for the FQHE model
 
 Install Python 3.12 dependencies once using the [shared setup](../../shared/README.md).
-The wrapper selects the shared package/vendor explicitly and rejects a config
-belonging to another algorithm. It runs on CPU by default.
+The wrapper uses [the Ne4 Cartesian config](training/configs/ne4_cartesian.json)
+by default. It runs on CPU and selects its optimizer from the shared package.
 
 ```bash
 python Final_proj/VMC/FQHE/training/run.py --backend cpu --cpus 2
@@ -14,16 +14,27 @@ python Final_proj/VMC/FQHE/training/run.py \
 Fresh launches without `--output` create a unique timestamp/UUID directory
 under `VMC/FQHE/results/runs/`. Existing output is never overwritten.
 The default Ne4 check is 5 optimizer updates, not a convergence claim.
-All three methods start the same fresh six-layer 64-wide all-layer-readout
-model (init seed 7, sampling seed 71, batch 32). The short stored checks have
-unequal budgets and are not a scientific speed/accuracy ranking.
+The example uses a fresh six-layer, width-64, all-layer-readout model with
+initialization seed 7, sampling seed 71, and batch 32. It samples the target
+$q(n)\propto |u_\theta(n)|^2+a$ with fixed $a=1/3$ and uses inverse target
+weights to estimate the physical energy force. The explicit
+[Ne4](training/configs/ne4.json) and [Ne6](training/configs/ne6.json) configs
+use exponential amplitudes and Born sampling.
 
-Resume always requires an explicit existing run directory:
+Resume with the original configuration and an explicit existing run directory.
+This example resumes a run started with the current Cartesian default:
 
 ```bash
 python Final_proj/VMC/FQHE/training/run.py --resume \
+  --config Final_proj/VMC/FQHE/training/configs/ne4_cartesian.json \
   --output /absolute/path/to/existing/run --steps 100 --backend cpu --cpus 2
 ```
+
+When `--config` is omitted, the wrapper reads the saved amplitude map and
+selects the matching Ne4 configuration. Supply the original configuration
+explicitly for Ne6 or custom settings. Keep `run_config.json` and
+`initial_parameters.npz` with the saved checkpoint so the Cartesian state can
+be reconstructed. The evaluator accepts `--run-dir` for copied checkpoints.
 
 `--steps 100` is a TOTAL target; parameters, optimizer state, walkers and both
 RNGs are restored. Source/method/physics/model signatures must match. This

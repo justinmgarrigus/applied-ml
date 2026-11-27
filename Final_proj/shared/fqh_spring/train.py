@@ -40,6 +40,10 @@ LEGACY_BORN_SOURCES = {
     'fqh_spring/train.py': '67e1d255eb7dc811943c9524b0363041e497f2721cb3484539ae9e154bf5b39d',
     'fqh_spring/local_energy.py': 'd5bdfe1735ca2f4e05ce1577e2302d426b89f6fdb00ef60512052c4ec441d729',
 }
+PUBLISHED_CARTESIAN_SOURCES = {
+    'fqh_spring/train.py': 'b84819c082f6aaa16f422c58a63b2545ac8030c1a77cc75627c61d9854625aad',
+    'fqh_spring/cartesian.py': '915e9a63dadfb71cf9099d93ab342f0adee159a3a0fb67595a96eb12b02ab0d0',
+}
 
 
 def digest(path):
@@ -74,8 +78,8 @@ def load_config(path, overrides=None):
         raise ValueError('amplitude_map must be exponential or cartesian')
     if isinstance(floor, bool) or not isinstance(floor, (int, float)) or not math.isfinite(floor):
         raise ValueError('sampling_floor must be a finite number')
-    if mode == 'cartesian' and (config['method'] != 'spring' or floor <= 0):
-        raise ValueError('Cartesian amplitudes require method=spring and sampling_floor > 0')
+    if mode == 'cartesian' and floor <= 0:
+        raise ValueError('Cartesian amplitudes require sampling_floor > 0')
     if mode == 'exponential' and floor != 0:
         raise ValueError('Exponential/Born mode requires sampling_floor=0')
     config['sampling_floor'] = float(floor)
@@ -144,6 +148,33 @@ def _legacy_born_invariant(invariant):
     return legacy
 
 
+def _published_invariant(invariant):
+    previous = dict(invariant)
+    sources = dict(invariant['implementation_sha256'])
+    for name, fingerprint in PUBLISHED_CARTESIAN_SOURCES.items():
+        if name in sources:
+            sources[name] = fingerprint
+    previous['implementation_sha256'] = sources
+    return previous
+
+
+def _resume_invariant(invariant, recorded):
+    """Accept an exact match to one of the two audited prior implementations."""
+    candidates = [_published_invariant(invariant)]
+    if invariant['amplitude_map'] == 'exponential':
+        candidates.append(_legacy_born_invariant(invariant))
+    allowed_runtime_sources = [invariant['implementation_sha256'],
+                               candidates[0]['implementation_sha256']]
+    for candidate in candidates:
+        signature = _scientific_signature(candidate)
+        runtime_sources = recorded.get('runtime_implementation_sha256')
+        if (recorded['config_sha256'] == signature
+                and recorded.get('invariant_configuration') == candidate
+                and (runtime_sources is None or runtime_sources in allowed_runtime_sources)):
+            return candidate, signature
+    return invariant, _scientific_signature(invariant)
+
+
 def run(config, *, resume=False):
     config = {'amplitude_map': 'exponential', 'sampling_floor': 0., **config}
     _set_runtime(config)
@@ -190,13 +221,8 @@ def run(config, *, resume=False):
             if old.get('frozen_anchor_sha256') != invariant['frozen_anchor_sha256']:
                 raise ValueError('Saved Cartesian anchor hash differs from the run configuration')
         signature = _scientific_signature(invariant)
-        if old['config_sha256'] != signature and not cartesian:
-            legacy = _legacy_born_invariant(invariant)
-            legacy_signature = _scientific_signature(legacy)
-            if (old['config_sha256'] == legacy_signature
-                    and old.get('invariant_configuration') == legacy
-                    and old.get('runtime_implementation_sha256', source_hashes) == source_hashes):
-                invariant, signature = legacy, legacy_signature
+        if old['config_sha256'] != signature:
+            invariant, signature = _resume_invariant(invariant, old)
         if old['config_sha256'] != signature:
             raise ValueError('Resume source code, physics, model, seed, sampling or optimizer settings changed; start a new run for intentional changes')
         with np.load(anchor_path, allow_pickle=False) as archive:
@@ -223,7 +249,7 @@ def run(config, *, resume=False):
         amplitude = make_amplitude(initial)
         log_target = make_proposal(amplitude, config['sampling_floor'])
         local = make_hamiltonian_action(operator, amplitude, pair_chunk_size=config['pair_chunk'])
-        fit = make_fit(initial, config['sampling_floor'])
+        fit = make_fit(initial, config['sampling_floor'], metric_rows=config['method'] != 'vmc_sgd')
     else:
         log_target = model.log_psi
         local = make_local_energy(operator, log_target, pair_chunk_size=config['pair_chunk'])

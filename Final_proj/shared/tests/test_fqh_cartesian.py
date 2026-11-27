@@ -1,4 +1,4 @@
-"""Check the Cartesian SPRING fit, sampled Hamiltonian rows, and checkpoints."""
+"""Check Cartesian fits, optimizer conventions, sampled rows, and checkpoints."""
 
 import csv
 import hashlib
@@ -18,7 +18,7 @@ from fqh_spring import model
 from fqh_spring.cartesian import make_amplitude, make_fit, make_proposal
 from fqh_spring.evaluate import evaluate, read_parameters
 from fqh_spring.local_energy import make_hamiltonian_action
-from fqh_spring.optimizer import make_spring
+from fqh_spring.optimizer import make_optimizer
 from fqh_spring.physics import SphereOperator
 from fqh_spring.references import build_reference, sparse_operators
 
@@ -61,7 +61,7 @@ def test_raw_hamiltonian_rows_agree_with_exact_action_at_a_node():
         np.testing.assert_allclose(actual[channel], values, atol=2e-12, rtol=2e-12)
 
 
-def test_floor_weighted_fit_matches_exact_projected_metric_and_spring_step():
+def test_floor_weighted_fit_matches_exact_metric_and_optimizer_steps():
     operator = SphereOperator(4)
     bits, hamiltonian, _, _ = sparse_operators(operator)
     occupations = occupations_from_bits(bits, operator.norb)
@@ -118,18 +118,47 @@ def test_floor_weighted_fit_matches_exact_projected_metric_and_spring_step():
                                atol=2e-12)
 
     damping, rate = 0.1, 0.02
-    optimizer = make_spring(learning_rate=rate, damping=damping, max_norm=10.0)
-    updates, state = optimizer.update(force, optimizer.init(params), params, data=rows)
     expected_direction = np.linalg.solve(expected_gram + damping * np.eye(len(flat)), expected_force)
-    np.testing.assert_allclose(state[0].prev_delta, expected_direction, atol=2e-11, rtol=2e-11)
-    np.testing.assert_allclose(ravel_pytree(updates)[0], -rate * expected_direction, atol=2e-12)
+    for method in ("spring", "minsr"):
+        optimizer = make_optimizer(method, learning_rate=rate, damping=damping, max_norm=10.0)
+        updates, state = optimizer.update(force, optimizer.init(params), params, data=rows)
+        np.testing.assert_allclose(state[0].prev_delta, expected_direction, atol=2e-11, rtol=2e-11)
+        np.testing.assert_allclose(ravel_pytree(updates)[0], -rate * expected_direction, atol=2e-12)
+        if method == "minsr":
+            repeated, _ = optimizer.update(force, state, params, data=rows)
+            np.testing.assert_allclose(ravel_pytree(repeated)[0], ravel_pytree(updates)[0], atol=2e-12)
+
+    gradient_fit = make_fit(anchor, floor, metric_rows=False)
+    gradient_force, unused_rows, gradient_diagnostics = gradient_fit(
+        params, occupations[sample], jnp.asarray(u[sample]), jnp.asarray(acted[sample]),
+    )
+    assert unused_rows is None
+    np.testing.assert_allclose(ravel_pytree(gradient_force)[0], expected_force, atol=2e-12, rtol=2e-12)
+    for key in diagnostics:
+        np.testing.assert_allclose(gradient_diagnostics[key], diagnostics[key], atol=2e-12)
+
+    def exact_energy(vector):
+        amplitudes = exact_amplitudes(vector)
+        return (jnp.vdot(amplitudes, jnp.asarray(hamiltonian.toarray()) @ amplitudes)
+                / jnp.vdot(amplitudes, amplitudes)).real
+
+    gradient = np.asarray(jax.grad(exact_energy)(flat))
+    np.testing.assert_allclose(gradient, 2 * expected_force, atol=2e-12, rtol=2e-12)
+    physical_gradient = jax.tree.map(lambda value: 2 * value, gradient_force)
+    radius = 0.001
+    optimizer = make_optimizer("vmc_sgd", learning_rate=rate, max_norm=radius)
+    updates, _ = optimizer.update(physical_gradient, optimizer.init(params), params)
+    expected_update = -gradient * min(rate, radius / np.linalg.norm(gradient))
+    np.testing.assert_allclose(ravel_pytree(updates)[0], expected_update, atol=2e-12, rtol=2e-12)
+    assert float(jnp.linalg.norm(ravel_pytree(updates)[0])) <= radius + 1e-12
 
 
-def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path):
+@pytest.mark.parametrize("algorithm,method", (("SPRING", "spring"), ("MinSR", "minsr"), ("VMC", "vmc_sgd")))
+def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path, algorithm, method):
     root = Path(__file__).resolve().parents[2]
-    entry = root / "SPRING/FQHE/training/run.py"
+    entry = root / algorithm / "FQHE/training/run.py"
     config = {
-        "method": "spring", "ne": 4, "width": 4, "layers": 2, "amplitude_map": "cartesian",
+        "method": method, "ne": 4, "width": 4, "layers": 2, "amplitude_map": "cartesian",
         "sampling_floor": 0.25, "batch": 4, "sweeps": 1, "burn_sweeps": 2, "refresh_every": 1,
         "checkpoint_every": 1, "log_every": 1, "keep_checkpoints": 4, "pair_chunk": 2,
         "backend": "cpu", "cpus": 2,
@@ -171,6 +200,7 @@ def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path):
     run_config = split / "run_config.json"
     provenance = run_config.read_bytes()
     metadata = json.loads(provenance)
+    assert metadata["configuration"]["method"] == method
     assert metadata["configuration"]["amplitude_map"] == "cartesian"
     assert metadata["configuration"]["sampling_floor"] == config["sampling_floor"]
     anchor_path = split / "initial_parameters.npz"
@@ -212,8 +242,9 @@ def test_cartesian_cli_resume_and_numbered_checkpoint_evaluation(tmp_path):
         evaluate(numbered, reference_path, tmp_path / "invalid_evaluation.json")
 
 
-def test_spring_default_cli_uses_cartesian(tmp_path):
-    entry = Path(__file__).resolve().parents[2] / "SPRING/FQHE/training/run.py"
+@pytest.mark.parametrize("algorithm,method", (("SPRING", "spring"), ("MinSR", "minsr"), ("VMC", "vmc_sgd")))
+def test_default_cli_uses_cartesian(tmp_path, algorithm, method):
+    entry = Path(__file__).resolve().parents[2] / algorithm / "FQHE/training/run.py"
     output = tmp_path / "default"
     env = dict(os.environ, JAX_PLATFORMS="cpu", OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1",
                MKL_NUM_THREADS="1")
@@ -224,6 +255,14 @@ def test_spring_default_cli_uses_cartesian(tmp_path):
     assert result.returncode == 0, result.stdout + "\n" + result.stderr
     metadata = json.loads((output / "run_config.json").read_text())
     config = metadata["configuration"]
+    assert config["method"] == method
     assert config["ne"] == 4
     assert config["amplitude_map"] == "cartesian"
     assert config["sampling_floor"] == 1/3
+    resumed = subprocess.run(
+        [sys.executable, str(entry), "--resume", "--steps", "2", "--output", str(output)],
+        env=env, capture_output=True, text=True, timeout=180,
+    )
+    assert resumed.returncode == 0, resumed.stdout + "\n" + resumed.stderr
+    summary = json.loads((output / "training_summary.json").read_text())
+    assert summary["completed_steps"] == 2
