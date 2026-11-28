@@ -143,6 +143,19 @@ def make_sgd(learning_rate: float = 0.05, max_norm: float = 0.1):
     return optax.chain(optax.sgd(learning_rate), optax.clip_by_global_norm(max_norm))
 
 
+def make_adam(learning_rate: float = 0.01, max_norm: float = 0.1, beta2: float = 0.999):
+    """Adam on the full physical gradient, followed by an applied-update cap."""
+    return optax.chain(optax.adam(learning_rate, b2=beta2), optax.clip_by_global_norm(max_norm))
+
+
+def make_rmsprop(learning_rate: float = 0.01, max_norm: float = 0.1, decay: float = 0.9):
+    """RMSProp on the full physical gradient, followed by an applied-update cap."""
+    return optax.chain(optax.rmsprop(learning_rate, decay=decay), optax.clip_by_global_norm(max_norm))
+
+
+FIRST_ORDER = {"sgd": make_sgd, "adam": make_adam, "rmsprop": make_rmsprop}
+
+
 def gradient_diagnostics(params: dict, states: jax.Array, H: jax.Array,
                          J: float, h: float) -> tuple[dict, dict]:
     obs = exact_observables(params, states, H)
@@ -199,7 +212,9 @@ def run(args: argparse.Namespace) -> dict:
 
     optimizer = (make_spring(args.learning_rate, args.damping, args.mu, args.max_norm)
                  if args.optimizer in ("spring", "damped-minsr")
-                 else make_sgd(args.learning_rate, args.max_norm))
+                 else FIRST_ORDER[args.optimizer](args.learning_rate, args.max_norm,
+                                                  *{"adam": (args.adam_beta2,),
+                                                    "rmsprop": (args.rmsprop_decay,)}.get(args.optimizer, ())))
     optimizer_state = optimizer.init(params)
     key = jax.random.PRNGKey(args.seed + 1)
 
@@ -268,17 +283,19 @@ def run(args: argparse.Namespace) -> dict:
         "optimizer_description": {
             "spring": "JaQMC SPRING, covariance force and previous-direction memory",
             "sgd": "VMC with SGD on the full physical energy gradient and an applied-update norm cap",
+            "adam": "VMC with Adam (b1=0.9, b2=--adam-beta2, default 0.999) on the full physical energy gradient and an applied-update norm cap",
+            "rmsprop": "VMC with RMSProp (decay=--rmsprop-decay, default 0.9) on the full physical energy gradient and an applied-update norm cap",
             "damped-minsr": "Damped sample-space SR/MinSR control with mu=0; not eigenvalue-truncated MinSR",
         }[args.optimizer],
-        "optimizer_module": (optax.sgd.__module__ if args.optimizer == "sgd" else robust_sr.__module__),
-        "optimizer_name": ("optax.sgd + optax.clip_by_global_norm" if args.optimizer == "sgd"
+        "optimizer_module": (optax.sgd.__module__ if args.optimizer in FIRST_ORDER else robust_sr.__module__),
+        "optimizer_name": (f"optax.{args.optimizer} + optax.clip_by_global_norm" if args.optimizer in FIRST_ORDER
                            else "jaqmc.optimizer.sr.jasr.robust_sr"),
         "parameter_count": int(ravel_pytree(params)[0].size),
         "exact_ground_energy": float(eigenvalues[0]), "initial": history[0], "final": history[-1],
         "gradient_check": gradient_report,
         "training_seconds_including_jit": elapsed,
         "sampling": "iid categorical draws from enumerated |psi|^2; exact expectations used for evaluation only",
-        "spring_force_convention": "physical_gradient/2; SGD uses physical_gradient",
+        "spring_force_convention": "physical_gradient/2; SGD/Adam/RMSProp use physical_gradient",
     }
     (out / "metrics.json").write_text(json.dumps(result, indent=2) + "\n")
     make_plots(history, gradient_arrays, out, args.optimizer)
@@ -330,6 +347,8 @@ def run_algorithm(optimizer: str, results_root: Path, argv=None) -> dict:
     """Fixed-algorithm entry point; every default run uses a fresh directory."""
     cli = parser()
     cli.set_defaults(optimizer=optimizer)
+    if optimizer in ("adam", "rmsprop"):
+        cli.set_defaults(learning_rate=0.01)  # adaptive step sizes are per-parameter
     if optimizer == "damped-minsr":
         cli.set_defaults(mu=0.0)
     args = cli.parse_args(argv)
@@ -355,9 +374,11 @@ def parser() -> argparse.ArgumentParser:
     cli.add_argument("--damping", type=float, default=0.001)
     cli.add_argument("--mu", type=float, default=0.9)
     cli.add_argument("--max-norm", type=float, default=0.1)
+    cli.add_argument("--adam-beta2", type=float, default=0.999, help="Adam second-moment decay; Adam only")
+    cli.add_argument("--rmsprop-decay", type=float, default=0.9, help="RMSProp squared-gradient decay; RMSProp only")
     cli.add_argument("--seed", type=int, default=7)
     cli.add_argument("--log-every", type=int, default=5)
-    cli.add_argument("--optimizer", choices=("spring", "sgd", "damped-minsr"), default="spring")
+    cli.add_argument("--optimizer", choices=("spring", "sgd", "adam", "rmsprop", "damped-minsr"), default="spring")
     cli.add_argument("--output", default=None)
     return cli
 

@@ -8,6 +8,8 @@ Monte Carlo (VMC) framework; SA currently uses exact full-basis Ising energy.
 |---|---|---|
 | SPRING | Sample-space reconfiguration with remembered directions | [SPRING](SPRING/README.md) |
 | VMC | Ordinary stochastic gradient descent on energy | [VMC](VMC/README.md) |
+| Adam (Ising only) | Adam on the energy gradient, with update-norm cap | [Adam](Adam/README.md) |
+| RMSProp (Ising only) | RMSProp on the energy gradient, with update-norm cap | [RMSProp](RMSProp/README.md) |
 | MinSR | Memory-free, damped minimum-norm/SR control | [MinSR](MinSR/README.md) |
 | SA (Ising only) | Gradient-free weight search with exact full-basis loss | [SA](SA/README.md) |
 
@@ -54,6 +56,9 @@ protocol, not the portable energy-only baseline. See
 The local old physics-first trees remain frozen archives, preserving absolute
 checkpoint paths and source hashes. New work starts in the algorithm folders;
 the Git export excludes those large archives. See [migration](MIGRATION.md).
+
+A matched Ising comparison of SPRING, SGD, Adam and RMSProp is in
+[benchmarks/ising/optimizer_comparison](benchmarks/ising/optimizer_comparison/README.md).
 
 The [two-page proposal](documents/reports/SPRING_Proposal.pdf) remains the
 canonical proposal. See [submission details](SUBMISSION.md) and

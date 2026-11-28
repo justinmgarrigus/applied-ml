@@ -1,0 +1,67 @@
+{
+  "sgd": {
+    "params": {
+      "lr": 0.1,
+      "max_norm": 0.3
+    },
+    "mean_best_error": 0.0010020448421833212,
+    "tuning_seeds": [
+      101,
+      102,
+      103
+    ]
+  },
+  "adam": {
+    "params": {
+      "beta2": 0.999,
+      "lr": 0.1,
+      "max_norm": 1000.0
+    },
+    "mean_best_error": 0.000278620342517281,
+    "tuning_seeds": [
+      101,
+      102,
+      103
+    ]
+  },
+  "rmsprop": {
+    "params": {
+      "decay": 0.999,
+      "lr": 0.003,
+      "max_norm": 1000.0
+    },
+    "mean_best_error": 0.0014025757485480739,
+    "tuning_seeds": [
+      101,
+      102,
+      103
+    ]
+  },
+  "spring": {
+    "params": {
+      "damping": 0.0001,
+      "lr": 0.03,
+      "max_norm": 0.3
+    },
+    "mean_best_error": 6.84550194307576e-10,
+    "tuning_seeds": [
+      101,
+      102,
+      103
+    ]
+  },
+  "sa": {
+    "params": {
+      "final_proposal_scale": 0.012723,
+      "final_temperature": 7.33e-06,
+      "proposal_scale": 0.09918,
+      "temperature": 0.002364
+    },
+    "mean_best_error": 0.00037440607890785554,
+    "tuning_seeds": [
+      101,
+      102,
+      103
+    ]
+  }
+}

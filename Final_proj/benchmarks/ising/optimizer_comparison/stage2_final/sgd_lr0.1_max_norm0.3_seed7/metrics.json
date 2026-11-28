@@ -1,0 +1,70 @@
+{
+  "configuration": {
+    "n": 6,
+    "hidden": 12,
+    "J": 1.0,
+    "h": 1.0,
+    "steps": 250,
+    "batch_size": 128,
+    "learning_rate": 0.1,
+    "damping": 0.001,
+    "mu": 0.9,
+    "max_norm": 0.3,
+    "adam_beta2": 0.999,
+    "rmsprop_decay": 0.9,
+    "seed": 7,
+    "log_every": 25,
+    "optimizer": "sgd",
+    "output": "/private/tmp/claude-501/-Users-yimingxiong-Library-Application-Support-Claude-scratch-workspaces-85147977-ecb2-4fa9-97fb-4da6ebffea6a-732502bb-cc1a-47bf-b6a5-c51405266b83-scratch-2026-11-28-c13b9e/f2219678-4fac-464e-95d0-b63942aa6989/scratchpad/final2/final/sgd_lr0.1_max_norm0.3_seed7"
+  },
+  "upstream_commit": "71f94158f2aca88ded904451f5314f71cdff5666",
+  "backend": "[CpuDevice(id=0)]",
+  "dtype": "float64",
+  "versions": {
+    "jax": "0.9.1",
+    "jaxlib": "0.9.1",
+    "optax": "0.2.8",
+    "numpy": "2.5.4",
+    "jaqmc-spring-subset": "vendored source; see code_provenance"
+  },
+  "code_provenance": {
+    "backend_sha256": "9125e2e309e0f7122b97e8c087adfdb0124091af89eeb93b04015dc420d0bbf6",
+    "legacy_backend_sha256": "bd597ccb0624e2d8f25ebf0f066db08f11ac955628e2127820af954aa9d6f04e",
+    "optimizer_source": "/Users/yimingxiong/Desktop/applied-ml/Final_proj/shared/vendor/jaqmc_spring/src/jaqmc/optimizer/sr/jasr.py",
+    "optimizer_sha256": "1d2a36b8b766018dfc459ff22c82841d7eb1f3250f4c17443e99785f7f3bb16d"
+  },
+  "optimizer_description": "VMC with SGD on the full physical energy gradient and an applied-update norm cap",
+  "optimizer_module": "optax._src.alias",
+  "optimizer_name": "optax.sgd + optax.clip_by_global_norm",
+  "parameter_count": 73,
+  "exact_ground_energy": -7.727406610312549,
+  "initial": {
+    "step": 0,
+    "exact_energy": -6.192017834495834,
+    "energy_error": 1.535388775816715,
+    "exact_variance": 4.271206523494897,
+    "ground_state_fidelity": 0.5174663205508696
+  },
+  "final": {
+    "step": 250,
+    "exact_energy": -7.727059645402347,
+    "energy_error": 0.000346964910201919,
+    "exact_variance": 0.003049812221312807,
+    "ground_state_fidelity": 0.9999475841304961,
+    "parameter_update_norm": 0.004201933733369318,
+    "raw_direction_norm": 0.042019337333693174,
+    "sampled_energy_before_update": -7.722436174653112,
+    "sampled_physical_gradient_norm": 0.042019337333693174
+  },
+  "gradient_check": {
+    "parameter_count": 73,
+    "finite_difference_step": 1e-05,
+    "covariance_vs_autodiff_max_abs": 1.887379141862766e-15,
+    "covariance_vs_finite_difference_max_abs": 2.8707036747732673e-10,
+    "exact_physical_gradient_norm": 2.796402129360154,
+    "normalization_gauge_gradient": 6.938893903907228e-16
+  },
+  "training_seconds_including_jit": 1.3956052919966169,
+  "sampling": "iid categorical draws from enumerated |psi|^2; exact expectations used for evaluation only",
+  "spring_force_convention": "physical_gradient/2; SGD/Adam/RMSProp use physical_gradient"
+}

@@ -82,3 +82,20 @@ def test_sgd_caps_the_applied_full_gradient_update():
     updates, _ = uncapped.update(gradient, uncapped.init(params), params)
     np.testing.assert_allclose(ravel_pytree(updates)[0], -eta * full_gradient,
                                atol=2e-14, rtol=2e-12)
+
+
+@pytest.mark.parametrize("name", ["adam", "rmsprop"])
+def test_adaptive_optimizers_use_physical_gradient_and_cap(name):
+    from ising_backend import FIRST_ORDER
+    params = init_params(5, 4, 3)
+    samples = enumerate_spins(4)[jnp.asarray([0, 1, 2, 4, 5, 11, 14, 15])]
+    gradient = energy_covariance_gradient(params, samples)
+    cap = 0.01
+    optimizer = FIRST_ORDER[name](0.5, cap)
+    updates, _ = optimizer.update(gradient, optimizer.init(params), params)
+    flat_update = np.asarray(ravel_pytree(updates)[0])
+    flat_gradient = np.asarray(ravel_pytree(gradient)[0])
+    assert np.linalg.norm(flat_update) <= cap * (1 + 1e-9)
+    # Descent direction: the first adaptive step has the sign of -gradient.
+    nonzero = np.abs(flat_gradient) > 1e-12
+    assert np.all(np.sign(flat_update[nonzero]) == -np.sign(flat_gradient[nonzero]))

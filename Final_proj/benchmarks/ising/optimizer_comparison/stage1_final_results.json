@@ -1,0 +1,182 @@
+[
+  {
+    "method": "spring",
+    "lr": 0.1,
+    "seed": 7,
+    "phase": "final",
+    "final_error": 7.759067707446832e-06,
+    "final_fidelity": 0.9999989792012633,
+    "seconds": 1.283198542019818
+  },
+  {
+    "method": "spring",
+    "lr": 0.1,
+    "seed": 8,
+    "phase": "final",
+    "final_error": 1.0774543398817116e-05,
+    "final_fidelity": 0.999998798927821,
+    "seconds": 1.1761907910113223
+  },
+  {
+    "method": "spring",
+    "lr": 0.1,
+    "seed": 9,
+    "phase": "final",
+    "final_error": 1.7077397274078976e-09,
+    "final_fidelity": 0.9999999997795148,
+    "seconds": 1.3636356249917299
+  },
+  {
+    "method": "spring",
+    "lr": 0.1,
+    "seed": 10,
+    "phase": "final",
+    "final_error": 3.638639700653812e-08,
+    "final_fidelity": 0.9999999945801219,
+    "seconds": 1.047815499943681
+  },
+  {
+    "method": "spring",
+    "lr": 0.1,
+    "seed": 11,
+    "phase": "final",
+    "final_error": 2.191117864924763e-08,
+    "final_fidelity": 0.9999999972806459,
+    "seconds": 1.3347170000197366
+  },
+  {
+    "method": "sgd",
+    "lr": 0.1,
+    "seed": 7,
+    "phase": "final",
+    "final_error": 0.00035061780433753853,
+    "final_fidelity": 0.9999465616983804,
+    "seconds": 0.5706970419851132
+  },
+  {
+    "method": "sgd",
+    "lr": 0.1,
+    "seed": 8,
+    "phase": "final",
+    "final_error": 0.0004059197235468659,
+    "final_fidelity": 0.9999385189627519,
+    "seconds": 0.6345697920187376
+  },
+  {
+    "method": "sgd",
+    "lr": 0.1,
+    "seed": 9,
+    "phase": "final",
+    "final_error": 0.001200869683479766,
+    "final_fidelity": 0.9996315593276406,
+    "seconds": 0.9818680000025779
+  },
+  {
+    "method": "sgd",
+    "lr": 0.1,
+    "seed": 10,
+    "phase": "final",
+    "final_error": 0.0006439879120048175,
+    "final_fidelity": 0.9998807799547506,
+    "seconds": 1.663486625009682
+  },
+  {
+    "method": "sgd",
+    "lr": 0.1,
+    "seed": 11,
+    "phase": "final",
+    "final_error": 0.0009238168608636244,
+    "final_fidelity": 0.9998755758876523,
+    "seconds": 1.0086684160050936
+  },
+  {
+    "method": "adam",
+    "lr": 0.03,
+    "seed": 7,
+    "phase": "final",
+    "final_error": 0.00019827428634933142,
+    "final_fidelity": 0.9999645784926349,
+    "seconds": 1.0359848330263048
+  },
+  {
+    "method": "adam",
+    "lr": 0.03,
+    "seed": 8,
+    "phase": "final",
+    "final_error": 0.0005377604943284098,
+    "final_fidelity": 0.9998485149584394,
+    "seconds": 1.5937238750047982
+  },
+  {
+    "method": "adam",
+    "lr": 0.03,
+    "seed": 9,
+    "phase": "final",
+    "final_error": 0.0003421925785946911,
+    "final_fidelity": 0.9999484792966181,
+    "seconds": 0.933020459022373
+  },
+  {
+    "method": "adam",
+    "lr": 0.03,
+    "seed": 10,
+    "phase": "final",
+    "final_error": 0.0008604211016125518,
+    "final_fidelity": 0.9997916395963321,
+    "seconds": 1.4056832080241293
+  },
+  {
+    "method": "adam",
+    "lr": 0.03,
+    "seed": 11,
+    "phase": "final",
+    "final_error": 0.0005791811353859089,
+    "final_fidelity": 0.9998509763913557,
+    "seconds": 1.0198286249651574
+  },
+  {
+    "method": "rmsprop",
+    "lr": 0.003,
+    "seed": 7,
+    "phase": "final",
+    "final_error": 0.0011633150320315977,
+    "final_fidelity": 0.9995981823539396,
+    "seconds": 1.1406878330162726
+  },
+  {
+    "method": "rmsprop",
+    "lr": 0.003,
+    "seed": 8,
+    "phase": "final",
+    "final_error": 0.0017482481831070373,
+    "final_fidelity": 0.9994095087368355,
+    "seconds": 0.5159876249963418
+  },
+  {
+    "method": "rmsprop",
+    "lr": 0.003,
+    "seed": 9,
+    "phase": "final",
+    "final_error": 0.0011521795506412857,
+    "final_fidelity": 0.9996133864013831,
+    "seconds": 0.6248572920449078
+  },
+  {
+    "method": "rmsprop",
+    "lr": 0.003,
+    "seed": 10,
+    "phase": "final",
+    "final_error": 0.002008453203424132,
+    "final_fidelity": 0.9994624035468549,
+    "seconds": 0.49297666701022536
+  },
+  {
+    "method": "rmsprop",
+    "lr": 0.003,
+    "seed": 11,
+    "phase": "final",
+    "final_error": 0.0015092667536409365,
+    "final_fidelity": 0.9996995637383008,
+    "seconds": 0.6627704999991693
+  }
+]

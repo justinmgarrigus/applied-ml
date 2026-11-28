@@ -1,0 +1,66 @@
+{
+  "configuration": {
+    "n": 6,
+    "hidden": 12,
+    "J": 1.0,
+    "h": 1.0,
+    "steps": 10000,
+    "temperature": 0.002364,
+    "final_temperature": 7.33e-06,
+    "proposal_scale": 0.09918,
+    "final_proposal_scale": 0.012723,
+    "seed": 9,
+    "search_seed": 10,
+    "output": "/private/tmp/claude-501/-Users-yimingxiong-Library-Application-Support-Claude-scratch-workspaces-85147977-ecb2-4fa9-97fb-4da6ebffea6a-732502bb-cc1a-47bf-b6a5-c51405266b83-scratch-2026-11-28-c13b9e/f2219678-4fac-464e-95d0-b63942aa6989/scratchpad/final2/final/sa_final_proposal_scale0.012723_final_temperature7.33e-06_proposal_scale0.09918_temperature0.002364_seed9"
+  },
+  "optimizer": "simulated_annealing",
+  "objective": "exact full-basis Rayleigh energy; no sampled loss",
+  "proposal": "symmetric Gaussian on W; per-weight std=proposal_scale/sqrt(W.size)",
+  "schedule": "geometric endpoints, first attempt uses initial temperature and scale",
+  "normalization_parameter": "c fixed at shared initialization",
+  "parameter_count": 73,
+  "searched_parameters": 72,
+  "exact_ground_energy": -7.727406610312549,
+  "initial": {
+    "energy": -5.629229195102413,
+    "energy_error": 2.0981774152101362,
+    "variance": 7.059855257550295,
+    "fidelity": 0.4297113292317082
+  },
+  "final": {
+    "energy": -7.726882740289756,
+    "energy_error": 0.0005238700227927495,
+    "variance": 0.004557919840992714,
+    "fidelity": 0.9999296647416366
+  },
+  "best": {
+    "energy": -7.726925016846225,
+    "energy_error": 0.0004815934663238153,
+    "variance": 0.004502074199193875,
+    "fidelity": 0.9999435469061906
+  },
+  "accepted_proposals": 1529,
+  "acceptance_rate": 0.1529,
+  "search_objective_evaluations": 10001,
+  "compilation_objective_evaluations": 1,
+  "endpoint_diagnostic_evaluations": 3,
+  "training_seconds": 1.6652929999982007,
+  "compilation_seconds": 0.20075358304893598,
+  "no_gradient_used": true,
+  "no_ed_labels_in_training": true,
+  "exact_resume_supported": false,
+  "versions": {
+    "jax": "0.9.1",
+    "jaxlib": "0.9.1",
+    "numpy": "2.5.4"
+  },
+  "code_sha256": {
+    "ising_annealing.py": "6383473db4fb4166fc9900c5a814a9327e1e8fc2478a08606e17333b0b6fe560",
+    "ising_backend.py": "9125e2e309e0f7122b97e8c087adfdb0124091af89eeb93b04015dc420d0bbf6"
+  },
+  "parameter_sha256": {
+    "initial_parameters.npz": "911a19cd2f3a6c26d0c97df2af48fb7fda5bf9b94ef743419d2cfcfdba8f3c4d",
+    "trained_parameters.npz": "89ec865e56af626d19eb620b1f76445912ffbef6c704041fa5f1f570efc7b842",
+    "best_parameters.npz": "0b6d301d7fffd55cd42b5222b6cb89fa4ff9b305a72fb752eaaecfafe13f3d94"
+  }
+}

@@ -6,7 +6,7 @@ import pytest
 import ising_backend as backend
 
 
-@pytest.mark.parametrize("optimizer,mu", [("spring", 0.9), ("sgd", 0.9), ("damped-minsr", 0.0)])
+@pytest.mark.parametrize("optimizer,mu", [("spring", 0.9), ("sgd", 0.9), ("adam", 0.9), ("rmsprop", 0.9), ("damped-minsr", 0.0)])
 def test_algorithm_entrypoint_keeps_fixed_label_and_fresh_destination(monkeypatch, tmp_path, optimizer, mu):
     monkeypatch.setattr(backend, "run", lambda args: vars(args))
     first = backend.run_algorithm(optimizer, tmp_path, [])

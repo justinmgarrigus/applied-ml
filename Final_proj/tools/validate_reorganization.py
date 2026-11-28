@@ -15,8 +15,8 @@ import posixpath
 import re
 from urllib.parse import unquote, urlsplit
 
-CURATED_DIRECTORIES = ('SPRING', 'VMC', 'MinSR', 'SA', 'shared', 'benchmarks', 'documents', 'tools', 'validation')
-REQUIRED_DIRECTORIES = ('SPRING', 'VMC', 'MinSR', 'SA', 'shared', 'benchmarks', 'documents', 'tools')
+CURATED_DIRECTORIES = ('SPRING', 'VMC', 'Adam', 'RMSProp', 'MinSR', 'SA', 'shared', 'benchmarks', 'documents', 'tools', 'validation')
+REQUIRED_DIRECTORIES = ('SPRING', 'VMC', 'Adam', 'RMSProp', 'MinSR', 'SA', 'shared', 'benchmarks', 'documents', 'tools')
 ROOT_DOCUMENTS = ('README.md', 'AGENTS.md', 'MIGRATION.md', 'SUBMISSION.md', 'THIRD_PARTY.md',
                   'BUILD_REPORTS.txt', 'requirements.txt', 'requirements-cpu.txt',
                   'requirements-gpu.txt', 'pyproject.toml', 'uv.lock', '.python-version',
@@ -193,7 +193,7 @@ def _markdown_destinations(text: str):
 def current_navigation(relative: str) -> bool:
     if '/' not in relative:
         return relative.endswith('.md')
-    return (relative.startswith(('SPRING/', 'VMC/', 'MinSR/', 'SA/', 'tools/'))
+    return (relative.startswith(('SPRING/', 'VMC/', 'Adam/', 'RMSProp/', 'MinSR/', 'SA/', 'tools/'))
             or relative in ('shared/README.md', 'benchmarks/README.md',
                             'benchmarks/ising/README.md', 'benchmarks/fqhe/README.md'))
 
